@@ -1,0 +1,143 @@
+.header {
+  position: fixed;
+  top: 2rem;
+  margin: 0 auto;
+  width: 100%;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+/* .scrolled {
+  transition: all 0.3s ease;
+  background-color: #19161ebb;
+  padding: 0.5rem 10rem;
+  box-shadow: 0 0 10px #19161e;
+} */
+
+.nav {
+  font-family: "Kanit-Bold";
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  color: #ffffff;
+}
+
+.nav__menuBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.3rem;
+  cursor: pointer;
+  position: relative;
+}
+/* .line {
+  width: 2.5rem;
+  height: 0.2rem;
+  background-color: #ee7124;
+  border-radius: 5rem;
+  z-index: 10;
+  box-shadow: 0 0 8px #ee7124, inset 0 0 8px #ee7124, 0 0 10px #ee7124,
+    inset 0 0 16px #ee7124, 0 0 32px #ee7124, inset 0 0 32px #ee7124;
+  transition: all 0.3s ease;
+}
+.l1 {
+  transform: translateY(0);
+}
+
+.l2 {
+  opacity: 1;
+}
+
+.l3 {
+  transform: translateY(0);
+}
+
+.active .l1 {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.active .l2 {
+  opacity: 0;
+}
+
+.active .l3 {
+  transform: translateY(-10px) rotate(-45deg);
+} */
+
+.nav__menuList {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  /* top: 12vh; */
+  width: 100%;
+  height: 85vh;
+  bottom: -100vh;
+  padding: 1.5rem 1rem;
+  background-color: rgba(5, 5, 5, 0.776);
+  transition: all 0.5s ease;
+  opacity: 0;
+  z-index: -1;
+  padding-top: 7rem;
+}
+.nav__menuList.active {
+  transition: all 0.5s ease;
+  bottom: 0;
+  opacity: 1;
+  z-index: 9;
+}
+.nav__itemContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.nav__item {
+  font-size: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.nav__item:hover {
+  text-shadow: 0 0 10px #ffffff, 0 0 5px #ffffff, 0 0 2px #ffffff,
+    0 0 5px #ffffff, 0 0 0px #ffffff, 0 0 0px #ffffff;
+}
+.nav__item.activeLink {
+  text-shadow: 0 0 10px #ffffff, 0 0 5px #ffffff, 0 0 2px #ffffff,
+    0 0 5px #ffffff, 0 0 0px #ffffff, 0 0 0px #ffffff;
+}
+
+@media screen and (max-width: 767px) {
+  .nav__menuBar div {
+    width: 40px;
+    height: 0.2rem;
+    background-color: #ee7124;
+    border-radius: 1rem;
+    z-index: 10;
+  }
+  .nav__menuList {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    bottom: -100vh;
+    padding: 1.5rem 1rem;
+    opacity: 0;
+    z-index: -1;
+    padding-top: 5rem;
+  }
+  .nav__itemContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .nav__item {
+    font-size: 1.5rem;
+  }
+}
