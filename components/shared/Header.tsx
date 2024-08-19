@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "./Navbar/Navbar";
 import { Annonces } from "./Annonces";
+import { BtnConnect } from "./BtnConnect";
 
 export const Header = () => {
   return (
