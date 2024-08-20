@@ -56,3 +56,14 @@ export const newPasswordSchema = z
       });
     }
   });
+
+//! CREATE PARTY SCHEMA
+export const partyFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Le nom de la soirée doit contenir au moins 2 caractères."),
+  startDateTime: z.date(),
+  endDateTime: z.date(),
+});
+
+//! UPDATE PARTY SCHEMA

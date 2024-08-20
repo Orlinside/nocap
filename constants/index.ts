@@ -12,3 +12,9 @@ export const headerLinks = [
     route: "/contact",
   },
 ];
+
+export const partyDefaultValues = {
+  name: "",
+  startDateTime: new Date(),
+  endDateTime: new Date(),
+};

@@ -24,7 +24,7 @@ export default async function RootLayout({
       <SessionProvider session={session}>
         <body className={inter.className}>
           <Header />
-          <main className="">{children}</main>
+          <main className="bg-dark">{children}</main>
         </body>
       </SessionProvider>
     </html>

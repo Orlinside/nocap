@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { logout } from "@/lib/actions/auth.actions";
 
 import { revalidatePath } from "next/cache";
+import { BtnConnect } from "../BtnConnect";
 
 export const Navbar = () => {
   const [navActive, setNavActive] = useState(false);
@@ -25,31 +26,22 @@ export const Navbar = () => {
     setNavActive(!navActive);
   };
 
-  const currentUser = useCurrentUser();
-  const [user, setUser] = useState(currentUser);
-
-  console.log("NAVBAR", user);
-
-  const onClick = () => {
-    logout();
-    router.push("/");
-    window.location.reload();
-  };
-
   return (
     <div>
       <nav className="flex flex-col justify-between">
         <div
-          className={`flex flex-col justify-center items-center gap-y-1 cursor-pointer relative ${
+          className={`flex flex-col justify-center  items-center gap-y-1 cursor-pointer relative ${
             isActive ? "active" : ""
           }`}
           onClick={handleClick}
         >
-          <p className="z-10">{isActive ? "FERMER" : "MENU"}</p>
+          <p className="z-10 h-8 w-20 text-[0.8rem] bg-transparent flex-center bg-gray-500 hover:text-primary">
+            {isActive ? "FERMER" : "MENU"}
+          </p>
         </div>
 
         <div
-          className={`w-full h-[85vh] flex flex-col justify-between fixed left-0 p-6 px-4 pt-32 bg-[rgba(33,33,33,0.78)] backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[0] ${
+          className={`w-full h-[94.25vh] flex flex-col justify-between fixed left-0 p-6 px-4 pt-32 sm:pt-28 bg-[rgba(33,33,33,0.78)] backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[0] ${
             navActive ? "bottom-0 opacity-100 z-20" : "bottom-[-100vh]"
           }`}
         >
@@ -80,31 +72,6 @@ export const Navbar = () => {
                 </div>
               );
             })}
-
-            {user ? (
-              <div className="flex-center flex-col gap-2 z-10">
-                <Button
-                  onClick={onClick}
-                  className="button w-full sm:w-1/3 text-[1rem] text-center uppercase  py-4 rounded-sm hover:bg-red-400 transition-all ease duration-300 "
-                >
-                  Se Déconnecter
-                </Button>
-              </div>
-            ) : (
-              <div className="flex-center flex-col gap-2 z-10">
-                <Link
-                  href="/connexion"
-                  className={`w-full sm:w-1/3 text-[1rem] text-center uppercase bg-black py-2 rounded-xl hover:bg-gray-400 transition-all ease duration-300 `}
-                >
-                  Se Connecter
-                </Link>
-                {/* <div className="flex flex-col gap-20 justify-between"> */}
-                <p className="w-full sm:w-1/3 text-[0.8rem] sm:text-sm text-center">
-                  Tu en as besoin pour mettre ton commentaires ! Pas de panique,
-                  ca ne dure que 2 minutes...
-                </p>
-              </div>
-            )}
           </div>
           <div className="text-[0.6rem] flex-center gap-8 z-10">
             <Link href="/mentions-legales" className="hover:text-gray-300">
@@ -125,7 +92,6 @@ export const Navbar = () => {
             </Link>
           </div>
         </div>
-        {/* </div> */}
       </nav>
     </div>
   );

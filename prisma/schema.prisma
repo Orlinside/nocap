@@ -73,10 +73,12 @@ model PasswordResetToken {
 }
 
 model Party {
-  id        String     @id @default(cuid())
-  name      String
-  createdAt DateTime   @default(now())
-  photos    Photo[]    // Relation avec Photo
+  id            String         @id @default(cuid())
+  name          String
+  startDateTime DateTime       @default(now())
+  endDateTime   DateTime       @default(now())
+  createdAt     DateTime       @default(now())
+  photos        Photo[]        // Relation avec Photo
 }
 
 model Photo {

@@ -1,29 +1,29 @@
-"use client";
-
 import { logout } from "@/lib/actions/auth.actions";
 import { currentUser } from "@/lib/auth";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { LogoutBtn } from "../auth/LogoutBtn";
 
 export const BtnConnect = async () => {
   const user = await currentUser();
   console.log("BTN", user);
 
-  const onClick = () => {
-    logout();
-    window.location.reload();
-  };
+  // const onClick = () => {
+  //   logout();
+  //   window.location.reload();
+  // };
 
   return (
     <div>
       {user !== null ? (
         <div className="flex-center flex-col gap-2 z-10">
-          <Button
+          <LogoutBtn>Se Déconnecter</LogoutBtn>
+          {/* <Button
             onClick={onClick}
             className="button w-full sm:w-1/3 text-[1rem] sm:text-[1rem] text-center uppercase  py-4 rounded-sm hover:bg-red-400 transition-all ease duration-300 "
           >
             Se Déconnecter
-          </Button>
+          </Button> */}
         </div>
       ) : (
         <div className="flex-center flex-col gap-2 z-10">
