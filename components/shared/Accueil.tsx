@@ -4,6 +4,7 @@ import { Photo } from "@prisma/client";
 import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
+import { BtnReactions } from "./BtnReactions";
 
 export const Accueil = ({ parties }: any) => {
   //! Filtrer les soirées pour ne garder que celles qui ont des photos
@@ -32,6 +33,8 @@ export const Accueil = ({ parties }: any) => {
     setVisibleParties([...visibleParties, ...moreParties]);
   };
 
+  console.log("REACT", partiesWithPhotos[0].photos[0].reactions.type);
+
   return (
     <section className="wrapper bg-dark h-screen">
       {visibleParties.map((party: PartyProps, index: any) => (
@@ -48,9 +51,10 @@ export const Accueil = ({ parties }: any) => {
                   className=""
                 />
                 <div className="absolute right-2 bottom-2">
-                  <Button className="text-[0.8rem]">Like</Button>
-                  <Button className="text-[0.8rem]">Fire</Button>
-                  <Button className="text-[0.8rem]">Pouce</Button>
+                  <BtnReactions
+                    photoId={photo.id}
+                    nbReaction={photo.reactions.length}
+                  />
                 </div>
               </div>
             ))}

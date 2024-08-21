@@ -70,3 +70,9 @@ export type AddPhotoToPartyParams = {
     url: string;
   };
 };
+
+export type AddReactionToPhotoParams = {
+  photoId: string;
+  userId: string;
+  reactionType: string;
+};
