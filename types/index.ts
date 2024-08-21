@@ -59,3 +59,11 @@ export type DeletePartyParams = {
   partyId: string;
   path: string;
 };
+
+export type AddPhotoToPartyParams = {
+  partyId: string;
+  userId: string;
+  photo: {
+    url: string;
+  };
+};
