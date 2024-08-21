@@ -28,7 +28,7 @@ export default async function Home() {
 
   return (
     <section className="wrapper bg-dark h-screen">
-      {user && <p>{JSON.stringify(user)}</p>}
+      {user && <p>{JSON.stringify(user)} aa</p>}
     </section>
   );
 }
