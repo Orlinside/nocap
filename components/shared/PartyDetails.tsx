@@ -83,7 +83,7 @@ export const PartyDetails = async ({
           {party.photos.length === 0 ? (
             <p>Aucune photo disponible pour cette soirée</p>
           ) : (
-            <div className="flex gap-8">
+            <div className="grid grid-cols-4 gap-8">
               {party.photos.map((photo: Photo) => (
                 <div key={photo.id} className="relative bg-black">
                   <Image

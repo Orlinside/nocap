@@ -5,6 +5,7 @@ import { currentUser } from "@/lib/auth";
 import { getAllParties } from "@/lib/actions/party.actions";
 
 import { PartyProps } from "@/types";
+import { Accueil } from "@/components/shared/Accueil";
 
 export default async function Home() {
   //! Récupérer l'ID de la personnne connecté pour afficher les events auxquels il est abonné
@@ -29,6 +30,7 @@ export default async function Home() {
   return (
     <section className="wrapper bg-dark h-screen">
       {user && <p>{JSON.stringify(user)} aa</p>}
+      <Accueil parties={parties} />
     </section>
   );
 }
