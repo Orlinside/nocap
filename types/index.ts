@@ -1,3 +1,5 @@
+import { Photo } from "@prisma/client";
+
 // ====== USER PARAMS
 export type CreateUserParams = {
   userId: string;
@@ -32,6 +34,7 @@ export type PartyProps = {
   name: string;
   startDateTime: Date;
   endDateTime: Date;
+  photos: Photo[];
 };
 
 export type CreatePartyParams = {
