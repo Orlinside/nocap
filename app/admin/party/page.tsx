@@ -6,10 +6,20 @@ import { Role } from "@prisma/client";
 import { getAllParties } from "@/lib/actions/party.actions";
 import { PartyProps } from "@/types";
 import { DeleteConfirmation } from "@/components/admin/DeleteConfirmation";
+import { NextResponse } from "next/server";
 
 export default async function PartyPage() {
-  const parties = await getAllParties();
-  console.log(parties);
+  const response = await getAllParties();
+  let parties: PartyProps[] = [];
+
+  if (response instanceof NextResponse) {
+    const data = await response.json();
+    if (Array.isArray(data)) {
+      parties = data;
+    }
+  } else if (Array.isArray(response)) {
+    parties = response;
+  }
 
   return (
     <RoleGate allowedRole={Role.admin}>

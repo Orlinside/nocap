@@ -113,7 +113,11 @@ export async function getPartyById(partyId: string) {
         id: partyId,
       },
       include: {
-        photos: true, // Inclure les photos associées à la soirée
+        photos: {
+          include: {
+            reactions: true, // Inclure les réactions associées à chaque photo
+          },
+        },
       },
     });
 
@@ -130,7 +134,15 @@ export async function getPartyById(partyId: string) {
 //! GET ALL PARTIES
 export async function getAllParties() {
   try {
-    const parties = await db.party.findMany();
+    const parties = await db.party.findMany({
+      include: {
+        photos: {
+          include: {
+            reactions: true, // Inclure les réactions associées à chaque photo
+          },
+        },
+      },
+    });
 
     return parties;
   } catch (error) {

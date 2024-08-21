@@ -67,3 +67,8 @@ export const partyFormSchema = z.object({
 });
 
 //! UPDATE PARTY SCHEMA
+
+//! ADD PHOTO SCHEMA
+export const photoFormSchema = z.object({
+  url: z.string(),
+});

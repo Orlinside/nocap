@@ -18,3 +18,7 @@ export const partyDefaultValues = {
   startDateTime: new Date(),
   endDateTime: new Date(),
 };
+
+export const photoDefaultValues = {
+  url: "",
+};
