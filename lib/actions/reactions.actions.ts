@@ -69,3 +69,17 @@ export const addOrRemoveReaction = async ({
     return new NextResponse(null, { status: 500 });
   }
 };
+
+export const getReactions = async (photoId: string) => {
+  try {
+    const reactions = await db.reaction.findMany({
+      where: {
+        photoId,
+      },
+    });
+
+    return reactions;
+  } catch (error) {
+    return new NextResponse(null, { status: 500 });
+  }
+};

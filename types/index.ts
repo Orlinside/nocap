@@ -63,6 +63,12 @@ export type DeletePartyParams = {
   path: string;
 };
 
+export type GetPartiesHomeParams = {
+  limit: number;
+  page: number;
+};
+
+// ====== PHOTO PARAMS
 export type AddPhotoToPartyParams = {
   partyId: string;
   userId: string;
@@ -75,4 +81,22 @@ export type AddReactionToPhotoParams = {
   photoId: string;
   userId: string;
   reactionType: string;
+};
+
+// ====== URL QUERY PARAMS
+export type UrlQueryParams = {
+  params: string;
+  key: string;
+  value: string | null;
+};
+
+export type RemoveUrlQueryParams = {
+  params: string;
+  keysToRemove: string[];
+};
+
+export type SearchParamProps = {
+  page?: number;
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };

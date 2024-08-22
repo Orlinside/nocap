@@ -7,6 +7,7 @@ import {
   CreatePartyParams,
   UpdatePartyParams,
   DeletePartyParams,
+  GetPartiesHomeParams,
 } from "@/types";
 
 import { getUserById } from "./user.actions";
@@ -145,6 +146,51 @@ export async function getAllParties() {
     });
 
     return parties;
+  } catch (error) {
+    return new NextResponse(null, { status: 500 });
+  }
+}
+
+//! GET ALL PARTIES
+export async function getAllPartiesWithPhotos({
+  limit = 1,
+  page,
+}: GetPartiesHomeParams) {
+  try {
+    const skipAmount = (Number(page) - 1) * limit;
+
+    const parties = await db.party.findMany({
+      where: {
+        photos: {
+          some: {}, // Filtrer pour ne récupérer que les parties avec des photos
+        },
+      },
+      include: {
+        photos: {
+          include: {
+            reactions: true, // Inclure les réactions associées à chaque photo
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc", // Trier par date de création, de la plus récente à la plus ancienne
+      },
+      skip: skipAmount,
+      take: limit,
+    });
+
+    const partiesCount = await db.party.count({
+      where: {
+        photos: {
+          some: {}, // Filtrer pour ne récupérer que les parties avec des photos
+        },
+      },
+    });
+
+    return {
+      data: parties,
+      totalPages: Math.ceil(partiesCount / limit),
+    };
   } catch (error) {
     return new NextResponse(null, { status: 500 });
   }

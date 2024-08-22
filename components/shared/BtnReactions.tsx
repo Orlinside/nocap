@@ -4,7 +4,10 @@ import React, { startTransition, useState } from "react";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
 import { Button } from "../ui/button";
-import { addOrRemoveReaction } from "@/lib/actions/reactions.actions";
+import {
+  addOrRemoveReaction,
+  getReactions,
+} from "@/lib/actions/reactions.actions";
 
 export const BtnReactions = ({
   photoId,
@@ -16,9 +19,10 @@ export const BtnReactions = ({
   const user = useCurrentUser();
   const userId = user?.id;
 
-  const [reactions, setReactions] = useState<{ [key: number]: string }>({});
+  const [reactions, setReactions] = useState({});
+
   const [isReact, setIsreact] = useState(false);
-  console.log(reactions);
+  // console.log(reactions);
 
   const handleReaction = (
     photoId: string,
@@ -37,7 +41,9 @@ export const BtnReactions = ({
           userId,
           reactionType,
         });
-        setReactions({ ...reactions, [photoId]: reactionType });
+        const reactions = await getReactions(photoId);
+        console.log("Objet REACTION", reactions);
+
         setIsreact(!isReact);
       });
     } catch (error) {
