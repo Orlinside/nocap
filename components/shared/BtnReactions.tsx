@@ -1,5 +1,5 @@
 "use client";
-import React, { startTransition, useState } from "react";
+import React, { startTransition, useEffect, useState } from "react";
 
 import { useCurrentUser } from "@/hooks/use-current-user";
 
@@ -8,21 +8,51 @@ import {
   addOrRemoveReaction,
   getReactions,
 } from "@/lib/actions/reactions.actions";
+import Link from "next/link";
 
 export const BtnReactions = ({
   photoId,
-  nbReaction,
+  reaction,
+  user,
+  isReact,
 }: {
   photoId: string;
-  nbReaction: number;
+  reaction: any;
+  user: any;
+  isReact: boolean;
 }) => {
-  const user = useCurrentUser();
   const userId = user?.id;
 
-  const [reactions, setReactions] = useState({});
+  // Récupération des réactions total
+  const [reactions, setReactions] = useState(reaction);
+  console.log(reactions);
 
-  const [isReact, setIsreact] = useState(false);
-  // console.log(reactions);
+  // Type de réactions de l'utilisateur
+  const [userReactions, setUserReactions] = useState<{
+    [key: string]: boolean;
+  }>({
+    LIKE: false,
+    FIRE: false,
+    THUMBS_UP: false,
+  });
+
+  useEffect(() => {
+    const userReactionTypes = reactions
+      .filter((r: any) => r.userId === userId)
+      .map((r: any) => r.type);
+    setUserReactions({
+      LIKE: userReactionTypes.includes("LIKE"),
+      FIRE: userReactionTypes.includes("FIRE"),
+      THUMBS_UP: userReactionTypes.includes("THUMBS_UP"),
+    });
+  }, [reactions, userId]);
+
+  // Nombre de réactions par type
+  const countReactions = (type: string) => {
+    return reactions.filter((r: any) => r.type === type).length;
+  };
+
+  const [isReaction, setIsReaction] = useState(isReact);
 
   const handleReaction = (
     photoId: string,
@@ -33,7 +63,6 @@ export const BtnReactions = ({
       if (userId === null || userId === "") {
         throw new Error("Vous devez être connecté pour réagir à une photo");
       }
-      console.log(reactionType);
 
       startTransition(async () => {
         const response = await addOrRemoveReaction({
@@ -44,7 +73,8 @@ export const BtnReactions = ({
         const reactions = await getReactions(photoId);
         console.log("Objet REACTION", reactions);
 
-        setIsreact(!isReact);
+        setReactions(reactions);
+        setIsReaction(!isReact);
       });
     } catch (error) {
       console.error(error);
@@ -53,24 +83,40 @@ export const BtnReactions = ({
 
   return (
     <div>
-      <Button
-        onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
-        className={isReact ? "bg-orange-500" : ""}
-      >
-        Like
-      </Button>
-      <Button
-        onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
-        className={isReact ? "bg-orange-500" : ""}
-      >
-        Fire
-      </Button>
-      <Button
-        onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
-        className={isReact ? "bg-orange-500" : ""}
-      >
-        Pouce
-      </Button>
+      {user === null ? (
+        <div>
+          <Link href="/connexion" className="button">
+            Like ({countReactions("LIKE")})
+          </Link>
+          <Link href="/connexion" className="button">
+            Fire ({countReactions("FIRE")})
+          </Link>
+          <Link href="/connexion" className="button">
+            Pouce ({countReactions("THUMBS_UP")})
+          </Link>
+        </div>
+      ) : (
+        <div>
+          <Button
+            onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
+            className={userReactions.LIKE ? "bg-orange-500" : ""}
+          >
+            Like ({countReactions("LIKE")})
+          </Button>
+          <Button
+            onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
+            className={userReactions.FIRE ? "bg-orange-500" : ""}
+          >
+            Fire ({countReactions("FIRE")})
+          </Button>
+          <Button
+            onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
+            className={userReactions.THUMBS_UP ? "bg-orange-500" : ""}
+          >
+            Pouce ({countReactions("THUMBS_UP")})
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

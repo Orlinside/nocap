@@ -58,3 +58,15 @@ export const deleteUser = async ({ userId, path }: DeleteUserParams) => {
     return null;
   }
 };
+
+//! GET REACTIONS BY USER ID
+export async function getReactionsByUserId(userId: string) {
+  try {
+    const reactions = await db.reaction.findMany({
+      where: { userId },
+    });
+    return reactions;
+  } catch {
+    return null;
+  }
+}
