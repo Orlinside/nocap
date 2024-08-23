@@ -195,3 +195,18 @@ export async function getAllPartiesWithPhotos({
     return new NextResponse(null, { status: 500 });
   }
 }
+
+//! GET LAST PARTY
+export const getLastParty = async () => {
+  try {
+    const lastParty = await db.party.findFirst({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return lastParty;
+  } catch (error) {
+    return new NextResponse(null, { status: 500 });
+  }
+};

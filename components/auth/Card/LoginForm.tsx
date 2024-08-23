@@ -91,7 +91,7 @@ export const LoginForm = () => {
     <AlertDialog>
       <AlertDialogTrigger className="button">Connexion</AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-transparent backdrop-blur-lg w-full lg:w-fit border-none rounded-sm">
+      <AlertDialogContent className="bg-transparent w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
           <AlertDialogTitle>SE CONNECTER</AlertDialogTitle>
           <AlertDialogCancel className="text-white rounded-xl">

@@ -5,6 +5,8 @@ import { Header } from "@/components/shared/Header";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
+import { Toaster } from "@/components/ui/sonner";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,6 +27,7 @@ export default async function RootLayout({
         <body className={inter.className}>
           <Header />
           <main className="bg-dark">{children}</main>
+          <Toaster />
         </body>
       </SessionProvider>
     </html>

@@ -70,7 +70,7 @@ export default function RegisterForm() {
         Pas encore de compte ? Créer un compte
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-transparent backdrop-blur-lg w-full lg:w-fit border-none rounded-sm">
+      <AlertDialogContent className="bg-transparent backdrop-blur-xl  w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
           <AlertDialogTitle>S&apos;INSCRIRE</AlertDialogTitle>
           <AlertDialogCancel className="text-white rounded-xl">

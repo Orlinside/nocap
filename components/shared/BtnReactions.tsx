@@ -1,14 +1,15 @@
 "use client";
 import React, { startTransition, useEffect, useState } from "react";
+import Link from "next/link";
 
 import { useCurrentUser } from "@/hooks/use-current-user";
-
-import { Button } from "../ui/button";
 import {
   addOrRemoveReaction,
   getReactions,
 } from "@/lib/actions/reactions.actions";
-import Link from "next/link";
+
+import { toast } from "sonner";
+import { Button } from "../ui/button";
 
 export const BtnReactions = ({
   photoId,
@@ -61,7 +62,8 @@ export const BtnReactions = ({
   ) => {
     try {
       if (userId === null || userId === "") {
-        throw new Error("Vous devez être connecté pour réagir à une photo");
+        toast.error("Vous devez être connecté pour réagir à une photo");
+        return;
       }
 
       startTransition(async () => {
@@ -83,40 +85,24 @@ export const BtnReactions = ({
 
   return (
     <div>
-      {user === null ? (
-        <div>
-          <Link href="/connexion" className="button">
-            Like ({countReactions("LIKE")})
-          </Link>
-          <Link href="/connexion" className="button">
-            Fire ({countReactions("FIRE")})
-          </Link>
-          <Link href="/connexion" className="button">
-            Pouce ({countReactions("THUMBS_UP")})
-          </Link>
-        </div>
-      ) : (
-        <div>
-          <Button
-            onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
-            className={userReactions.LIKE ? "bg-orange-500" : ""}
-          >
-            Like ({countReactions("LIKE")})
-          </Button>
-          <Button
-            onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
-            className={userReactions.FIRE ? "bg-orange-500" : ""}
-          >
-            Fire ({countReactions("FIRE")})
-          </Button>
-          <Button
-            onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
-            className={userReactions.THUMBS_UP ? "bg-orange-500" : ""}
-          >
-            Pouce ({countReactions("THUMBS_UP")})
-          </Button>
-        </div>
-      )}
+      <Button
+        onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
+        className={userReactions.LIKE ? "bg-orange-500" : ""}
+      >
+        Like ({countReactions("LIKE")})
+      </Button>
+      <Button
+        onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
+        className={userReactions.FIRE ? "bg-orange-500" : ""}
+      >
+        Fire ({countReactions("FIRE")})
+      </Button>
+      <Button
+        onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
+        className={userReactions.THUMBS_UP ? "bg-orange-500" : ""}
+      >
+        Pouce ({countReactions("THUMBS_UP")})
+      </Button>
     </div>
   );
 };

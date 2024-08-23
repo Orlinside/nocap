@@ -42,7 +42,7 @@ export const Accueil = async ({
         <h2 className="text-xl">{party[0].name}</h2>
         <div className="grid grid-cols-3 gap-4 items-center">
           {party[0].photos.map((photo: any, idx: any) => (
-            <div key={idx} className="relative bg-black z-0">
+            <div key={idx} className="relative bg-black -z-0">
               <Image
                 src={photo.url}
                 alt={photo.url}
