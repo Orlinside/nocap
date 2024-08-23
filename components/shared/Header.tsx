@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import React, { Suspense } from "react";
 
 import { currentUser } from "@/lib/auth";
 
 import { Navbar } from "./Navbar/Navbar";
 import { Annonces } from "./Annonces";
 import { LogoutBtn } from "../auth/LogoutBtn";
+import { LoginForm } from "../auth/Card/LoginForm";
 
 export const Header = async () => {
   const user = await currentUser();
@@ -30,12 +32,9 @@ export const Header = async () => {
               <LogoutBtn>Out</LogoutBtn>
             </div>
           ) : (
-            <Link
-              href="/connexion"
-              className="h-8 text-[0.8rem] p-2 z-10 hover:text-primary"
-            >
-              In
-            </Link>
+            <Suspense>
+              <LoginForm />
+            </Suspense>
           )}
         </div>
       </div>

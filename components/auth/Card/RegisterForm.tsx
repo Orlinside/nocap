@@ -9,6 +9,17 @@ import { register } from "@/lib/actions/auth.actions";
 
 import { CardWrapper } from "./CardWrapper";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
   Form,
   FormControl,
   FormField,
@@ -54,117 +65,135 @@ export default function RegisterForm() {
   };
 
   return (
-    <CardWrapper
-      headerLabel="Créer un compte"
-      backButtonLabel="Vous avez déjà un compte ? Connectez-vous !"
-      backButtonHref="/connexion"
-      showSocial
-    >
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6 w-full text-dark"
+    <AlertDialog>
+      <AlertDialogTrigger className="">
+        Pas encore de compte ? Créer un compte
+      </AlertDialogTrigger>
+
+      <AlertDialogContent className="bg-transparent backdrop-blur-lg w-full lg:w-fit border-none rounded-sm">
+        <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
+          <AlertDialogTitle>S&apos;INSCRIRE</AlertDialogTitle>
+          <AlertDialogCancel className="text-white rounded-xl">
+            Quitter
+          </AlertDialogCancel>
+        </AlertDialogHeader>
+        <CardWrapper
+          headerLabel="Créer un compte"
+          backButtonLabel="Vous avez déjà un compte ? Connectez-vous !"
+          backButtonHref="/connexion"
+          showSocial
         >
-          <div className="space-y-4">
-            <div className="flex gap-2 w-full">
-              <div className="flex-grow">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          id="firstName"
-                          placeholder="Pseudo"
-                          {...field}
-                          disabled={isPending}
-                          className="input-field w-full"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-6 w-full text-dark"
+            >
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  <div className="flex-grow">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="text"
+                              id="firstName"
+                              placeholder="Pseudo"
+                              {...field}
+                              disabled={isPending}
+                              className="input-field w-full"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-              <div className="flex-grow">
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="email"
-                          id="email"
-                          placeholder="Email"
-                          {...field}
-                          disabled={isPending}
-                          className="input-field"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
+                  <div className="flex-grow">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              id="email"
+                              placeholder="Email"
+                              {...field}
+                              disabled={isPending}
+                              className="input-field"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
 
-            <div className="flex gap-2 w-full">
-              <div className="flex-grow">
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="password"
-                          id="password"
-                          placeholder="Mot de passe"
-                          {...field}
-                          disabled={isPending}
-                          className="input-field text-black"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+                <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  <div className="flex-grow">
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="password"
+                              id="password"
+                              placeholder="Mot de passe"
+                              {...field}
+                              disabled={isPending}
+                              className="input-field text-black"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
 
-              <div className="flex-grow">
-                <FormField
-                  control={form.control}
-                  name="passwordConfirmation"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          type="password"
-                          id="passwordConfirmation"
-                          placeholder="Confirmation du mot de passe"
-                          {...field}
-                          disabled={isPending}
-                          className="input-field text-black"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                  <div className="flex-grow">
+                    <FormField
+                      control={form.control}
+                      name="passwordConfirmation"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="password"
+                              id="passwordConfirmation"
+                              placeholder="Confirmation du mot de passe"
+                              {...field}
+                              disabled={isPending}
+                              className="input-field text-black"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button type="submit" disabled={isPending} className="button w-full">
-            Créer mon compte
-          </Button>
-        </form>
-      </Form>
-    </CardWrapper>
+              <FormError message={error} />
+              <FormSuccess message={success} />
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="button w-full"
+              >
+                Créer mon compte
+              </Button>
+            </form>
+          </Form>
+        </CardWrapper>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

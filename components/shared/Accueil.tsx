@@ -39,10 +39,10 @@ export const Accueil = async ({
   return (
     <section className="wrapper bg-dark h-screen">
       <div className="">
-        <h2>{party.name}</h2>
+        <h2 className="text-xl">{party[0].name}</h2>
         <div className="grid grid-cols-3 gap-4 items-center">
           {party[0].photos.map((photo: any, idx: any) => (
-            <div key={idx} className="relative bg-black">
+            <div key={idx} className="relative bg-black z-0">
               <Image
                 src={photo.url}
                 alt={photo.url}

@@ -26,10 +26,7 @@ import {
   FormMessage,
   FormDescription,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
-import { deleteParty } from "@/lib/actions/party.actions";
 import { photoDefaultValues } from "@/constants";
 import { FileUploader } from "../shared/FileUploader";
 import { photoFormSchema } from "@/lib/validator";

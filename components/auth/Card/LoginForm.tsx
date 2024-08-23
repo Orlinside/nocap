@@ -15,6 +15,17 @@ import { FormSuccess } from "./FormSucess";
 import { useState, useTransition } from "react";
 
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
   Form,
   FormControl,
   FormField,
@@ -24,6 +35,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { revalidatePath } from "next/cache";
+import RegisterForm from "./RegisterForm";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -54,7 +66,6 @@ export const LoginForm = () => {
     setError("");
     setSuccess("");
 
-    // Server Action (je peux aussi utiliser fetch ici)
     startTransition(() => {
       login(values)
         .then((data) => {
@@ -77,77 +88,92 @@ export const LoginForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel="ICI ET NULLE PART AILLEURS"
-      backButtonLabel="Vous n'avez pas encore de compte ? C'est ici que ça se passe !"
-      backButtonHref="/inscription"
-      showSocial
-    >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4">
-            <>
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        id="email"
-                        placeholder="Email ou nom d'utilisateur"
-                        {...field}
-                        disabled={isPending}
-                        className="input-field rounded-sm text-black"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+    <AlertDialog>
+      <AlertDialogTrigger className="button">Connexion</AlertDialogTrigger>
 
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        id="password"
-                        placeholder="Mot de passe"
-                        {...field}
-                        disabled={isPending}
-                        className="input-field text-black rounded-sm"
-                      />
-                    </FormControl>
+      <AlertDialogContent className="bg-transparent backdrop-blur-lg w-full lg:w-fit border-none rounded-sm">
+        <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
+          <AlertDialogTitle>SE CONNECTER</AlertDialogTitle>
+          <AlertDialogCancel className="text-white rounded-xl">
+            Quitter
+          </AlertDialogCancel>
+        </AlertDialogHeader>
 
-                    <button className="">
-                      <Link
-                        href="/auth/reset"
-                        className="text-[0.8rem] hover:text-grey-500"
-                      >
-                        Mot de passe oublié ?
-                      </Link>
-                    </button>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </>
-          </div>
-          <FormError message={error || urlError} />
-          <FormSuccess message={success} />
-          <Button
-            type="submit"
-            disabled={isPending}
-            className="button hover:bg-slate-800 w-full"
-          >
-            Connexion
-          </Button>
-        </form>
-      </Form>
-    </CardWrapper>
+        <CardWrapper
+          headerLabel="ICI ET NULLE PART AILLEURS"
+          backButtonLabel=""
+          // Vous n'avez pas encore de compte ? C'est ici que ça se passe
+          backButtonHref=""
+          showSocial
+        >
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <div className="space-y-4">
+                <>
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            id="email"
+                            placeholder="Email ou nom d'utilisateur"
+                            {...field}
+                            disabled={isPending}
+                            className="input-field rounded-sm text-black"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            type="password"
+                            id="password"
+                            placeholder="Mot de passe"
+                            {...field}
+                            disabled={isPending}
+                            className="input-field text-black rounded-sm"
+                          />
+                        </FormControl>
+
+                        <button className="">
+                          <Link
+                            href="/auth/reset"
+                            className="text-[0.8rem] hover:text-grey-500"
+                          >
+                            Mot de passe oublié ?
+                          </Link>
+                        </button>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </>
+              </div>
+              <FormError message={error || urlError} />
+              <FormSuccess message={success} />
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="button hover:bg-slate-800 w-full"
+              >
+                Connexion
+              </Button>
+            </form>
+          </Form>
+        </CardWrapper>
+        <RegisterForm />
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
