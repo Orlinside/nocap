@@ -1,10 +1,26 @@
 import { CommentAdmin } from "@/components/admin/CommentAdmin";
 import { RoleGate } from "@/components/auth/RoleGate";
 import { getAllComments } from "@/lib/actions/comment.actions";
-import { Role } from "@prisma/client";
+import { ImportanceComment, Role } from "@prisma/client";
 
-export default async function GestionCommentPage() {
-  const comments = await getAllComments({ limit: 10, page: 1 });
+export default async function GestionCommentPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const page = Number(searchParams?.page) || 1;
+
+  const comments = (await getAllComments({ limit: 10, page })) as {
+    data: ({ user: { name: string | null } } & {
+      id: string;
+      content: string;
+      createdAt: Date;
+      userId: string;
+      isValid: boolean;
+      importance: ImportanceComment;
+    })[];
+    totalPages: number;
+  };
   // console.log(comments);
   return (
     <RoleGate allowedRole={Role.admin}>
@@ -12,7 +28,12 @@ export default async function GestionCommentPage() {
         <div className="wrapper">
           <h1 className="uppercase">Gestion des commentaires</h1>
           <div>
-            <CommentAdmin comments={comments.data} />
+            <CommentAdmin
+              comments={comments.data}
+              page={page}
+              totalPages={comments.totalPages}
+              urlParamName={""}
+            />
           </div>
         </div>
       </section>

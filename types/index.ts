@@ -84,6 +84,12 @@ export type AddReactionToPhotoParams = {
 };
 
 //! ====== COMMENTS PARAMS
+// export type Comment = {
+//   commentId: string;
+//   content: string;
+
+// }
+
 export type AddComment = {
   userId: string;
   content: string;

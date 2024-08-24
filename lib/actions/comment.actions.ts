@@ -98,6 +98,31 @@ export const getAllComments = async ({
   }
 };
 
+//! GET ALL COMMENTS FOR PUBLIC
+export const getAllCommentsForPublic = async () => {
+  try {
+    const comments = await db.comment.findMany({
+      where: {
+        isValid: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        user: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    return comments;
+  } catch (error) {
+    return new NextResponse(null, { status: 500 });
+  }
+};
+
 //! UPDATE ADMIN COMMENT
 export const updateAdminComment = async ({
   commentId,
@@ -121,6 +146,26 @@ export const updateAdminComment = async ({
         isValid,
       },
     });
+    revalidatePath(path);
+
+    return { status: "success" };
+  } catch (error) {
+    return new NextResponse(null, { status: 500 });
+  }
+};
+
+//! DELETE COMMENT
+export const deleteAdminComment = async ({
+  commentId,
+  path,
+}: DeleteComment) => {
+  try {
+    await db.comment.delete({
+      where: {
+        id: commentId,
+      },
+    });
+
     revalidatePath(path);
 
     return { status: "success" };
