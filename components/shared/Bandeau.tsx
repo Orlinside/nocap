@@ -47,7 +47,12 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
       const distance = startDateTime.getTime() - now;
 
       if (distance < 0) {
-        setCountTimer(defaultCountdown);
+        setCountTimer({
+          jours: "00",
+          heures: "00",
+          minutes: "00",
+          secondes: "00",
+        });
         return;
       }
 
@@ -69,15 +74,13 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
     updateTime(); // Call updateTime immediately to set initial state
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
-  }, [startDateTime]);
+  }, [startDateTime, endDateTime]);
 
   if (endDateTime && now > endDateTime) {
     return null; // Party is finished, do not display the banner
   }
 
   const countdownString = `${lastParty.name} - ${countTimer.jours} JOURS - ${countTimer.heures}h ${countTimer.minutes}m ${countTimer.secondes}s`;
-
-  console.log("countdownString", countdownString);
 
   const testimonial = [{ quote: countdownString }, { quote: countdownString }];
 

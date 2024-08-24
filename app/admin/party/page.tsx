@@ -25,7 +25,7 @@ export default async function PartyPage() {
     <RoleGate allowedRole={Role.admin}>
       <section>
         <div className="wrapper flex justify-between items-center">
-          <div>Liste des soirées</div>
+          <h1>Liste des soirées</h1>
           <Link href="/admin/party/create">
             <Button className="button rounded-xl">Créer une soirée</Button>
           </Link>

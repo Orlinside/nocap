@@ -35,7 +35,7 @@ export default async function Home({
   const party = partyResponse;
 
   return (
-    <section className="wrapper bg-dark h-screen">
+    <section className="wrapper bg-dark">
       {user && <p>{JSON.stringify(user)}</p>}
       <Accueil
         party={party.data}

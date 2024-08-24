@@ -24,9 +24,11 @@ export default async function RootLayout({
   return (
     <html lang="fr">
       <SessionProvider session={session}>
-        <body className={inter.className}>
-          <Header />
-          <main className="bg-dark">{children}</main>
+        <body className="">
+          <div className="fixed top-0 w-full">
+            <Header />
+          </div>
+          <main className="min-h-screen bg-dark pt-[7rem]">{children}</main>
           <Toaster />
         </body>
       </SessionProvider>

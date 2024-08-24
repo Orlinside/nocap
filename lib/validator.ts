@@ -72,3 +72,13 @@ export const partyFormSchema = z.object({
 export const photoFormSchema = z.object({
   url: z.string(),
 });
+
+//! ADD COMMENT SCHEMA
+export const commentFormSchema = z.object({
+  content: z.string().min(1, "Le commentaire est requis."),
+});
+
+export const updateCommentSchema = z.object({
+  importance: z.enum(["LOW", "MEDIUM", "HIGH"]),
+  isValid: z.boolean(),
+});

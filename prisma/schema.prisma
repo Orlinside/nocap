@@ -26,6 +26,12 @@ enum ReactionType {
   THUMBS_UP
 }
 
+enum ImportanceComment {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 model User {
   id                     String                 @id @default(cuid())
   email                  String?                @unique
@@ -106,9 +112,11 @@ model Reaction {
 }
 
 model Comment {
-  id        String     @id @default(cuid())
-  content   String
-  createdAt DateTime   @default(now())
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
+  id            String            @id @default(cuid())
+  content       String
+  createdAt     DateTime          @default(now())
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  isValid       Boolean           @default(false)
+  importance    ImportanceComment @default(LOW)
 }

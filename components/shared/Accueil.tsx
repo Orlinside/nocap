@@ -37,7 +37,7 @@ export const Accueil = async ({
   }
 
   return (
-    <section className="wrapper bg-dark h-screen">
+    <section className="wrapper bg-dark">
       <div className="">
         <h2 className="text-xl">{party[0].name}</h2>
         <div className="grid grid-cols-3 gap-4 items-center">

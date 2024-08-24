@@ -1,6 +1,6 @@
 import { Photo } from "@prisma/client";
 
-// ====== USER PARAMS
+//! ====== USER PARAMS
 export type CreateUserParams = {
   userId: string;
   name: string;
@@ -28,7 +28,7 @@ export type DeleteUserParams = {
   path: string;
 };
 
-// ====== PARTY PARAMS
+//! ====== PARTY PARAMS
 export type PartyProps = {
   id: string;
   name: string;
@@ -68,7 +68,7 @@ export type GetPartiesHomeParams = {
   page: number;
 };
 
-// ====== PHOTO PARAMS
+//! ====== PHOTO PARAMS
 export type AddPhotoToPartyParams = {
   partyId: string;
   userId: string;
@@ -83,7 +83,32 @@ export type AddReactionToPhotoParams = {
   reactionType: string;
 };
 
-// ====== URL QUERY PARAMS
+//! ====== COMMENTS PARAMS
+export type AddComment = {
+  userId: string;
+  content: string;
+  path: string;
+};
+
+export type DeleteComment = {
+  commentId: string;
+  path: string;
+};
+
+export type GetCommentsParams = {
+  limit: number;
+  page: number;
+};
+
+export type UpdateCommentParams = {
+  // userId: string;
+  commentId: string;
+  importance: "LOW" | "MEDIUM" | "HIGH";
+  isValid: boolean;
+  path: string;
+};
+
+//! ====== URL QUERY PARAMS
 export type UrlQueryParams = {
   params: string;
   key: string;
