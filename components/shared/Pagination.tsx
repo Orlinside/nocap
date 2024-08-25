@@ -38,8 +38,9 @@ export const Pagination = ({
           variant="outline"
           onClick={() => onClick("prev")}
           disabled={Number(page) <= 1}
+          className="rounded-sm hover:bg-primary border-none uppercase"
         >
-          Précédent
+          Revenir
         </Button>
       )}
 
@@ -48,9 +49,9 @@ export const Pagination = ({
         variant="outline"
         onClick={() => onClick("next")}
         disabled={Number(page) >= totalPages}
-        className="rounded-xl hover:bg-primary"
+        className="rounded-sm hover:bg-primary border-none uppercase"
       >
-        Soirée précédente
+        Précédemment
       </Button>
     </div>
   );

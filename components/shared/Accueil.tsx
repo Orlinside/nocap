@@ -4,6 +4,7 @@ import { BtnReactions } from "./BtnReactions";
 import { Pagination } from "./Pagination";
 import { currentUser } from "@/lib/auth";
 import { getReactionsByUserId } from "@/lib/actions/user.actions";
+import { Carousel } from "./Carousel/Swiper";
 
 type AccueilProps = {
   party: any;
@@ -37,12 +38,12 @@ export const Accueil = async ({
   }
 
   return (
-    <section className="wrapper bg-dark">
+    <section className="flex flex-col justify-center items-center bg-dark">
       <div className="">
-        <h2 className="text-xl">{party[0].name}</h2>
-        <div className="grid grid-cols-3 gap-4 items-center">
-          {party[0].photos.map((photo: any, idx: any) => (
-            <div key={idx} className="relative bg-black -z-0">
+        {/* <h2 className="wrapper text-xl">{party[0].name}</h2> */}
+        <div className="w-full overflow-x-hidden">
+          {/* {party[0].photos.map((photo: any, idx: any) => (
+            <div key={idx} className="relative bg-black z-0">
               <Image
                 src={photo.url}
                 alt={photo.url}
@@ -59,11 +60,12 @@ export const Accueil = async ({
                 />
               </div>
             </div>
-          ))}
+          ))} */}
+          <Carousel photos={party[0].photos} user={user} isReact={isReact} />
         </div>
       </div>
       {totalPages > 1 && (
-        <div className="flex justify-end mt-12">
+        <div className="mt-8">
           <Pagination
             urlParamName={urlParamName}
             page={page}

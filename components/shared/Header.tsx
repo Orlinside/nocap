@@ -13,9 +13,10 @@ export const Header = async () => {
   const user = await currentUser();
 
   return (
-    <header className="w-full border-b-2 border-black bg-dark">
-      <Annonces />
-      <div className="wrapper w-full h-full p-6 flex justify-between items-center bg-transparent">
+    <header className="w-full bg-transparent">
+      {/* <Annonces /> */}
+      <div className="wrapper w-full h-full p-6 flex justify-center items-center bg-transparent">
+        <div></div>
         <Link href="/">
           <Image
             src="/logo/Logo_NoCapR.png"
@@ -25,7 +26,7 @@ export const Header = async () => {
             className="cursor-pointer"
           />
         </Link>
-        <div className="flex justify-end bg-dark">
+        <div className="flex justify-end bg-transparent">
           <Navbar />
           {user ? (
             <div className="h-8 text-[0.8rem] p-2 z-10">
