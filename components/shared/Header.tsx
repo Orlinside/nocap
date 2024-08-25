@@ -15,9 +15,10 @@ export const Header = async () => {
   return (
     <header className="w-full bg-transparent">
       {/* <Annonces /> */}
-      <div className="wrapper w-full h-full p-6 flex justify-center items-center bg-transparent">
-        <div></div>
-        <Link href="/">
+      <div className="wrapper flex justify-between w-full h-full p-6 bg-transparent">
+        {/* <div></div> */}
+
+        <Link href="/" className="flex justify-center">
           <Image
             src="/logo/Logo_NoCapR.png"
             alt="logo"
@@ -30,7 +31,7 @@ export const Header = async () => {
           <Navbar />
           {user ? (
             <div className="h-8 text-[0.8rem] p-2 z-10">
-              <LogoutBtn>Out</LogoutBtn>
+              <LogoutBtn>OUT</LogoutBtn>
             </div>
           ) : (
             <Suspense>

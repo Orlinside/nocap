@@ -35,7 +35,7 @@ export const Navbar = () => {
         </div>
 
         <div
-          className={`w-full h-[94.25vh] flex flex-col justify-between fixed left-0 p-6 px-4 pt-32 sm:pt-28 bg-[rgba(33,33,33,0.29)] backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[100] ${
+          className={`w-full h-[100vh] flex flex-col justify-between fixed left-0 p-6 px-4 pt-32 sm:pt-28 bg-[rgba(33,33,33,0.29)] backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[100] ${
             navActive ? "bottom-0 opacity-100 z-[100]" : "bottom-[-100vh]"
           }`}
         >

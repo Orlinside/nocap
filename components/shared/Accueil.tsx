@@ -38,41 +38,26 @@ export const Accueil = async ({
   }
 
   return (
-    <section className="flex flex-col justify-center items-center bg-dark">
-      <div className="">
-        {/* <h2 className="wrapper text-xl">{party[0].name}</h2> */}
-        <div className="w-full overflow-x-hidden">
-          {/* {party[0].photos.map((photo: any, idx: any) => (
-            <div key={idx} className="relative bg-black z-0">
-              <Image
-                src={photo.url}
-                alt={photo.url}
-                width={500}
-                height={300}
-                className=""
-              />
-              <div className="absolute right-2 bottom-2">
-                <BtnReactions
-                  photoId={photo.id}
-                  reaction={photo.reactions}
-                  user={user}
-                  isReact={isReact}
-                />
-              </div>
-            </div>
-          ))} */}
+    <section className="h-full flex flex-col justify-between pb-8 items-center overflow-hidden">
+      {/* <div className="block lg:hidden xl:hidden"></div> */}
+      <h2 className="text-xl mt-28 lg:hidden ">{party[0].name}</h2>
+      <div className="lg:mt-32 xl:mt-24">
+        <div className="w-full overflow-x-hidden flex-1">
           <Carousel photos={party[0].photos} user={user} isReact={isReact} />
         </div>
       </div>
-      {totalPages > 1 && (
-        <div className="mt-8">
-          <Pagination
-            urlParamName={urlParamName}
-            page={page}
-            totalPages={totalPages}
-          />
-        </div>
-      )}
+      <div className="w-full wrapper flex justify-center lg:justify-between">
+        <h2 className="text-xl hidden lg:block">{party[0].name}</h2>
+        {totalPages > 1 && (
+          <div className="">
+            <Pagination
+              urlParamName={urlParamName}
+              page={page}
+              totalPages={totalPages}
+            />
+          </div>
+        )}
+      </div>
     </section>
   );
 };

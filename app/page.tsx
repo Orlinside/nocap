@@ -26,7 +26,7 @@ export default async function Home({
   if (partyResponse instanceof NextResponse) {
     // Gérer le cas où la réponse est un NextResponse
     return (
-      <section className="wrapper bg-dark h-screen">
+      <section className="wrapper bg-dark h-full">
         <p>Erreur lors de la récupération des soirées.</p>
       </section>
     );
@@ -35,7 +35,7 @@ export default async function Home({
   const party = partyResponse;
 
   return (
-    <section className="bg-dark w-screen overflow-x-hidden">
+    <section className="h-screen w-screen overflow-x-hidden">
       {/* {user && <p>{JSON.stringify(user)}</p>} */}
       <Accueil
         party={party.data}

@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,8 +19,24 @@ export const Carousel = ({
   user: any;
   isReact: any;
 }) => {
+  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handlePhotoClick = (url: string) => {
+    setSelectedPhoto(url);
+    setIsClosing(false);
+  };
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setSelectedPhoto(null);
+      setIsClosing(false);
+    }, 300); // Durée de l'animation
+  };
+
   return (
-    <div className="w-full box-content overflow-x-hidden">
+    <div className="w-full h-full -z-0">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -39,9 +56,13 @@ export const Carousel = ({
         {photos.map((photo: any, idx: any) => (
           <SwiperSlide
             key={idx}
-            className="overflow-x-hidden relative w-full max-w-[350px] h-auto overflow-hidden rounded-sm object-cover md:max-w-[750px] sm:max-w-[300px]"
+            className="relative w-full max-w-[350px] h-auto overflow-hidden rounded-sm object-cover lg:max-w-[780px] md:max-w-[700px] sm:max-w-[300px]"
           >
-            <div key={idx} className="relative z-0 overflow-x-hidden">
+            <div
+              key={idx}
+              className="relative z-0 overflow-x-hidden"
+              onClick={() => handlePhotoClick(photo.url)}
+            >
               <Image
                 src={photo.url}
                 alt={photo.url}
@@ -61,6 +82,28 @@ export const Carousel = ({
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {selectedPhoto && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-md">
+          <div
+            className={`relative fade-in ${isClosing ? "fade-out" : "fade-in"}`}
+          >
+            <button
+              className="absolute top-2 right-3 text-white text-sm sm:text-xl"
+              onClick={handleClose}
+            >
+              FERMER
+            </button>
+            <Image
+              src={selectedPhoto}
+              alt="Selected photo"
+              width={1000}
+              height={1000}
+              className="object-contain"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
