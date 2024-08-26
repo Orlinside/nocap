@@ -24,7 +24,7 @@ export const Header = async () => {
             alt="logo"
             width={150}
             height={100}
-            className="cursor-pointer"
+            className="cursor-pointer logo"
           />
         </Link>
         <div className="flex justify-end bg-transparent">

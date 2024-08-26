@@ -29,7 +29,7 @@ export const Navbar = () => {
           }`}
           onClick={handleClick}
         >
-          <p className="z-[110] h-8 w-20 text-[0.8rem] bg-transparent flex-center bg-gray-500 hover:text-primary">
+          <p className="z-[110] h-8 w-20 text-[0.8rem] bg-transparent flex-center tex-dark bg-gray-500 hover:text-primary">
             {isActive ? "FERMER" : "MENU"}
           </p>
         </div>

@@ -26,6 +26,10 @@ const config = {
           DEFAULT: "#5890d5",
           foreground: "#FFFFFF",
         },
+        second: {
+          DEFAULT: "#000",
+          foreground: "#000000",
+        },
         dark: {
           DEFAULT: "#030303",
         },

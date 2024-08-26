@@ -4,6 +4,8 @@ import { currentUser } from "@/lib/auth";
 import { getAllPartiesWithPhotos } from "@/lib/actions/party.actions";
 
 import { Accueil } from "@/components/shared/Accueil";
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 export default async function Home({
   searchParams,
@@ -35,15 +37,17 @@ export default async function Home({
   const party = partyResponse;
 
   return (
-    <section className="h-screen w-screen overflow-x-hidden">
-      {/* {user && <p>{JSON.stringify(user)}</p>} */}
-      <Accueil
-        party={party.data}
-        totalPages={party.totalPages}
-        limit={1}
-        page={page}
-        urlParamName={""}
-      />
-    </section>
+    <>
+      <section className="h-screen w-screen overflow-x-hidden">
+        {/* {user && <p>{JSON.stringify(user)}</p>} */}
+        <Accueil
+          party={party.data}
+          totalPages={party.totalPages}
+          limit={1}
+          page={page}
+          urlParamName={""}
+        />
+      </section>
+    </>
   );
 }

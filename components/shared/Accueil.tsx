@@ -1,10 +1,9 @@
-import Image from "next/image";
-
-import { BtnReactions } from "./BtnReactions";
-import { Pagination } from "./Pagination";
 import { currentUser } from "@/lib/auth";
 import { getReactionsByUserId } from "@/lib/actions/user.actions";
+
 import { Carousel } from "./Carousel/Swiper";
+import { Pagination } from "./Pagination";
+import { AccueilBackground } from "./AccueilBackground";
 
 type AccueilProps = {
   party: any;
@@ -38,26 +37,15 @@ export const Accueil = async ({
   }
 
   return (
-    <section className="h-full flex flex-col justify-between pb-8 items-center overflow-hidden">
-      {/* <div className="block lg:hidden xl:hidden"></div> */}
-      <h2 className="text-xl mt-28 lg:hidden ">{party[0].name}</h2>
-      <div className="lg:mt-32 xl:mt-24">
-        <div className="w-full overflow-x-hidden flex-1">
-          <Carousel photos={party[0].photos} user={user} isReact={isReact} />
-        </div>
-      </div>
-      <div className="w-full wrapper flex justify-center lg:justify-between">
-        <h2 className="text-xl hidden lg:block">{party[0].name}</h2>
-        {totalPages > 1 && (
-          <div className="">
-            <Pagination
-              urlParamName={urlParamName}
-              page={page}
-              totalPages={totalPages}
-            />
-          </div>
-        )}
-      </div>
-    </section>
+    <>
+      <AccueilBackground
+        user={user}
+        party={party}
+        totalPages={totalPages}
+        urlParamName={urlParamName}
+        page={page}
+        isReact={isReact}
+      />
+    </>
   );
 };
