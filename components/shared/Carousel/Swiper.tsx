@@ -40,8 +40,12 @@ export const Carousel = ({
 
   const handleSlideChange = (swiper: any) => {
     const activeIndex = swiper.realIndex;
-    const activePhoto = photos[activeIndex];
-    onPhotoChange(activePhoto.url);
+    if (photos && photos.length > 0 && activeIndex < photos.length) {
+      const activePhoto = photos[activeIndex];
+      onPhotoChange(activePhoto.url ? activePhoto.url : photos[0].url);
+    } else {
+      console.error("Invalid activeIndex or empty photos array");
+    }
   };
 
   return (
@@ -82,14 +86,14 @@ export const Carousel = ({
                   className="relative object-cover"
                 />
               </GlareCard>
-              <div className="absolute z-10 right-2 bottom-2 overflow-x-hidden">
-                <BtnReactions
-                  photoId={photo.id}
-                  reaction={photo.reactions}
-                  user={user}
-                  isReact={isReact}
-                />
-              </div>
+            </div>
+            <div className="absolute z-10 right-2 bottom-2 overflow-x-hidden">
+              <BtnReactions
+                photoId={photo.id}
+                reaction={photo.reactions}
+                user={user}
+                isReact={isReact}
+              />
             </div>
           </SwiperSlide>
         ))}

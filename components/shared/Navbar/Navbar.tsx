@@ -24,7 +24,7 @@ export const Navbar = () => {
     <div>
       <nav className="flex flex-col justify-between">
         <div
-          className={`flex flex-col justify-center  items-center gap-y-1 cursor-pointer relative ${
+          className={`flex flex-col justify-center items-center gap-y-1 cursor-pointer relative ${
             isActive ? "active" : ""
           }`}
           onClick={handleClick}
@@ -35,11 +35,11 @@ export const Navbar = () => {
         </div>
 
         <div
-          className={`w-full h-[100vh] flex flex-col justify-between fixed left-0 p-6 px-4 pt-32 sm:pt-28 bg-[rgba(33,33,33,0.29)] backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[100] ${
+          className={`w-full h-[100vh] flex flex-col justify-between fixed left-0 pb-6 pt-32 sm:pt-28 bg-[rgba(33,33,33,0.29)] backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[100] ${
             navActive ? "bottom-0 opacity-100 z-[100]" : "bottom-[-100vh]"
           }`}
         >
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col">
             {headerLinks.map((item, index) => {
               const active =
                 item.route === "/"
@@ -47,7 +47,11 @@ export const Navbar = () => {
                   : pathname.startsWith(item.route);
               return (
                 <div
-                  className="w-full flex flex-col justify-center items-center"
+                  className={`w-full h-full flex flex-col justify-left border-b-4 p-8 border-gray-300 hover:bg-dark transition-all ease-in-out duration-300 ${
+                    active
+                      ? "bg-gradient-to-t from-dark via-[#1b1b1b] to-transparent"
+                      : ""
+                  }`}
                   key={index}
                   onClick={() => {
                     setActiveLink(item.route),
@@ -57,7 +61,7 @@ export const Navbar = () => {
                 >
                   <Link
                     href={item.route}
-                    className={`${styles.nav__item} ${
+                    className={`relative wrapper text-[2rem] uppercase tracking-widest transition-all ease duration-300 ${
                       active ? styles.activeLink : ""
                     }`}
                   >

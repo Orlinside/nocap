@@ -38,7 +38,7 @@ export const AccueilBackground = ({
       <div
         className="absolute inset-0 bg-cover bg-center blur-lg transition-all duration-500 ease-in-out"
         style={{
-          backgroundImage: `url(${activePhotoUrl})`,
+          backgroundImage: `url(${activePhotoUrl ?? party[0].photos[0].url})`,
         }}
       ></div>
       <div className="relative z-10 w-full h-full flex flex-col justify-between">
