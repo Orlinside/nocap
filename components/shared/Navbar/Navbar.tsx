@@ -48,7 +48,7 @@ export const Navbar = () => {
               return (
                 <div
                   className={`w-full h-full flex flex-col justify-left p-8 border-gray-300 hover:bg-dark transition-all ease-in-out duration-300 ${
-                    active ? "bg-com text-second font-bold" : ""
+                    active ? "bg-com2 text-white font-bold" : ""
                   }`}
                   key={index}
                   onClick={() => {

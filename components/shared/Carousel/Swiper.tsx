@@ -107,7 +107,7 @@ export const Carousel = ({
             className={`relative fade-in ${isClosing ? "fade-out" : "fade-in"}`}
           >
             <button
-              className="absolute top-2 right-3 text-white text-sm sm:text-xl hover:text-primary"
+              className="absolute top-2 right-3 text-white text-sm sm:text-xl hover:text-white/80"
               onClick={handleClose}
             >
               <IoClose size={30} />

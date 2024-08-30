@@ -74,7 +74,9 @@ export default function RegisterForm() {
 
       <AlertDialogContent className="bg-transparent backdrop-blur-xl  w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
-          <AlertDialogTitle>S&apos;INSCRIRE</AlertDialogTitle>
+          <AlertDialogTitle className="renogare">
+            S&apos;INSCRIRE
+          </AlertDialogTitle>
           <AlertDialogCancel className="text-white border-none">
             <ImCross className="hover:text-primary" />
           </AlertDialogCancel>
