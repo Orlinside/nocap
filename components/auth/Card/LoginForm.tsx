@@ -96,7 +96,11 @@ export const LoginForm = () => {
         aria-label="Connexion"
         className="renogare uppercase text-sm"
       >
-        <IoMdLogIn size={25} className="hover:text-primary" />
+        <IoMdLogIn
+          size={25}
+          className="hover:text-white/80"
+          aria-label="Connexion"
+        />
       </AlertDialogTrigger>
 
       <AlertDialogContent className="bg-transparent w-full lg:w-fit border-none rounded-sm">

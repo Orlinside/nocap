@@ -52,7 +52,7 @@ export const DeleteConfirmationCommentUser = ({
                 await deleteAdminComment({ commentId, path: pathname });
               })
             }
-            className="text-white renogare bg-primary hover:bg-primary/80 rounded-xl"
+            className="text-white renogare bg-gradient hover:bg-primary/80 rounded-xl"
           >
             {isPending ? "Suppression..." : "Supprimer"}
           </AlertDialogAction>

@@ -11,6 +11,8 @@ import "swiper/css/pagination";
 import { GlareCard } from "@/components/ui/glare-card";
 import { BtnReactions } from "../BtnReactions";
 
+import { IoClose } from "react-icons/io5";
+
 export const Carousel = ({
   photos,
   user,
@@ -105,10 +107,10 @@ export const Carousel = ({
             className={`relative fade-in ${isClosing ? "fade-out" : "fade-in"}`}
           >
             <button
-              className="absolute bottom-2 right-3 text-white text-sm sm:text-xl"
+              className="absolute top-2 right-3 text-white text-sm sm:text-xl hover:text-primary"
               onClick={handleClose}
             >
-              FERMER
+              <IoClose size={30} />
             </button>
             <Image
               src={selectedPhoto}

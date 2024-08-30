@@ -17,32 +17,31 @@ import {
 
 import { deletePhoto } from "@/lib/actions/photo.actions";
 
+import { MdDeleteForever } from "react-icons/md";
+
 export const DeleteConfirmationPhoto = ({ photoId }: { photoId: string }) => {
   let [isPending, startTransition] = useTransition();
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="button px-2">
-        <Image
-          src="/assets/icons/delete.svg"
-          alt="edit"
-          width={20}
-          height={20}
-        />
+      <AlertDialogTrigger className="">
+        <MdDeleteForever size={25} className="hover:text-red-700" />
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-dark rounded-sm border-second">
+      <AlertDialogContent className="w-2/3 sm:w-1/2 bg-dark rounded-xl border-none">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-white">
+          <AlertDialogTitle className="text-white renogare">
             Etes-vous sûr de vouloir supprimer cette photo ?
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-second">
+          <AlertDialogDescription className="text-white">
             La suppression est irréversible.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel className="text-white">Annuler</AlertDialogCancel>
+          <AlertDialogCancel className="text-white rounded-xl">
+            Annuler
+          </AlertDialogCancel>
 
           <AlertDialogAction
             onClick={() =>
@@ -50,7 +49,7 @@ export const DeleteConfirmationPhoto = ({ photoId }: { photoId: string }) => {
                 await deletePhoto(photoId);
               })
             }
-            className="text-white rubik bg-second hover:bg-third"
+            className="text-white renogare bg-gradient rounded-xl"
           >
             {isPending ? "Suppression..." : "Supprimer"}
           </AlertDialogAction>

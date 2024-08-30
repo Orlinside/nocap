@@ -64,7 +64,7 @@ export const CommentForm = ({ userId }: { userId: string }) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="bg-primary hover:bg-primary/80 uppercase renogare rounded-xl p-2 text-sm">
+      <AlertDialogTrigger className="bg-gradient uppercase renogare rounded-xl p-2 text-sm">
         <p>écrire un commentaire</p>
       </AlertDialogTrigger>
 
@@ -102,7 +102,7 @@ export const CommentForm = ({ userId }: { userId: string }) => {
 
               <AlertDialogAction
                 type="submit"
-                className="text-white renogare bg-primary rounded-xl hover:bg-primary/80"
+                className="text-white renogare bg-gradient-to-t from-[#fc0010] to-[#FE9D01] rounded-xl hover:bg-primary/80"
               >
                 {isPending ? "Envoie..." : "Envoyer"}
               </AlertDialogAction>

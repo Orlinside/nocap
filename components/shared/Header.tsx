@@ -9,29 +9,37 @@ import { Annonces } from "./Annonces";
 import { LogoutBtn } from "../auth/LogoutBtn";
 import { LoginForm } from "../auth/Card/LoginForm";
 
+import { IoMdLogOut } from "react-icons/io";
+
 export const Header = async () => {
   const user = await currentUser();
 
   return (
     <header className="w-full bg-transparent">
       {/* <Annonces /> */}
-      <div className="wrapper flex justify-between w-full h-full p-6 bg-transparent">
+      <div className="wrapper flex justify-between items-center w-full h-full p-6 bg-transparent">
         {/* <div></div> */}
 
         <Link href="/" className="flex justify-center">
           <Image
-            src="/logo/Logo_NoCapR.png"
+            src="/logo/Logo_NoCapR_white.png"
             alt="logo"
             width={150}
             height={100}
-            className="cursor-pointer logo"
+            className="cursor-pointer"
           />
         </Link>
-        <div className="flex justify-end bg-transparent">
+        <div className="flex items-center justify-end bg-transparent">
           <Navbar />
           {user ? (
-            <div className="h-8 text-[0.8rem] p-2 z-10">
-              <LogoutBtn>OUT</LogoutBtn>
+            <div className="">
+              <LogoutBtn>
+                <IoMdLogOut
+                  size={25}
+                  className="text-white hover:text-white/80"
+                  aria-label="Déconnexion"
+                />
+              </LogoutBtn>
             </div>
           ) : (
             <Suspense>

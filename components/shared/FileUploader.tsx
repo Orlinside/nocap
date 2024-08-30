@@ -60,7 +60,7 @@ export function FileUploader({
           />
           <h3 className="mb-2 mt-2 rubik">Glisser ici</h3>
           <p className="mb-4 rubik text-dark">SVG, PNG, JPG</p>
-          <Button type="button" className="rounded-sm rubik">
+          <Button type="button" className="rounded-xl bg-second">
             Sélectionner depuis l&apos;ordinateur
           </Button>
         </div>

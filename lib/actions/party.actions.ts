@@ -143,6 +143,9 @@ export async function getAllParties() {
           },
         },
       },
+      orderBy: {
+        startDateTime: "desc", // Trier par date de début de la plus récente à la plus vieille
+      },
     });
 
     return parties;

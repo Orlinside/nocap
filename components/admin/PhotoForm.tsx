@@ -92,13 +92,13 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="button px-2">
+      <AlertDialogTrigger className="button renogare bg-gradient px-2">
         <p>Ajouter une photo</p>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-dark rounded-sm border-second">
+      <AlertDialogContent className="bg-dark w-5/6 sm:w-2/3 rounded-xl border-none">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-white">
+          <AlertDialogTitle className="text-white renogare">
             Ajouter une photo
           </AlertDialogTitle>
         </AlertDialogHeader>
@@ -122,13 +122,13 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
               )}
             />
             <AlertDialogFooter>
-              <AlertDialogCancel className="text-white">
+              <AlertDialogCancel className="text-white rounded-xl">
                 Annuler
               </AlertDialogCancel>
 
               <AlertDialogAction
                 type="submit"
-                className="text-white rubik bg-second hover:bg-third"
+                className="text-white rounded-xl renogare bg-gradient"
               >
                 {isPending ? "Ajout..." : type}
               </AlertDialogAction>

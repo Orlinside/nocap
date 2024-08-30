@@ -12,10 +12,10 @@ export default async function CommentairesPage() {
   return (
     <>
       <div className="flex gap-2 justify-between">
-        <div className="h-screen w-1/6 sm:w-1/3 bg-com backdrop-blur-lg fixed left-0"></div>
+        <div className="h-screen hidden sm:flex sm:w-1/3 bg-com backdrop-blur-lg fixed left-0"></div>
 
         <section className="wrapper pl-2 flex justify-end">
-          <div className="mt-20 w-5/6 sm:w-2/3 flex flex-col gap-2">
+          <div className="mt-20 w-7/8 sm:w-2/3 flex flex-col gap-4">
             <div className="w-full text-right mb-4">
               <CommentForm userId={userId || ""} />
             </div>
@@ -27,7 +27,7 @@ export default async function CommentairesPage() {
                 switch (comment.importance) {
                   case "HIGH":
                     entireDivClass =
-                      "rounded-xl bg-gradient-to-t from-[#fc0010] to-[#FE9D01]  overflow-hidden p-2 flex flex-col justify-between";
+                      "rounded-xl bg-gradient overflow-hidden p-2 flex flex-col justify-between";
                     pseudoClass =
                       "renogare text-2xl font-bold text-white border-b pb-1 flex justify-between";
                     commentClass = "text-[1.5rem] text-white sm:ml-8  p-2";
@@ -42,7 +42,7 @@ export default async function CommentairesPage() {
                     break;
                   case "LOW":
                     entireDivClass =
-                      "bg-gradient-to-t from-transparent to-transparent border rounded-xl p-2 flex flex-col justify-between";
+                      "bg-gradient-to-t from-transparent to-transparent border rounded-xl p-2 flex flex-col justify-between boxShadow";
                     pseudoClass =
                       "renogare text-sm font-bold text-white border-b pb-1 flex justify-between";
                     commentClass =

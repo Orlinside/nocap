@@ -29,7 +29,7 @@ export const Navbar = () => {
           }`}
           onClick={handleClick}
         >
-          <p className="z-[110] h-8 w-20 text-[0.8rem] renogare bg-transparent flex-center tex-dark bg-gray-500 hover:text-primary">
+          <p className="z-[110] h-8 w-20 text-[0.8rem] renogare bg-transparent flex-center tex-dark bg-gray-500 hover:text-white/80 tracking-widest">
             {isActive ? "FERMER" : "MENU"}
           </p>
         </div>
@@ -47,10 +47,8 @@ export const Navbar = () => {
                   : pathname.startsWith(item.route);
               return (
                 <div
-                  className={`w-full h-full flex flex-col justify-left border-b-4 p-8 border-gray-300 hover:bg-dark transition-all ease-in-out duration-300 ${
-                    active
-                      ? "bg-gradient-to-t from-dark via-[#1b1b1b] to-transparent"
-                      : ""
+                  className={`w-full h-full flex flex-col justify-left p-8 border-gray-300 hover:bg-dark transition-all ease-in-out duration-300 ${
+                    active ? "bg-com text-second font-bold" : ""
                   }`}
                   key={index}
                   onClick={() => {
@@ -61,7 +59,7 @@ export const Navbar = () => {
                 >
                   <Link
                     href={item.route}
-                    className={`relative renogare wrapper text-[2rem] uppercase tracking-widest transition-all ease duration-300 ${
+                    className={`relative renogare wrapper text-2xl sm:text-[2rem] uppercase tracking-widest transition-all ease duration-300 ${
                       active ? styles.activeLink : ""
                     }`}
                   >

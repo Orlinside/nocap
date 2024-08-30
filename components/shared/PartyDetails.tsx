@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
+import { NextResponse } from "next/server";
 
-import { getPartyById } from "@/lib/actions/party.actions";
-import { PhotoForm } from "../admin/PhotoForm";
 import { currentUser } from "@/lib/auth";
+import { getPartyById } from "@/lib/actions/party.actions";
+
+import { PhotoForm } from "../admin/PhotoForm";
 import { DeleteConfirmationPhoto } from "../admin/DeleteConfirmationPhoto";
 import { DeleteConfirmation } from "../admin/DeleteConfirmation";
-import { NextResponse } from "next/server";
 
 interface Photo {
   id: string;
@@ -56,6 +56,15 @@ export const PartyDetails = async ({
     return <div>Party not found</div>;
   }
 
+  const formattedDate = new Date(party.startDateTime).toLocaleDateString(
+    "fr-FR",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
+
   //! Vérifier si l'event est passé ou pas :
   // const currentDateTime = new Date();
   // const startDateTime = new Date(party.startDateTime);
@@ -66,11 +75,20 @@ export const PartyDetails = async ({
 
   return (
     <>
-      <section>
-        <div className="wrapper flex flex-between">
-          <h2 className="uppercase text-2xl">{party.name}</h2>
+      <section className="wrapper">
+        <div className="mt-20"></div>
+        <div
+          className="flex flex-col gap-4 justify-center sm:flex-row
+         sm:flex-between"
+        >
+          <h2 className="uppercase renogare bg-linear-text text-2xl text-center sm:text-left">
+            {party.name}{" "}
+            <span className="text-xs text-white font-mono">
+              {formattedDate}
+            </span>
+          </h2>
           {/* <Button className="rounded-xl">Ajouter une photo</Button> */}
-          <div className="flex gap-8">
+          <div className="flex flex-col gap-4 items-center sm:flex-row sm:gap-8">
             <PhotoForm
               partyId={party.id}
               userId={userId ?? ""}
@@ -83,15 +101,15 @@ export const PartyDetails = async ({
           {party.photos.length === 0 ? (
             <p>Aucune photo disponible pour cette soirée</p>
           ) : (
-            <div className="flex gap-8">
+            <div className="grid sm:grid-cols-3 gap-8">
               {party.photos.map((photo: Photo) => (
-                <div key={photo.id} className="relative bg-black">
+                <div key={photo.id} className="relative bg-black rounded-xl">
                   <Image
                     src={photo.url}
                     alt={photo.alt}
                     width={2000}
                     height={2000}
-                    className="rounded-xl w-[20rem] h-[18rem] object-contain"
+                    className="rounded-xl w-full object-contain"
                   />
                   <div className="absolute right-2 top-2">
                     <DeleteConfirmationPhoto photoId={photo.id} />
