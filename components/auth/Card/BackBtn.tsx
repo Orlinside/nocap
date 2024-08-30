@@ -13,7 +13,7 @@ export const BackButton = ({ href, label }: BackButtonProps) => {
       type="button"
       className="flex justify-center mx-auto rounded-lg hover:text-grey-500 transition-all ease-in-out duration-200"
     >
-      <Link href={href} className="text-sm rubik">
+      <Link href={href} className="text-sm renogare">
         {label}
       </Link>
     </button>

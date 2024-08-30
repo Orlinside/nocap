@@ -26,9 +26,18 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+@font-face {
+  font-family: "renogare";
+  src: url("./../public/font/Renogare-Regular.otf") format("truetype");
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .renogare {
+    font-family: "renogare";
   }
 
   .wrapper {
@@ -53,11 +62,19 @@ body {
   }
 
   .button {
-    @apply bg-slate-600 rounded-xl text-white h-[40px];
+    @apply bg-dark hover:bg-black rounded-xl text-white h-[40px];
   }
 
   .logo {
-    filter: drop-shadow(0 0 1px #ffffff60);
+    filter: drop-shadow(0px 0px 10px #ffffffcd);
+  }
+
+  .bg-com {
+    background-image: url("/images/nocap.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* backdrop-filter: blur(5px) grayscale(1) contrast(20); */
   }
 
   .swiper-slide {

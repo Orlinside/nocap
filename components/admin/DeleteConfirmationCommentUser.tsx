@@ -27,8 +27,8 @@ export const DeleteConfirmationCommentUser = ({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="button px-2">
-        <p>Supprimer</p>
+      <AlertDialogTrigger className="">
+        <p className="text-[0.8rem] font-mono">Supprimer</p>
       </AlertDialogTrigger>
 
       <AlertDialogContent className="bg-dark w-1/3 rounded-sm border-second">

@@ -29,7 +29,7 @@ export const Navbar = () => {
           }`}
           onClick={handleClick}
         >
-          <p className="z-[110] h-8 w-20 text-[0.8rem] bg-transparent flex-center tex-dark bg-gray-500 hover:text-primary">
+          <p className="z-[110] h-8 w-20 text-[0.8rem] renogare bg-transparent flex-center tex-dark bg-gray-500 hover:text-primary">
             {isActive ? "FERMER" : "MENU"}
           </p>
         </div>
@@ -61,7 +61,7 @@ export const Navbar = () => {
                 >
                   <Link
                     href={item.route}
-                    className={`relative wrapper text-[2rem] uppercase tracking-widest transition-all ease duration-300 ${
+                    className={`relative renogare wrapper text-[2rem] uppercase tracking-widest transition-all ease duration-300 ${
                       active ? styles.activeLink : ""
                     }`}
                   >

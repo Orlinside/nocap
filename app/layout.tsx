@@ -6,8 +6,6 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
 import { Toaster } from "@/components/ui/sonner";
-import { ShootingStars } from "@/components/ui/shooting-stars";
-import { StarsBackground } from "@/components/ui/stars-background";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,10 +25,6 @@ export default async function RootLayout({
     <html lang="fr">
       <SessionProvider session={session}>
         <body className="">
-          {/* <div>
-            <ShootingStars />
-            <StarsBackground />
-          </div> */}
           <div className="fixed top-0 w-full z-50">
             <Header />
           </div>

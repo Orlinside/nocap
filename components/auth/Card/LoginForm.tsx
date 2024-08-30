@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 import { login } from "@/lib/actions/auth.actions";
 
@@ -34,8 +35,10 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { revalidatePath } from "next/cache";
 import RegisterForm from "./RegisterForm";
+
+import { IoMdLogIn } from "react-icons/io";
+import { ImCross } from "react-icons/im";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -89,13 +92,18 @@ export const LoginForm = () => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="button">Connexion</AlertDialogTrigger>
+      <AlertDialogTrigger
+        aria-label="Connexion"
+        className="renogare uppercase text-sm"
+      >
+        <IoMdLogIn size={25} className="hover:text-primary" />
+      </AlertDialogTrigger>
 
       <AlertDialogContent className="bg-transparent w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
-          <AlertDialogTitle>SE CONNECTER</AlertDialogTitle>
-          <AlertDialogCancel className="text-white rounded-xl">
-            Quitter
+          <AlertDialogTitle className="renogare">SE CONNECTER</AlertDialogTitle>
+          <AlertDialogCancel className="text-white border-none">
+            <ImCross className="hover:text-primary" />
           </AlertDialogCancel>
         </AlertDialogHeader>
 
@@ -149,7 +157,7 @@ export const LoginForm = () => {
                         <button className="">
                           <Link
                             href="/auth/reset"
-                            className="text-[0.8rem] hover:text-grey-500"
+                            className="text-[0.8rem] renogare tracking-widest hover:text-grey-500"
                           >
                             Mot de passe oublié ?
                           </Link>
@@ -165,7 +173,7 @@ export const LoginForm = () => {
               <Button
                 type="submit"
                 disabled={isPending}
-                className="button hover:bg-slate-800 w-full"
+                className="button renogare uppercase tracking-widest hover:bg-slate-800 w-full"
               >
                 Connexion
               </Button>

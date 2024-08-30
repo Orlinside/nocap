@@ -5,6 +5,17 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
   Form,
   FormControl,
   FormField,
@@ -15,6 +26,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { commentFormSchema } from "@/lib/validator";
 import { createComment } from "@/lib/actions/comment.actions";
+import { useTransition } from "react";
 
 // type CommentFormProps = {
 //   userId: string | undefined;
@@ -22,6 +34,8 @@ import { createComment } from "@/lib/actions/comment.actions";
 
 export const CommentForm = ({ userId }: { userId: string }) => {
   const router = useRouter();
+
+  let [isPending, startTransition] = useTransition();
 
   const initialValues = {
     content: "",
@@ -41,7 +55,7 @@ export const CommentForm = ({ userId }: { userId: string }) => {
         path: "/commentaires",
       });
       if (newComment) {
-        form.reset();
+        form.reset({ content: "" });
       }
     } catch (error) {
       console.error(error);
@@ -49,38 +63,62 @@ export const CommentForm = ({ userId }: { userId: string }) => {
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-10"
-      >
-        <div className="col-span-9">
-          <FormField
-            control={form.control}
-            name="content"
-            render={({ field }) => (
-              <FormItem className="w-full">
-                <FormControl className="h-4">
-                  <Textarea
-                    placeholder="Met un commentaire ici..."
-                    {...field}
-                    className="h-8 border-none bg-gray-400 text-dark font-bold"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <Button
-          type="submit"
-          size="lg"
-          disabled={form.formState.isSubmitted}
-          className="h-full col-span-1 w-full uppercase"
-        >
-          {form.formState.isSubmitted ? "En cours..." : `Envoyer`}
-        </Button>
-      </form>
-    </Form>
+    <AlertDialog>
+      <AlertDialogTrigger className="bg-primary hover:bg-primary/80 uppercase renogare rounded-xl p-2 text-sm">
+        <p>écrire un commentaire</p>
+      </AlertDialogTrigger>
+
+      <AlertDialogContent className="bg-dark w-5/6 sm:w-1/2 rounded-xl border-none">
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-white renogare uppercase">
+            écrire un commentaire
+          </AlertDialogTitle>
+        </AlertDialogHeader>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="">
+            <div className="rounded-xl">
+              <FormField
+                control={form.control}
+                name="content"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormControl className="h-2">
+                      <Textarea
+                        placeholder="Met un commentaire ici..."
+                        {...field}
+                        className=" border-none bg-white backdrop-blur-md text-dark font-bold rounded-xl placeholder:text-gray-800"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <AlertDialogFooter className="mt-4">
+              <AlertDialogCancel className="text-white rounded-xl">
+                Annuler
+              </AlertDialogCancel>
+
+              <AlertDialogAction
+                type="submit"
+                className="text-white renogare bg-primary rounded-xl hover:bg-primary/80"
+              >
+                {isPending ? "Envoie..." : "Envoyer"}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </form>
+        </Form>
+      </AlertDialogContent>
+    </AlertDialog>
+
+    // <Button
+    //   type="submit"
+    //   size="lg"
+    //   disabled={form.formState.isSubmitted}
+    //   className="h-full col-span-1 w-full uppercase rounded-xl"
+    // >
+    //   {form.formState.isSubmitted ? "En cours..." : `Envoyer`}
+    // </Button>
   );
 };

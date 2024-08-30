@@ -8,13 +8,12 @@ interface HeaderAuthProps {
 export const HeaderAuth = ({ label }: HeaderAuthProps) => {
   return (
     <div className="w-full flex flex-col gap-y-2 items-center justify-center">
-      <Link
-        href="/"
-        className="text-2xl font-bold kronaOne -tracking-[0.25rem]"
-      >
+      <Link href="/" className="text-2xl font-bold renogare tracking-widest">
         NoCap
       </Link>
-      <p className="text-muted-foreground text-sm rubik">{label}</p>
+      <p className="text-muted-foreground text-sm renogare tracking-widest">
+        {label}
+      </p>
     </div>
   );
 };

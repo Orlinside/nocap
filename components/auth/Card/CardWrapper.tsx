@@ -30,13 +30,13 @@ export const CardWrapper = ({
       <CardHeader className="text-white">
         <HeaderAuth label={headerLabel} />
       </CardHeader>
-      <CardContent className="text-white rubik">{children}</CardContent>
+      <CardContent className="text-white">{children}</CardContent>
       {showSocial && (
         <CardFooter>
           <Social />
         </CardFooter>
       )}
-      <CardFooter className="text-white">
+      <CardFooter className="text-white renogare">
         <BackButton label={backButtonLabel} href={backButtonHref} />
       </CardFooter>
     </Card>

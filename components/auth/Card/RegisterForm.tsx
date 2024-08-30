@@ -31,6 +31,8 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "./FormError";
 import { FormSuccess } from "./FormSucess";
 
+import { ImCross } from "react-icons/im";
+
 export default function RegisterForm() {
   const [isPending, startTransition] = useTransition();
 
@@ -66,21 +68,21 @@ export default function RegisterForm() {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="">
+      <AlertDialogTrigger className="renogare text-sm tracking-widest hover:text-primary">
         Pas encore de compte ? Créer un compte
       </AlertDialogTrigger>
 
       <AlertDialogContent className="bg-transparent backdrop-blur-xl  w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
           <AlertDialogTitle>S&apos;INSCRIRE</AlertDialogTitle>
-          <AlertDialogCancel className="text-white rounded-xl">
-            Quitter
+          <AlertDialogCancel className="text-white border-none">
+            <ImCross className="hover:text-primary" />
           </AlertDialogCancel>
         </AlertDialogHeader>
         <CardWrapper
           headerLabel="Créer un compte"
-          backButtonLabel="Vous avez déjà un compte ? Connectez-vous !"
-          backButtonHref="/connexion"
+          backButtonLabel=""
+          backButtonHref=""
           showSocial
         >
           <Form {...form}>
@@ -186,7 +188,7 @@ export default function RegisterForm() {
               <Button
                 type="submit"
                 disabled={isPending}
-                className="button w-full"
+                className="button uppercase renogare tracking-widest w-full"
               >
                 Créer mon compte
               </Button>

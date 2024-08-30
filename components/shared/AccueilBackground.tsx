@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { currentUser } from "@/lib/auth";
-import { getReactionsByUserId } from "@/lib/actions/user.actions";
 
 import { Carousel } from "./Carousel/Swiper";
 import { Pagination } from "./Pagination";
@@ -42,7 +40,7 @@ export const AccueilBackground = ({
         }}
       ></div>
       <div className="relative z-10 w-full h-full flex flex-col justify-between">
-        <h2 className="text-xl text-center mt-28 lg:hidden ">
+        <h2 className="text-xl renogare tracking-widest text-center mt-28 lg:hidden ">
           {party[0].name}
         </h2>
         <div className="lg:mt-32 xl:mt-24">
@@ -55,8 +53,10 @@ export const AccueilBackground = ({
             />
           </div>
         </div>
-        <div className="w-full wrapper flex justify-center lg:justify-between">
-          <h2 className="text-xl hidden lg:block">{party[0].name}</h2>
+        <div className="w-full wrapper flex justify-center items-center lg:justify-between">
+          <h2 className="text-xl renogare tracking-widest hidden lg:block">
+            {party[0].name}
+          </h2>
           {totalPages > 1 && (
             <div className="">
               <Pagination
