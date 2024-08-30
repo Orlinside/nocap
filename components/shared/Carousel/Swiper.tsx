@@ -49,7 +49,7 @@ export const Carousel = ({
   };
 
   return (
-    <div className="w-full h-full -z-0">
+    <div className="h-full -z-0 ">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -64,20 +64,20 @@ export const Carousel = ({
         }}
         loop={true}
         modules={[EffectCoverflow, Pagination]}
-        className="mx-auto overflow-x-hidden swiper-slide swiper-slide-active"
+        className="mx-auto h-full "
         onSlideChange={handleSlideChange}
       >
         {photos.map((photo: any, idx: any) => (
           <SwiperSlide
             key={idx}
-            className="relative w-full max-w-[350px] h-auto overflow-hidden rounded-sm object-cover lg:max-w-[700px] md:max-w-[700px] sm:max-w-[300px]"
+            className="relative w-full max-w-[350px] h-auto rounded-sm object-cover lg:max-w-[700px] md:max-w-[700px] sm:max-w-[300px]"
           >
             <div
               key={idx}
-              className="relative z-0 overflow-x-hidden"
+              className="relative z-0 swiper-slide swiper-slide-active"
               onClick={() => handlePhotoClick(photo.url)}
             >
-              <GlareCard>
+              <GlareCard className="">
                 <Image
                   src={photo.url}
                   alt={photo.url}
@@ -87,7 +87,7 @@ export const Carousel = ({
                 />
               </GlareCard>
             </div>
-            <div className="absolute z-10 right-2 bottom-2 overflow-x-hidden">
+            <div className="absolute z-10 right-2 bottom-2">
               <BtnReactions
                 photoId={photo.id}
                 reaction={photo.reactions}

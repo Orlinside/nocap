@@ -11,6 +11,10 @@ import {
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 
+import { FaHeart } from "react-icons/fa";
+import { FaFire } from "react-icons/fa";
+import { FaThumbsUp } from "react-icons/fa6";
+
 export const BtnReactions = ({
   photoId,
   reaction,
@@ -26,7 +30,6 @@ export const BtnReactions = ({
 
   // Récupération des réactions total
   const [reactions, setReactions] = useState(reaction);
-  console.log(reactions);
 
   // Type de réactions de l'utilisateur
   const [userReactions, setUserReactions] = useState<{
@@ -87,21 +90,42 @@ export const BtnReactions = ({
     <div>
       <Button
         onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
-        className={userReactions.LIKE ? "bg-orange-500" : ""}
+        className={
+          userReactions.LIKE
+            ? "flex gap-4 items-center justify-center text-red-600 bg-transparent hover:text-red-700 hover:bg-transparent"
+            : "flex gap-4 items-center justify-center text-white bg-transparent hover:text-red-600 hover:bg-transparent"
+        }
       >
-        Like ({countReactions("LIKE")})
+        <FaHeart size={25} />
+        <span className="renogare text-white text-[0.7rem] w-4">
+          {countReactions("LIKE")}
+        </span>
       </Button>
       <Button
         onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
-        className={userReactions.FIRE ? "bg-orange-500" : ""}
+        className={
+          userReactions.FIRE
+            ? "flex gap-4 items-center justify-center text-orange-600 bg-transparent hover:text-orange-700 hover:bg-transparent"
+            : "flex gap-4 items-center justify-center text-white bg-transparent hover:text-orange-600 hover:bg-transparent"
+        }
       >
-        Fire ({countReactions("FIRE")})
+        <FaFire size={25} />
+        <span className="renogare text-white text-[0.7rem] w-4">
+          {countReactions("FIRE")}
+        </span>
       </Button>
       <Button
         onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
-        className={userReactions.THUMBS_UP ? "bg-orange-500" : ""}
+        className={
+          userReactions.THUMBS_UP
+            ? "flex gap-4 items-center justify-center text-primary bg-transparent hover:text-primary/80 hover:bg-transparent"
+            : "flex gap-4 items-center justify-center text-white bg-transparent hover:text-primary/80 hover:bg-transparent"
+        }
       >
-        Pouce ({countReactions("THUMBS_UP")})
+        <FaThumbsUp size={25} />
+        <span className="renogare text-white text-[0.7rem] w-4">
+          {countReactions("THUMBS_UP")}
+        </span>
       </Button>
     </div>
   );

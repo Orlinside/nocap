@@ -31,18 +31,20 @@ export const DeleteConfirmationCommentUser = ({
         <p className="text-[0.8rem] font-mono">Supprimer</p>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-dark w-1/3 rounded-sm border-second">
+      <AlertDialogContent className="bg-dark w-1/3 border-none">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-white">
+          <AlertDialogTitle className="text-white renogare">
             Etes-vous sûr de vouloir supprimer votre commentaire ?
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-second">
+          <AlertDialogDescription className="text-white">
             La suppression est irréversible.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel className="text-white">Annuler</AlertDialogCancel>
+          <AlertDialogCancel className="text-white rounded-xl">
+            Annuler
+          </AlertDialogCancel>
 
           <AlertDialogAction
             onClick={() =>
@@ -50,7 +52,7 @@ export const DeleteConfirmationCommentUser = ({
                 await deleteAdminComment({ commentId, path: pathname });
               })
             }
-            className="text-white rubik bg-second hover:bg-third"
+            className="text-white renogare bg-primary hover:bg-primary/80 rounded-xl"
           >
             {isPending ? "Suppression..." : "Supprimer"}
           </AlertDialogAction>

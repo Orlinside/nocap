@@ -31,6 +31,15 @@ export const AccueilBackground = ({
     console.log(activePhotoUrl);
   }, [activePhotoUrl]);
 
+  const formattedDate = new Date(party[0].startDateTime).toLocaleDateString(
+    "fr-FR",
+    {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }
+  );
+
   return (
     <section className="h-full flex flex-col justify-between pb-8 items-center overflow-hidden relative">
       <div
@@ -40,11 +49,12 @@ export const AccueilBackground = ({
         }}
       ></div>
       <div className="relative z-10 w-full h-full flex flex-col justify-between">
-        <h2 className="text-xl renogare tracking-widest text-center mt-28 lg:hidden ">
-          {party[0].name}
+        <h2 className="text-xl renogare tracking-widest text-center mt-28 flex flex-col justify-center items-center lg:hidden ">
+          {party[0].name}{" "}
+          <span className="text-sm font-mono">{formattedDate}</span>
         </h2>
         <div className="lg:mt-32 xl:mt-24">
-          <div className="w-full overflow-x-hidden flex-1">
+          <div className="w-full flex-1">
             <Carousel
               photos={party[0].photos}
               user={user}
@@ -53,9 +63,10 @@ export const AccueilBackground = ({
             />
           </div>
         </div>
-        <div className="w-full wrapper flex justify-center items-center lg:justify-between">
-          <h2 className="text-xl renogare tracking-widest hidden lg:block">
-            {party[0].name}
+        <div className="w-full wrapper flex flex-col gap-2 justify-center items-center">
+          <h2 className="text-2xl renogare tracking-widest hidden lg:flex lg:flex-col lg:justify-center items-center">
+            {party[0].name}{" "}
+            <span className="text-sm font-mono">{formattedDate}</span>
           </h2>
           {totalPages > 1 && (
             <div className="">

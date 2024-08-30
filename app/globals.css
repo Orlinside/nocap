@@ -66,7 +66,7 @@ body {
   }
 
   .logo {
-    filter: drop-shadow(0px 0px 10px #ffffffcd);
+    filter: drop-shadow(0px 0px 3px #ffffffcd);
   }
 
   .bg-com {
@@ -79,9 +79,9 @@ body {
 
   .swiper-slide {
     text-align: center;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0);
-    filter: blur(5px) grayscale(1) contrast(20);
-    opacity: 0.1;
+    /* box-shadow: 0 15px 50px rgba(0, 0, 0, 0); */
+    filter: blur(5px) grayscale(1) contrast(10);
+    opacity: 0.2;
     border-radius: 5px;
     object-fit: cover;
   }
@@ -89,7 +89,11 @@ body {
   .swiper-slide-active {
     filter: blur(0);
     opacity: 1;
-    /* box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.775); */
+    /* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.479); */
+  }
+
+  .boxShadow {
+    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.622);
   }
 
   /* Animation pour l'affichage en grand */
