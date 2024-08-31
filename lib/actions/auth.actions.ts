@@ -99,8 +99,8 @@ export const register = async (values: z.infer<typeof userRegisterSchema>) => {
 };
 
 //! LOGOUT ACTION
-export const logout = async () => {
+export const logout = async (pathname: string) => {
   // On peut dans cette fonction supprimer des cookies ou des tokens de session du User par exemple
   await signOut();
-  revalidatePath("/");
+  revalidatePath(pathname);
 };

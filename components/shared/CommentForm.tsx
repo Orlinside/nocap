@@ -3,6 +3,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 
 import {
   AlertDialog,
@@ -26,7 +27,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { commentFormSchema } from "@/lib/validator";
 import { createComment } from "@/lib/actions/comment.actions";
-import { useTransition } from "react";
+import { toast } from "sonner";
 
 // type CommentFormProps = {
 //   userId: string | undefined;
@@ -34,7 +35,6 @@ import { useTransition } from "react";
 
 export const CommentForm = ({ userId }: { userId: string }) => {
   const router = useRouter();
-
   let [isPending, startTransition] = useTransition();
 
   const initialValues = {
@@ -46,6 +46,14 @@ export const CommentForm = ({ userId }: { userId: string }) => {
     defaultValues: initialValues,
   });
 
+  //! HANDLE DIALOG OPEN
+  const handleDialogOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (!userId) {
+      event.preventDefault();
+      toast.error("Vous devez être connecté pour écrire un commentaire");
+    }
+  };
+
   //! SUBMIT FORM
   async function onSubmit(values: z.infer<typeof commentFormSchema>) {
     try {
@@ -56,6 +64,7 @@ export const CommentForm = ({ userId }: { userId: string }) => {
       });
       if (newComment) {
         form.reset({ content: "" });
+        toast.success("Commentaire envoyé");
       }
     } catch (error) {
       console.error(error);
@@ -64,7 +73,10 @@ export const CommentForm = ({ userId }: { userId: string }) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="bg-gradient uppercase renogare rounded-xl p-2 text-sm">
+      <AlertDialogTrigger
+        onClick={handleDialogOpen}
+        className="bg-gradient uppercase renogare rounded-xl p-2 text-sm"
+      >
         <p>écrire un commentaire</p>
       </AlertDialogTrigger>
 

@@ -24,7 +24,7 @@ export const Annonces = async () => {
 
   return (
     <div className="w-full h-10 flex items-center justify-center gap-20 bg-dark z-10">
-      {/* <Bandeau lastParty={lastParty} /> */}
+      <Bandeau lastParty={lastParty} />
     </div>
   );
 };

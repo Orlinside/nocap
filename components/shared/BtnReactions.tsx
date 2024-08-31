@@ -1,8 +1,6 @@
 "use client";
 import React, { startTransition, useEffect, useState } from "react";
-import Link from "next/link";
 
-import { useCurrentUser } from "@/hooks/use-current-user";
 import {
   addOrRemoveReaction,
   getReactions,
@@ -76,7 +74,6 @@ export const BtnReactions = ({
           reactionType,
         });
         const reactions = await getReactions(photoId);
-        console.log("Objet REACTION", reactions);
 
         setReactions(reactions);
         setIsReaction(!isReact);

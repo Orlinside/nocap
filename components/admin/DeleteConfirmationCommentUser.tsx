@@ -14,6 +14,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 import { deleteAdminComment } from "@/lib/actions/comment.actions";
 
@@ -50,6 +51,7 @@ export const DeleteConfirmationCommentUser = ({
             onClick={() =>
               startTransition(async () => {
                 await deleteAdminComment({ commentId, path: pathname });
+                toast.success("Commentaire supprimé");
               })
             }
             className="text-white renogare bg-gradient hover:bg-primary/80 rounded-xl"

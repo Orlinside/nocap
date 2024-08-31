@@ -7,6 +7,7 @@ import { getPartyById } from "@/lib/actions/party.actions";
 import { PhotoForm } from "../admin/PhotoForm";
 import { DeleteConfirmationPhoto } from "../admin/DeleteConfirmationPhoto";
 import { DeleteConfirmation } from "../admin/DeleteConfirmation";
+import { PartyForm } from "../admin/PartyForm";
 
 interface Photo {
   id: string;
@@ -39,21 +40,31 @@ export const PartyDetails = async ({
   let party: Party | null = null;
 
   if (response instanceof NextResponse) {
-    const data = await response.json();
-    if (data && typeof data === "object" && "id" in data) {
-      party = data as Party;
+    try {
+      const text = await response.text();
+      if (text) {
+        const data = JSON.parse(text);
+        if (data && typeof data === "object" && "id" in data) {
+          party = data as Party;
+        }
+      }
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
     }
   } else if (response && typeof response === "object" && "id" in response) {
     party = response as Party;
   }
 
-  console.log(party);
-
   const user = await currentUser();
   const userId = user?.id;
 
   if (!party) {
-    return <div>Party not found</div>;
+    return (
+      <section className="wrapper">
+        <div className="mt-20"></div>
+        <p>Les données sont introuvables ou supprimées.</p>
+      </section>
+    );
   }
 
   const formattedDate = new Date(party.startDateTime).toLocaleDateString(
@@ -88,11 +99,17 @@ export const PartyDetails = async ({
             </span>
           </h2>
           {/* <Button className="rounded-xl">Ajouter une photo</Button> */}
-          <div className="flex flex-col gap-4 items-center sm:flex-row sm:gap-8">
+          <div className="flex gap-4 justify-between items-center sm:flex-row sm:gap-8">
             <PhotoForm
               partyId={party.id}
               userId={userId ?? ""}
               type="Ajouter"
+            />
+            <PartyForm
+              type="Modifier"
+              userId={userId}
+              party={party}
+              partyId={party.id}
             />
             <DeleteConfirmation partyId={party.id} />
           </div>

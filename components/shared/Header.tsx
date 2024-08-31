@@ -24,9 +24,9 @@ export const Header = async () => {
           <Image
             src="/logo/Logo_NoCapR_white.png"
             alt="logo"
-            width={150}
+            width={175}
             height={100}
-            className="cursor-pointer"
+            className="cursor-pointer z-[200]"
           />
         </Link>
         <div className="flex items-center justify-end bg-transparent">

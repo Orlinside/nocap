@@ -1,7 +1,9 @@
 "use client";
 
 import { logout } from "@/lib/actions/auth.actions";
-import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { usePathname, useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface LogoutBtnProps {
   children?: React.ReactNode;
@@ -9,10 +11,12 @@ interface LogoutBtnProps {
 
 export const LogoutBtn = ({ children }: LogoutBtnProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   const onClick = () => {
-    logout();
-    router.push("/");
+    logout(pathname);
+    // router.push("/");
+    toast.success("Déconnection réussie");
   };
   return (
     <span

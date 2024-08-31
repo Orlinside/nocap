@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 
-import { PartyProps } from "@/types";
 import { partyDefaultValues } from "@/constants";
 import { partyFormSchema } from "@/lib/validator";
+
+import { createParty, updateParty } from "@/lib/actions/party.actions";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
@@ -32,9 +33,11 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { createParty, updateParty } from "@/lib/actions/party.actions";
+
+import { FaEdit } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
+import { toast } from "sonner";
 
 type PartyFormProps = {
   userId: string | undefined;
@@ -70,8 +73,6 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
 
   //! SUBMIT FORM
   async function onSubmit(values: z.infer<typeof partyFormSchema>) {
-    console.log(values);
-
     if (type === "Créer") {
       try {
         const newParty = await createParty({
@@ -82,8 +83,10 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
         if (newParty && "id" in newParty) {
           form.reset();
           router.push(`/admin/party/${newParty.id}`);
+          toast.success("Création réussie");
         }
       } catch (error) {
+        toast.error("Erreur lors de la création de la soirée.");
         console.error(error);
       }
     }
@@ -101,33 +104,45 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
             partyId,
           },
           userId,
-          path: "/admin/party",
+          path: `/admin/party/${partyId}`,
         });
         if (updatedParty) {
           form.reset();
           router.push(`/admin/party/${partyId}`);
+          toast.success("Modification réussie");
         }
       } catch (error) {
-        console.error(error);
+        toast.error("Erreur lors de la modification de la soirée.");
+        console.error("Error updating party:", error);
       }
     }
   }
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="text-sm button renogare bg-gradient px-2">
-        <p>Créer une soirée</p>
+      <AlertDialogTrigger
+        aria-describedby={type}
+        className="bg-linear-text hover:text-white/70"
+      >
+        {type === "Créer" ? (
+          <FaPlus size={25} className="" />
+        ) : type === "Modifier" ? (
+          <FaEdit size={25} className="" />
+        ) : null}
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-dark w-4/5 sm:w-1/2 rounded-xl border-none">
+      <AlertDialogContent
+        aria-describedby={type}
+        className="bg-dark w-4/5 sm:w-1/2 rounded-xl border-none"
+      >
         <AlertDialogHeader>
           <AlertDialogTitle className="text-white renogare">
-            Nouvelle soirée
+            {type}
           </AlertDialogTitle>
         </AlertDialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="name"
@@ -210,7 +225,7 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
                 type="submit"
                 className="text-white rounded-xl renogare bg-gradient"
               >
-                {isPending ? "Ajout..." : type}
+                {isPending ? "..." : type}
               </AlertDialogAction>
             </AlertDialogFooter>
           </form>

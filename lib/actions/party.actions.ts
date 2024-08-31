@@ -15,6 +15,7 @@ import { getUserById } from "./user.actions";
 import { Role } from "@prisma/client";
 import path from "path";
 import { currentRole } from "../auth";
+import { Value } from "@radix-ui/react-select";
 
 //! CREATE PARTY
 export const createParty = async ({
@@ -66,10 +67,16 @@ export async function updateParty({ userId, party, path }: UpdatePartyParams) {
       throw new Error("Party not found");
     }
 
+    if (!userId) {
+      return new NextResponse(null, { status: 401 });
+    }
+
     const updatedParty = await db.party.update({
       where: { id: party.partyId },
       data: {
-        ...party,
+        name: party.name,
+        startDateTime: party.startDateTime,
+        endDateTime: party.endDateTime,
       },
     });
 
@@ -77,6 +84,7 @@ export async function updateParty({ userId, party, path }: UpdatePartyParams) {
 
     return updatedParty;
   } catch (error) {
+    console.error("Error updating party:", error);
     return new NextResponse(null, { status: 500 });
   }
 }
@@ -102,6 +110,7 @@ export async function deleteParty({ partyId, path }: DeletePartyParams) {
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {
+    console.error("Error deleting party:", error);
     return new NextResponse(null, { status: 500 });
   }
 }

@@ -92,11 +92,17 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="button renogare bg-gradient px-2">
+      <AlertDialogTrigger
+        aria-describedby="Ajouter une photo"
+        className="button renogare bg-gradient px-2"
+      >
         <p>Ajouter une photo</p>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-dark w-5/6 sm:w-2/3 rounded-xl border-none">
+      <AlertDialogContent
+        aria-describedby="Ajouter une photo"
+        className="bg-dark w-5/6 sm:w-2/3 rounded-xl border-none"
+      >
         <AlertDialogHeader>
           <AlertDialogTitle className="text-white renogare">
             Ajouter une photo

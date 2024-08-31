@@ -36,6 +36,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import RegisterForm from "./RegisterForm";
+import { toast } from "sonner";
 
 import { IoMdLogIn } from "react-icons/io";
 import { ImCross } from "react-icons/im";
@@ -83,6 +84,7 @@ export const LoginForm = () => {
             router.push("/");
             revalidatePath("/");
           }
+          toast.success("Vous êtes connecté !");
         })
         .catch(() =>
           setError("Une erreur s'est produite. Veuillez réessayer.")
