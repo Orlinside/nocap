@@ -72,10 +72,15 @@ export const Navbar = () => {
             })}
           </div>
           <div className="text-[0.6rem] flex-center gap-8 z-10">
-            <Link href="/mentions-legales" className="hover:text-gray-300">
+            <Link
+              onClick={() => setNavActive(!navActive)}
+              href="/mentions-legales"
+              className="hover:text-gray-300"
+            >
               Mentions Légales
             </Link>
             <Link
+              onClick={() => setNavActive(!navActive)}
               href="/politique-de-confidentialite"
               className="hover:text-gray-300"
             >
