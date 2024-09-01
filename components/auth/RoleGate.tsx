@@ -19,7 +19,7 @@ export const RoleGate = ({ children, allowedRole }: RoleGateProps) => {
 
   if (role !== allowedRole) {
     return (
-      <div className="h-full flex items-center justify-center">
+      <div className="mt-28 sm:mt-20 renogare h-full flex items-center justify-center">
         <FormError message="Cette page n'est pas accessible." />
       </div>
     );

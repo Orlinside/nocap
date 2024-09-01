@@ -24,8 +24,17 @@ declare module "next-auth" {
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
-    signIn: "/auth/connexion",
-    error: "/auth/error", // Redirige vers NOTRE page d'erreur si il y a une erreur
+    signIn: "/",
+    error: "/", // Redirige vers NOTRE page d'erreur si il y a une erreur
+  },
+  events: {
+    // Quand on se connecte avec Google, l'email est déjà vérifié donc on le met à jour directement dans la base de données
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+    },
   },
   callbacks: {
     async signIn({ user, account }) {

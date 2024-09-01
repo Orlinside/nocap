@@ -39,9 +39,19 @@ export const getUserByEmail = async (email: string) => {
 //! TOUS LES USERS
 export async function getAllUsers() {
   try {
-    const users = await db.user.findMany();
+    const users = await db.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        name: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
     return users;
-  } catch {
+  } catch (error) {
+    console.error("Error fetching users:", error);
     return null;
   }
 }

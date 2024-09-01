@@ -49,9 +49,6 @@ export default async function Home({
           urlParamName={""}
         />
       </section>
-      {/* <div className="fixed bottom-10 right-[10rem]">
-        <Annonces />
-      </div> */}
     </>
   );
 }

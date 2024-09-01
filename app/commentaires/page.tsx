@@ -12,10 +12,10 @@ export default async function CommentairesPage() {
   return (
     <>
       <div className="flex gap-2 justify-between">
-        <div className="h-screen hidden sm:flex sm:w-1/3 bg-com backdrop-blur-lg fixed left-0"></div>
+        <div className="h-screen hidden sm:flex md:1/4 lg:w-1/3 bg-com backdrop-blur-lg fixed left-0"></div>
 
         <section className="wrapper pl-2 flex justify-end">
-          <div className="mt-20 w-7/8 sm:w-2/3 flex flex-col gap-4">
+          <div className="mt-28 sm:mt-20 w-7/8 md:w-3/4 lg:w-2/3 flex flex-col gap-4">
             <div className="w-full text-right mb-4">
               <CommentForm userId={userId || ""} />
             </div>

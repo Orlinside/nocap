@@ -15,6 +15,12 @@ export type GetUserParams = {
   role: string;
 };
 
+export type GetAllUserParams = {
+  id: string;
+  name: string;
+  email: string;
+};
+
 export type UpdateUserParams = {
   userId: string;
   user: {
