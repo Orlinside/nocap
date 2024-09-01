@@ -6,6 +6,7 @@ import { getAllPartiesWithPhotos } from "@/lib/actions/party.actions";
 import { Accueil } from "@/components/shared/Accueil";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
+import { Annonces } from "@/components/shared/Annonces";
 
 export default async function Home({
   searchParams,
@@ -48,6 +49,9 @@ export default async function Home({
           urlParamName={""}
         />
       </section>
+      {/* <div className="fixed bottom-10 right-[10rem]">
+        <Annonces />
+      </div> */}
     </>
   );
 }

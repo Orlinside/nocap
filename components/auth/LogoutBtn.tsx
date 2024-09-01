@@ -1,7 +1,6 @@
 "use client";
 
 import { logout } from "@/lib/actions/auth.actions";
-import { revalidatePath } from "next/cache";
 import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 

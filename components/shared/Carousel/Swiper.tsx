@@ -72,7 +72,7 @@ export const Carousel = ({
         {photos.map((photo: any, idx: any) => (
           <SwiperSlide
             key={idx}
-            className="relative w-full max-w-[350px] h-auto rounded-sm object-cover lg:max-w-[700px] md:max-w-[700px] sm:max-w-[300px]"
+            className="relative w-full max-w-[95%] h-auto rounded-sm object-cover lg:max-w-[700px] md:max-w-[700px] sm:max-w-[90%]"
           >
             <div
               key={idx}

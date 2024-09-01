@@ -85,7 +85,7 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
   const testimonial = [{ quote: countdownString }, { quote: countdownString }];
 
   return (
-    <div className="w-full flex items-center justify-center gap-20 bg-dark z-10">
+    <div className="w-full flex items-center justify-center gap-20 bg-transparent">
       <InfiniteMovingCards
         items={testimonial}
         direction="right"

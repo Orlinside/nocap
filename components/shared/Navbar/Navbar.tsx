@@ -35,8 +35,8 @@ export const Navbar = () => {
         </div>
 
         <div
-          className={`w-full h-[100vh] flex flex-col justify-between fixed left-0 pb-6 pt-32 sm:pt-28 bg-[rgba(33,33,33,0.29)] bg-com3 backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[100] ${
-            navActive ? "bottom-0 opacity-100 z-[100]" : "bottom-[-100vh]"
+          className={`fixed left-0 w-full h-[100vh] flex flex-col justify-between pb-6 pt-32 sm:pt-28 bg-com3 backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[100] ${
+            navActive ? "top-0 opacity-100 z-[100]" : "top-[-100vh]"
           }`}
         >
           <div className="flex flex-col">
@@ -47,7 +47,7 @@ export const Navbar = () => {
                   : pathname.startsWith(item.route);
               return (
                 <div
-                  className={`w-full h-full  flex flex-col justify-left p-8 border-gray-300 hover:bg-dark/50 hover:backdrop-blur-sm transition-all ease-in-out duration-300 ${
+                  className={`w-full h-full flex flex-col justify-left p-10 sm:p-12 border-gray-300 hover:bg-dark/50 hover:backdrop-blur-sm transition-all ease-in-out duration-300 ${
                     active
                       ? "bg-dark/50 backdrop-blur-sm text-white font-bold"
                       : ""

@@ -15,7 +15,7 @@ export const Header = async () => {
   const user = await currentUser();
 
   return (
-    <header className="w-full bg-transparent">
+    <header className="w-full bg-transparent backdrop-blur-sm">
       {/* <Annonces /> */}
       <div className="wrapper flex justify-between items-center w-full h-full p-6 bg-transparent">
         {/* <div></div> */}
@@ -29,6 +29,9 @@ export const Header = async () => {
             className="cursor-pointer z-[200]"
           />
         </Link>
+        <div className="hidden sm:flex">
+          <Annonces />
+        </div>
         <div className="flex items-center justify-end bg-transparent">
           <Navbar />
           {user ? (
@@ -47,6 +50,9 @@ export const Header = async () => {
             </Suspense>
           )}
         </div>
+      </div>
+      <div className=" sm:hidden">
+        <Annonces />
       </div>
     </header>
   );
