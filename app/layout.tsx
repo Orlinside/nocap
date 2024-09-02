@@ -6,6 +6,9 @@ import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 
 import { Toaster } from "@/components/ui/sonner";
+import { Annonces } from "@/components/shared/Annonces";
+
+import { Transition } from "@/components/shared/Transition";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,12 +29,16 @@ export default async function RootLayout({
       <SessionProvider session={session}>
         <body className="">
           <div className="fixed top-0 w-full z-50">
+            <div className="w-full">
+              <Annonces />
+            </div>
             <Header />
           </div>
 
-          <main className="min-h-screen bg-gradient-to-b from-[#020202] via-[#040404]  to-second z-50">
+          <main className="min-h-screen bg-gradient-to-b from-[#020202] via-[#040404] to-second z-50">
             {children}
           </main>
+
           <Toaster />
         </body>
       </SessionProvider>

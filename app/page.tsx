@@ -6,7 +6,6 @@ import { getAllPartiesWithPhotos } from "@/lib/actions/party.actions";
 import { Accueil } from "@/components/shared/Accueil";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
-import { Annonces } from "@/components/shared/Annonces";
 
 export default async function Home({
   searchParams,

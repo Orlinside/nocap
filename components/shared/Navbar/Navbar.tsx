@@ -36,7 +36,7 @@ export const Navbar = () => {
 
         <div
           className={`fixed left-0 w-full h-[100vh] flex flex-col justify-between pb-6 pt-32 sm:pt-28 bg-com3 backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[100] ${
-            navActive ? "top-0 opacity-100 z-[100]" : "top-[-100vh]"
+            navActive ? "top-0 opacity-100 z-[100]" : "top-[-100vh] -z-50"
           }`}
         >
           <div className="flex flex-col">
@@ -73,14 +73,14 @@ export const Navbar = () => {
           </div>
           <div className="text-[0.6rem] flex-center gap-8 z-10">
             <Link
-              onClick={() => setNavActive(!navActive)}
+              onClick={handleClick}
               href="/mentions-legales"
               className="hover:text-gray-300"
             >
               Mentions Légales
             </Link>
             <Link
-              onClick={() => setNavActive(!navActive)}
+              onClick={handleClick}
               href="/politique-de-confidentialite"
               className="hover:text-gray-300"
             >

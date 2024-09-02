@@ -59,7 +59,7 @@ export default auth((req) => {
     console.log(
       "Redirection vers la page de connexion car la route n'est pas publique et l'utilisateur n'est pas connecté."
     );
-    return Response.redirect(new URL("/auth/connexion", nextUrl));
+    return Response.redirect(new URL("/", nextUrl));
   }
 
   if (isAdminRoute) {

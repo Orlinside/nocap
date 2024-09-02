@@ -23,7 +23,7 @@ export const Annonces = async () => {
   // }
 
   return (
-    <div className="w-[30rem] h-auto flex items-center justify-center gap-20 bg-transparent">
+    <div className="w-full h-auto flex items-center justify-center gap-20 bg-transparent">
       <Bandeau lastParty={lastParty} />
     </div>
   );

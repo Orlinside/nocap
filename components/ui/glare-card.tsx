@@ -68,7 +68,7 @@ export const GlareCard = ({
   return (
     <div
       style={containerStyle}
-      className="relative w-full max-w-[350px] h-auto overflow-hidden object-cover lg:max-w-[700px] md:max-w-[700px] sm:max-w-[300px]"
+      className="w-full h-full relative"
       ref={refElement}
       onPointerMove={(event) => {
         const rect = event.currentTarget.getBoundingClientRect();
@@ -117,7 +117,7 @@ export const GlareCard = ({
         }
       }}
     >
-      <div className="h-full grid will-change-transform origin-center transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] [transform:rotateY(var(--r-x))_rotateX(var(--r-y))] rounded-[var(--radius)]  hover:[--opacity:0.3] hover:[--duration:200ms] hover:[--easing:linear] hover:filter-none overflow-hidden">
+      <div className="h-full w-full grid will-change-transform origin-center transition-transform duration-[var(--duration)] ease-[var(--easing)] delay-[var(--delay)] [transform:rotateY(var(--r-x))_rotateX(var(--r-y))] rounded-[var(--radius)]  hover:[--opacity:0.3] hover:[--duration:200ms] hover:[--easing:linear] hover:filter-none overflow-hidden">
         <div className="w-full h-full grid [grid-area:1/1] mix-blend-soft-light [clip-path:inset(0_0_0_0_round_var(--radius))]">
           <div className={cn("h-full w-full bg-slate-950", className)}>
             {children}

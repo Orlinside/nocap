@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
+import { motion } from "framer-motion";
 import { InfiniteMovingCards } from "../ui/infinite-moving-cards";
 
 interface LastParty {
@@ -21,30 +22,15 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
     secondes: "00",
   });
 
-  if (
-    !lastParty ||
-    !lastParty.endDateTime ||
-    new Date(lastParty.endDateTime) <= new Date()
-  ) {
-    return null;
-  }
-
-  // Je veux vérifier si j'ai bien la lastParty et qu'elle nest pas null ou undefined
-  // Si elle est null ou undefined, je ne veux pas afficher le bandeau
-  // Si elle est définie, je veux afficher le bandeau avec le compte à rebours
-  // Si la date de fin est dépassée, je ne veux pas afficher le bandeau
-
   const now = new Date();
-  const startDateTime = new Date(lastParty.startDateTime);
-  const endDateTime = new Date(lastParty.endDateTime);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    if (!startDateTime) return;
+    if (!lastParty.startDateTime) return;
 
     const updateTime = () => {
       const now = new Date().getTime();
-      const distance = startDateTime.getTime() - now;
+      const distance = lastParty.startDateTime.getTime() - now;
 
       if (distance < 0) {
         setCountTimer({
@@ -71,27 +57,63 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
       });
     };
 
-    updateTime(); // Call updateTime immediately to set initial state
+    updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
-  }, [startDateTime, endDateTime]);
+  }, [lastParty.startDateTime]);
 
-  if (endDateTime && now > endDateTime) {
-    return null; // Party is finished, do not display the banner
+  //! Si la date de fin est dépassée, je ne veux pas afficher le bandeau
+  if (lastParty.endDateTime && now > lastParty.endDateTime) {
+    return null;
   }
 
-  const countdownString = `${lastParty.name} - ${countTimer.jours} JOURS - ${countTimer.heures}h ${countTimer.minutes}m ${countTimer.secondes}s`;
+  let countdownString = `${lastParty.name} - ${countTimer.jours} JOURS - ${countTimer.heures}h ${countTimer.minutes}m ${countTimer.secondes}s`;
+
+  //! Si la date est en cours, j'affiche le message
+  if (
+    now >= new Date(lastParty.startDateTime) &&
+    now <= new Date(lastParty.endDateTime)
+  ) {
+    countdownString = `${lastParty.name} - ça commence maintenant !!!`;
+  }
 
   const testimonial = [{ quote: countdownString }, { quote: countdownString }];
 
+  //! Si elle est définie, je veux afficher le bandeau avec le compte à rebours
   return (
-    <div className="w-full flex items-center justify-center gap-20 bg-transparent">
-      <InfiniteMovingCards
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: { ease: "easeOut", duration: 3 },
+        },
+      }}
+      className="w-full flex items-center justify-center gap-20"
+    >
+      <motion.p
+        initial={{ x: "-120%" }}
+        animate={{ x: "120%" }}
+        transition={{
+          ease: "linear",
+          duration: 20,
+          repeat: Infinity,
+          delay: 3,
+        }}
+        className="w-full text-sm md:text-lg lg:text-sm text-center leading-[1.6] text-white renogare flex md:gap-32 lg:gap-40 uppercase"
+      >
+        <span className="w-full">{countdownString}</span>
+        <span className="w-full hidden sm:flex">{countdownString}</span>
+        <span className="w-full hidden lg:flex">{countdownString}</span>
+      </motion.p>
+      {/* <InfiniteMovingCards
         items={testimonial}
         direction="right"
         speed="normal"
         className="h-full w-full"
-      />
-    </div>
+      /> */}
+    </motion.div>
   );
 };

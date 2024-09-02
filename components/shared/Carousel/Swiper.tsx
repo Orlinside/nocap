@@ -51,7 +51,7 @@ export const Carousel = ({
   };
 
   return (
-    <div className="h-full -z-0 ">
+    <div className="h-full w-full -z-0 ">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -72,20 +72,20 @@ export const Carousel = ({
         {photos.map((photo: any, idx: any) => (
           <SwiperSlide
             key={idx}
-            className="relative w-full max-w-[95%] h-auto rounded-sm object-cover lg:max-w-[700px] md:max-w-[700px] sm:max-w-[90%]"
+            className="relative max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-[700px] h-auto rounded-sm object-cover"
           >
             <div
               key={idx}
-              className="relative z-0 swiper-slide swiper-slide-active"
+              className="relative z-0 swiper-slide swiper-slide-active flex items-center justify-center"
               onClick={() => handlePhotoClick(photo.url)}
             >
-              <GlareCard className="">
+              <GlareCard className="w-full h-full bg-blue-400">
                 <Image
                   src={photo.url}
                   alt={photo.url}
                   width={1000}
                   height={1000}
-                  className="relative object-cover"
+                  className="object-cover w-full h-full"
                 />
               </GlareCard>
             </div>

@@ -5,7 +5,6 @@ import React, { Suspense } from "react";
 import { currentUser } from "@/lib/auth";
 
 import { Navbar } from "./Navbar/Navbar";
-import { Annonces } from "./Annonces";
 import { LogoutBtn } from "../auth/LogoutBtn";
 import { LoginForm } from "../auth/Card/LoginForm";
 
@@ -13,13 +12,11 @@ import { IoMdLogOut } from "react-icons/io";
 
 export const Header = async () => {
   const user = await currentUser();
+  const role = user?.role;
 
   return (
-    <header className="w-full bg-transparent backdrop-blur-[2px]">
-      {/* <Annonces /> */}
+    <header className="w-full bg-transparent">
       <div className="wrapper flex justify-between items-center w-full h-full p-6 bg-transparent">
-        {/* <div></div> */}
-
         <Link href="/" className="flex justify-center">
           <Image
             src="/logo/Logo_NoCapR_white.png"
@@ -29,13 +26,10 @@ export const Header = async () => {
             className="cursor-pointer z-[200]"
           />
         </Link>
-        {/* <div className="hidden sm:flex">
-          <Annonces />
-        </div> */}
         <div className="flex items-center justify-end bg-transparent">
           <Navbar />
           {user ? (
-            <div className="">
+            <div className="flex justify-center items-center gap-4">
               <LogoutBtn>
                 <IoMdLogOut
                   size={25}
@@ -43,6 +37,14 @@ export const Header = async () => {
                   aria-label="Déconnexion"
                 />
               </LogoutBtn>
+              {role === "admin" && (
+                <Link
+                  href="/admin"
+                  className="renogare uppercase text-sm hover:text-white/80"
+                >
+                  Admin
+                </Link>
+              )}
             </div>
           ) : (
             <Suspense>
@@ -51,9 +53,6 @@ export const Header = async () => {
           )}
         </div>
       </div>
-      {/* <div className=" sm:hidden">
-        <Annonces />
-      </div> */}
     </header>
   );
 };
