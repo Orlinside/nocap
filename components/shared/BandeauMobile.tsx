@@ -95,25 +95,25 @@ export const BandeauMobile = ({ lastParty }: { lastParty: any }) => {
         }}
         className="grid auto-cols-max grid-flow-col gap-5 text-center"
       >
-        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono">
+        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono text-white">
           <span className="countdown renogare text-sm">
             <span>{countTimer.jours}</span>
           </span>
           jours
         </div>
-        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono">
+        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono text-white">
           <span className="countdown renogare text-sm">
             <span>{countTimer.heures}</span>
           </span>
           heures
         </div>
-        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono">
+        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono text-white">
           <span className="countdown renogare text-sm">
             <span>{countTimer.minutes}</span>
           </span>
           min
         </div>
-        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono">
+        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono text-white">
           <span className="countdown renogare text-sm">
             <span>{countTimer.secondes}</span>
           </span>
