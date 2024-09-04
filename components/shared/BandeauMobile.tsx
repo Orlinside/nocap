@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
 
 interface LastParty {
   name: string;
@@ -9,13 +10,17 @@ interface LastParty {
   endDateTime: Date;
 }
 
-export const Bandeau = ({ lastParty }: { lastParty: any }) => {
+export const BandeauMobile = ({ lastParty }: { lastParty: any }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [countTimer, setCountTimer] = useState({
     jours: "00",
     heures: "00",
     minutes: "00",
     secondes: "00",
   });
+  const [isVisible, setIsVisible] = useState(true);
 
   const now = new Date();
 
@@ -34,6 +39,7 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
           minutes: "00",
           secondes: "00",
         });
+        setIsVisible(false); // Masquer le compteur lorsque le temps est écoulé
         return;
       }
 
@@ -62,6 +68,9 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
     return null;
   }
 
+  // Vérifier si nous sommes sur la page d'accueil
+  const isHomePage = pathname === "/";
+
   let countdownString = `${lastParty.name} - ${countTimer.jours} JOURS - ${countTimer.heures}h ${countTimer.minutes}m ${countTimer.secondes}s`;
 
   //! Si la date est en cours, j'affiche le message
@@ -74,33 +83,43 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
 
   //! Si elle est définie, je veux afficher le bandeau avec le compte à rebours
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={{
-        hidden: { opacity: 0 },
-        visible: {
-          opacity: 1,
-          transition: { ease: "easeOut", duration: 3 },
-        },
-      }}
-      className="w-full flex items-center justify-center gap-20"
-    >
-      <motion.p
-        initial={{ x: "-120%" }}
-        animate={{ x: "120%" }}
+    isVisible &&
+    isHomePage && ( // Afficher le compteur uniquement si isVisible est true et si nous sommes sur la page d'accueil
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
         transition={{
-          ease: "linear",
-          duration: 20,
-          repeat: Infinity,
-          delay: 3,
+          duration: 0.8,
+          ease: [0, 0.71, 0.2, 1.01],
         }}
-        className="w-full text-sm md:text-lg lg:text-sm text-center leading-[1.6] text-white renogare flex md:gap-32 lg:gap-40 uppercase"
+        className="grid auto-cols-max grid-flow-col gap-5 text-center"
       >
-        <span className="w-full">{countdownString}</span>
-        <span className="w-full hidden sm:flex">{countdownString}</span>
-        <span className="w-full hidden lg:flex">{countdownString}</span>
-      </motion.p>
-    </motion.div>
+        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono">
+          <span className="countdown renogare text-sm">
+            <span>{countTimer.jours}</span>
+          </span>
+          jours
+        </div>
+        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono">
+          <span className="countdown renogare text-sm">
+            <span>{countTimer.heures}</span>
+          </span>
+          heures
+        </div>
+        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono">
+          <span className="countdown renogare text-sm">
+            <span>{countTimer.minutes}</span>
+          </span>
+          min
+        </div>
+        <div className="bg-neutral rounded-box text-neutral-content flex flex-col p-2 font-mono">
+          <span className="countdown renogare text-sm">
+            <span>{countTimer.secondes}</span>
+          </span>
+          sec
+        </div>
+      </motion.div>
+    )
   );
 };

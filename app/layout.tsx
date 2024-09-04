@@ -8,8 +8,6 @@ import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { Annonces } from "@/components/shared/Annonces";
 
-import { Transition } from "@/components/shared/Transition";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -29,7 +27,7 @@ export default async function RootLayout({
       <SessionProvider session={session}>
         <body className="">
           <div className="fixed top-0 w-full z-50">
-            <div className="w-full">
+            <div className="hidden sm:flex w-full">
               <Annonces />
             </div>
             <Header />

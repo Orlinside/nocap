@@ -5,6 +5,7 @@ import { Carousel } from "./Carousel/Swiper";
 import { Pagination } from "./Pagination";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { AnnoncesMobile } from "./AnnoncesMobile";
 
 type AccueilProps = {
   user: any;
@@ -64,7 +65,7 @@ export const AccueilBackground = ({
       ></motion.div>
 
       <div className="relative z-10 w-full h-full flex flex-col justify-around md:justify-between md:gap-4 lg:gap-0">
-        <h2 className="text-xl text-white renogare tracking-widest text-center mt-28 flex flex-col justify-center items-center lg:hidden ">
+        <h2 className="text-xl text-white renogare tracking-widest text-center mt-32 flex flex-col justify-center items-center lg:hidden ">
           {party[0].name}{" "}
           <span className="text-sm font-mono text-white">{formattedDate}</span>
         </h2>

@@ -1,8 +1,6 @@
 import { currentUser } from "@/lib/auth";
 import { getReactionsByUserId } from "@/lib/actions/user.actions";
 
-import { Carousel } from "./Carousel/Swiper";
-import { Pagination } from "./Pagination";
 import { AccueilBackground } from "./AccueilBackground";
 
 type AccueilProps = {
