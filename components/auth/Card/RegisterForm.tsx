@@ -74,7 +74,7 @@ export default function RegisterForm() {
 
       <AlertDialogContent className="bg-transparent backdrop-blur-xl  w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
-          <AlertDialogTitle className="renogare">
+          <AlertDialogTitle className="renogare tracking-widest">
             S&apos;INSCRIRE
           </AlertDialogTitle>
           <AlertDialogCancel className="text-white border-none">
@@ -82,7 +82,7 @@ export default function RegisterForm() {
           </AlertDialogCancel>
         </AlertDialogHeader>
         <CardWrapper
-          headerLabel="Créer un compte"
+          headerLabel=""
           backButtonLabel=""
           backButtonHref=""
           showSocial

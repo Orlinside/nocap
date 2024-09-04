@@ -105,7 +105,9 @@ export const LoginForm = () => {
 
       <AlertDialogContent className="bg-transparent w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
-          <AlertDialogTitle className="renogare">SE CONNECTER</AlertDialogTitle>
+          <AlertDialogTitle className="renogare tracking-widest">
+            SE CONNECTER
+          </AlertDialogTitle>
           <AlertDialogCancel className="text-white border-none">
             <ImCross className="hover:text-primary" />
           </AlertDialogCancel>
@@ -158,14 +160,14 @@ export const LoginForm = () => {
                           />
                         </FormControl>
 
-                        <button className="">
+                        {/* <button className="">
                           <Link
                             href="/auth/reset"
                             className="text-[0.8rem] renogare tracking-widest hover:text-grey-500"
                           >
                             Mot de passe oublié ?
                           </Link>
-                        </button>
+                        </button> */}
                         <FormMessage />
                       </FormItem>
                     )}

@@ -86,19 +86,6 @@ export const BtnReactions = ({
   return (
     <div>
       <Button
-        onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
-        className={
-          userReactions.LIKE
-            ? "flex gap-4 items-center justify-center text-red-600 bg-transparent hover:text-red-700 hover:bg-transparent"
-            : "flex gap-4 items-center justify-center text-white bg-transparent hover:text-red-600 hover:bg-transparent"
-        }
-      >
-        <FaHeart size={25} />
-        <span className="renogare text-white text-[0.7rem] w-4">
-          {countReactions("LIKE")}
-        </span>
-      </Button>
-      <Button
         onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
         className={
           userReactions.FIRE
@@ -109,6 +96,19 @@ export const BtnReactions = ({
         <FaFire size={25} />
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("FIRE")}
+        </span>
+      </Button>
+      <Button
+        onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
+        className={
+          userReactions.LIKE
+            ? "flex gap-4 items-center justify-center text-red-600 bg-transparent hover:text-red-700 hover:bg-transparent"
+            : "flex gap-4 items-center justify-center text-white bg-transparent hover:text-red-600 hover:bg-transparent"
+        }
+      >
+        <FaHeart size={25} />
+        <span className="renogare text-white text-[0.7rem] w-4">
+          {countReactions("LIKE")}
         </span>
       </Button>
       <Button

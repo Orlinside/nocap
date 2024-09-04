@@ -40,7 +40,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async signIn({ user, account }) {
       if (account?.provider !== "credentials") return true;
 
-      // Ici, si le user n'est pas vérifié, il ne peut pas se connecter
       const existingUser = user.id ? await getUserById(user.id) : null;
       if (!existingUser) return false;
 

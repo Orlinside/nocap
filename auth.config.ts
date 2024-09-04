@@ -11,6 +11,7 @@
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import Instagram from "next-auth/providers/instagram";
 
 import bcrypt from "bcryptjs";
 import { userLoginSchema } from "./lib/validator";
@@ -28,6 +29,10 @@ export default {
           response_type: "code",
         },
       },
+    }),
+    Instagram({
+      clientId: process.env.AUTH_INSTAGRAM_ID,
+      clientSecret: process.env.AUTH_INSTAGRAM_SECRET,
     }),
     Credentials({
       async authorize(credentials) {
