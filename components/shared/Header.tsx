@@ -40,7 +40,7 @@ export const Header = async () => {
               {role === "admin" && (
                 <Link
                   href="/admin"
-                  className="renogare uppercase text-sm hover:text-white/80"
+                  className="renogare uppercase text-white text-sm hover:text-white/80"
                 >
                   Admin
                 </Link>

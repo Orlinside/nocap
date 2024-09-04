@@ -88,7 +88,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
           <p className="text-left text-white text-[0.8rem]">
             {comment.content}
           </p>
-          <p className="text-sm sm:text-sm">
+          <p className="text-sm text-white sm:text-sm">
             Niveau{" "}
             <span className="font-bold text-white">{comment.importance}</span>
           </p>
@@ -153,7 +153,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
                       <div className="flex items-center">
                         <label
                           htmlFor="isValid"
-                          className="rubik whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          className="text-white whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
                           Afficher le commentaire :
                         </label>

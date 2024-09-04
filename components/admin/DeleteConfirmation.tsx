@@ -28,7 +28,7 @@ export const DeleteConfirmation = ({ partyId }: { partyId: string }) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="">
+      <AlertDialogTrigger className="text-white">
         <MdDeleteForever size={25} className="hover:text-red-700" />
       </AlertDialogTrigger>
 

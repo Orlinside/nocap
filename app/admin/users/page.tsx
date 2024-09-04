@@ -21,7 +21,7 @@ export default async function GestionUsers() {
             </h1>
           </div>
         </section>
-        <section className="wrapper">
+        <section className="wrapper text-white">
           <p>Aucun utilisateur trouvé.</p>
         </section>
       </RoleGate>
@@ -44,10 +44,12 @@ export default async function GestionUsers() {
           return (
             <div key={user.email} className="border border-white/60 rounded-xl">
               <div className="flex justify-between items-center hover:bg-white/20 p-2 rounded-xl">
-                <p className="col-span-3 text-xl font-bold renogare">
+                <p className="col-span-3 text-white text-xl font-bold renogare">
                   {user.name}
                 </p>
-                <span className="text-sm font-bold">{user.email}</span>
+                <span className="text-sm text-white font-bold">
+                  {user.email}
+                </span>
                 <DeleteConfirmationUser userId={user.id} />
               </div>
             </div>

@@ -122,7 +122,7 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
     <AlertDialog>
       <AlertDialogTrigger
         aria-describedby={type}
-        className="bg-linear-text hover:text-white/70"
+        className="bg-linear-text text-white hover:text-white/70"
       >
         {type === "Créer" ? (
           <FaPlus size={25} className="" />
