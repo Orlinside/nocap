@@ -43,11 +43,11 @@ export default async function GestionUsers() {
         {users.map((user) => {
           return (
             <div key={user.email} className="border border-white/60 rounded-xl">
-              <div className="flex justify-between items-center hover:bg-white/20 p-2 rounded-xl">
-                <p className="col-span-3 text-white text-xl font-bold renogare">
+              <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center hover:bg-white/20 p-2 rounded-xl">
+                <p className="col-span-3 text-white text-sm sm:text-xl font-bold renogare">
                   {user.name}
                 </p>
-                <span className="text-sm text-white font-bold">
+                <span className="text-xs text-white font-bold">
                   {user.email}
                 </span>
                 <DeleteConfirmationUser userId={user.id} />

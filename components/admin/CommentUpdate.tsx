@@ -78,21 +78,18 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="w-full">
-        <div
-          className="bg-dark rounded-xl grid grid-cols-4 w-full p-1 sm:p-2 hover:bg-[#121212] cursor-pointer"
-          key={comment.id}
-        >
-          <p className="font-bold text-white text-lg sm:text-xl">
+        <div className="bg-dark border border-white/30 rounded-xl flex flex-col justify-start sm:grid sm:grid-cols-4 w-full p-1 sm:p-2 hover:bg-[#121212] cursor-pointer">
+          <p className="font-bold text-white text-sm sm:text-xl border-b border-white/20 pb-1 sm:border-none sm:pb-0">
             {comment.user.name}
           </p>
-          <p className="text-left text-white text-[0.8rem]">
-            {comment.content}
+          <p className="sm:text-left text-white text-[0.8rem] border-b border-white/20 py-1 sm:border-none sm:py-0">
+            &apos;&apos;{comment.content}&apos;&apos;
           </p>
-          <p className="text-sm text-white sm:text-sm">
+          <p className="text-xs text-white sm:text-sm pt-1 sm:pt-0">
             Niveau{" "}
             <span className="font-bold text-white">{comment.importance}</span>
           </p>
-          <p className="text-sm sm:text-sm text-white">
+          <p className="text-xs sm:text-sm text-white">
             Afficher : {comment.isValid ? "OUI" : "NON"}
           </p>
         </div>

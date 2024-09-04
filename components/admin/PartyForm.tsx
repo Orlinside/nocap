@@ -168,7 +168,7 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
                   <FormItem className="w-full">
                     <FormControl>
                       <div className="w-full flex-center h-[40px] overflow-hidden rounded-sm bg-grey-50 px-4 py-2">
-                        <p className="mr-3 whitespace-nowrap text-grey-600">
+                        <p className="mr-3 whitespace-nowrap text-white">
                           Début
                         </p>
                         <DatePicker
@@ -195,9 +195,7 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
                   <FormItem className="w-full">
                     <FormControl>
                       <div className="w-full flex-center h-[40px] overflow-hidden rounded-sm bg-grey-50 px-4 py-2">
-                        <p className="mr-3 whitespace-nowrap text-grey-600">
-                          Fin
-                        </p>
+                        <p className="mr-3 whitespace-nowrap text-white">Fin</p>
                         <DatePicker
                           locale="fr"
                           selected={field.value}

@@ -62,7 +62,9 @@ export const PartyDetails = async ({
     return (
       <section className="wrapper">
         <div className="mt-20"></div>
-        <p>Les données sont introuvables ou supprimées.</p>
+        <p className="text-white">
+          Les données sont introuvables ou supprimées.
+        </p>
       </section>
     );
   }
@@ -116,7 +118,9 @@ export const PartyDetails = async ({
         </div>
         <div className="wrapper">
           {party.photos.length === 0 ? (
-            <p>Aucune photo disponible pour cette soirée</p>
+            <p className="text-white font-mono">
+              Aucune photo disponible pour cette soirée
+            </p>
           ) : (
             <div className="grid sm:grid-cols-3 gap-8">
               {party.photos.map((photo: Photo) => (

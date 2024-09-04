@@ -54,8 +54,10 @@ export default async function PartyPage() {
               className="bg-gray-600 rounded-xl"
             >
               <div className="flex justify-between items-center hover:bg-white/20 p-2 rounded-xl">
-                <p className=" col-span-3 text-xl font-bold">{party.name}</p>
-                <span className="text-sm">{formattedDate}</span>
+                <p className="text-white col-span-3 text-xl font-bold">
+                  {party.name}
+                </p>
+                <span className="text-sm text-white">{formattedDate}</span>
                 {/* <DeleteConfirmation partyId={party.id} /> */}
               </div>
             </Link>

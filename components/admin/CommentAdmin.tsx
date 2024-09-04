@@ -16,7 +16,7 @@ export const CommentAdmin = ({
 }: CommentAdminProps) => {
   return (
     <>
-      <div className="wrapper flex flex-col gap-2">
+      <div className="mt-4 flex flex-col w-full gap-2">
         {comments.map((comment: any) => (
           <CommentUpdate key={comment.id} comment={comment} />
         ))}
