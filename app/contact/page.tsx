@@ -8,7 +8,7 @@ export default function ContactPage() {
       <Transition>
         <section className="wrapper">
           <div className="mt-28 sm:mt-20"></div>
-          <h1 className="text-center renogare text-2xl uppercase">
+          <h1 className="text-center text-white renogare text-2xl uppercase">
             Contactez-nous
           </h1>
         </section>

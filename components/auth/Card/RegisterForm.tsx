@@ -68,13 +68,13 @@ export default function RegisterForm() {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="renogare text-sm tracking-widest hover:text-primary">
+      <AlertDialogTrigger className="renogare text-white text-sm tracking-widest hover:text-primary">
         Pas encore de compte ? Créer un compte
       </AlertDialogTrigger>
 
       <AlertDialogContent className="bg-transparent backdrop-blur-xl  w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
-          <AlertDialogTitle className="renogare tracking-widest">
+          <AlertDialogTitle className="renogare text-white tracking-widest">
             S&apos;INSCRIRE
           </AlertDialogTitle>
           <AlertDialogCancel className="text-white border-none">

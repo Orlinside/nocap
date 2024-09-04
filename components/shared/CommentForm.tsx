@@ -75,7 +75,7 @@ export const CommentForm = ({ userId }: { userId: string }) => {
     <AlertDialog>
       <AlertDialogTrigger
         onClick={handleDialogOpen}
-        className="bg-gradient uppercase renogare rounded-xl p-2 text-sm"
+        className="bg-gradient uppercase text-white renogare rounded-xl p-2 text-sm"
       >
         <p>écrire un commentaire</p>
       </AlertDialogTrigger>

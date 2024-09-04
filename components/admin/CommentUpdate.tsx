@@ -82,12 +82,17 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
           className="bg-dark rounded-xl grid grid-cols-4 w-full p-1 sm:p-2 hover:bg-[#121212] cursor-pointer"
           key={comment.id}
         >
-          <p className="font-bold text-lg sm:text-xl">{comment.user.name}</p>
-          <p className="text-left text-[0.8rem]">{comment.content}</p>
-          <p className="text-sm sm:text-sm">
-            Niveau <span className="font-bold">{comment.importance}</span>
+          <p className="font-bold text-white text-lg sm:text-xl">
+            {comment.user.name}
+          </p>
+          <p className="text-left text-white text-[0.8rem]">
+            {comment.content}
           </p>
           <p className="text-sm sm:text-sm">
+            Niveau{" "}
+            <span className="font-bold text-white">{comment.importance}</span>
+          </p>
+          <p className="text-sm sm:text-sm text-white">
             Afficher : {comment.isValid ? "OUI" : "NON"}
           </p>
         </div>
@@ -95,7 +100,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
 
       <AlertDialogContent className="w-5/6 sm:w-1/2 bg-dark border-none">
         <AlertDialogHeader className="flex flex-row items-center justify-between">
-          <AlertDialogTitle className="uppercase renogare">
+          <AlertDialogTitle className="uppercase renogare text-white">
             Mettre à jour
           </AlertDialogTitle>
           <AlertDialogCancel className="text-white border-none hover:text-white/80">

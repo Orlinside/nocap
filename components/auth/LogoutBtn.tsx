@@ -20,7 +20,7 @@ export const LogoutBtn = ({ children }: LogoutBtnProps) => {
   return (
     <span
       onClick={onClick}
-      className="flex-center cursor-pointer hover:text-primary"
+      className="flex-center cursor-pointer text-white hover:text-primary"
     >
       {children}
     </span>

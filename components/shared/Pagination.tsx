@@ -38,7 +38,7 @@ export const Pagination = ({
           variant="outline"
           onClick={() => onClick("prev")}
           disabled={Number(page) <= 1}
-          className="rounded-xl renogare text-[0.8rem] uppercase tracking-widest border-none hover:text-white/80"
+          className="rounded-xl renogare text-[0.8rem] text-white uppercase tracking-widest border-none hover:text-white/80"
         >
           Revenir
         </Button>
@@ -49,7 +49,7 @@ export const Pagination = ({
         variant="outline"
         onClick={() => onClick("next")}
         disabled={Number(page) >= totalPages}
-        className="renogare uppercase text-[0.8rem] tracking-widest border-none hover:text-white/80"
+        className="renogare uppercase text-[0.8rem] text-white tracking-widest border-none hover:text-white/80"
       >
         Précédemment
       </Button>

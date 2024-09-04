@@ -64,9 +64,9 @@ export const AccueilBackground = ({
       ></motion.div>
 
       <div className="relative z-10 w-full h-full flex flex-col justify-around md:justify-between md:gap-4 lg:gap-0">
-        <h2 className="text-xl renogare tracking-widest text-center mt-28 flex flex-col justify-center items-center lg:hidden ">
+        <h2 className="text-xl text-white renogare tracking-widest text-center mt-28 flex flex-col justify-center items-center lg:hidden ">
           {party[0].name}{" "}
-          <span className="text-sm font-mono">{formattedDate}</span>
+          <span className="text-sm font-mono text-white">{formattedDate}</span>
         </h2>
         <AnimatePresence mode="wait">
           <motion.div
@@ -101,9 +101,11 @@ export const AccueilBackground = ({
           }}
           className="w-full wrapper flex gap-8 justify-center lg:justify-between items-center"
         >
-          <h2 className="text-2xl renogare tracking-widest hidden lg:flex lg:justify-center items-center gap-4">
+          <h2 className="text-2xl text-white renogare tracking-widest hidden lg:flex lg:justify-center items-center gap-4">
             {party[0].name}{" "}
-            <span className="text-sm font-mono">{formattedDate}</span>
+            <span className="text-sm font-mono text-white">
+              {formattedDate}
+            </span>
           </h2>
 
           {totalPages > 1 && (

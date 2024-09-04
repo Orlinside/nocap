@@ -29,7 +29,7 @@ export const Navbar = () => {
           }`}
           onClick={handleClick}
         >
-          <p className="z-[110] h-8 w-20 text-[0.8rem] renogare bg-transparent flex-center tex-dark bg-gray-500 hover:text-white/80 tracking-widest">
+          <p className="z-[110] h-8 w-20 text-[0.8rem] renogare bg-transparent flex-center text-white bg-gray-500 hover:text-white/80 tracking-widest">
             {isActive ? "FERMER" : "MENU"}
           </p>
         </div>
@@ -61,7 +61,7 @@ export const Navbar = () => {
                 >
                   <Link
                     href={item.route}
-                    className={`relative renogare wrapper text-2xl sm:text-[2rem] uppercase tracking-widest transition-all ease duration-300 ${
+                    className={`relative renogare wrapper text-2xl text-white sm:text-[2rem] uppercase tracking-widest transition-all ease duration-300 ${
                       active ? styles.activeLink : ""
                     }`}
                   >
@@ -75,21 +75,21 @@ export const Navbar = () => {
             <Link
               onClick={handleClick}
               href="/mentions-legales"
-              className="hover:text-gray-300"
+              className="text-white hover:text-gray-300"
             >
               Mentions Légales
             </Link>
             <Link
               onClick={handleClick}
               href="/politique-de-confidentialite"
-              className="hover:text-gray-300"
+              className="text-white hover:text-gray-300"
             >
               Politique de confidentialité
             </Link>
             <Link
               target="_blank"
               href={"https://www.inthegleam.com/"}
-              className="hover:text-gray-300"
+              className="text-white hover:text-gray-300"
             >
               Website by inTheGleam
             </Link>

@@ -94,22 +94,22 @@ export const LoginForm = () => {
     <AlertDialog>
       <AlertDialogTrigger
         aria-label="Connexion"
-        className="renogare uppercase text-sm"
+        className="renogare text-white uppercase text-sm"
       >
         <IoMdLogIn
           size={25}
-          className="hover:text-white/80"
+          className="text-white hover:text-white/80"
           aria-label="Connexion"
         />
       </AlertDialogTrigger>
 
       <AlertDialogContent className="bg-transparent w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
-          <AlertDialogTitle className="renogare tracking-widest">
+          <AlertDialogTitle className="renogare text-white tracking-widest">
             SE CONNECTER
           </AlertDialogTitle>
           <AlertDialogCancel className="text-white border-none">
-            <ImCross className="hover:text-primary" />
+            <ImCross className="text-white hover:text-primary" />
           </AlertDialogCancel>
         </AlertDialogHeader>
 
