@@ -84,16 +84,16 @@ export const BtnReactions = ({
   };
 
   return (
-    <div>
+    <div className="flex sm:flex-col gap-2 bg-transparent backdrop-blur-[3px] sm:backdrop-blur-none rounded-xl">
       <Button
         onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
         className={
           userReactions.FIRE
-            ? "flex gap-4 items-center justify-center text-orange-600 bg-transparent hover:text-orange-700 hover:bg-transparent"
-            : "flex gap-4 items-center justify-center text-white bg-transparent hover:text-orange-600 hover:bg-transparent"
+            ? "flex gap-1 items-center justify-center text-orange-600 bg-transparent hover:text-orange-700 hover:bg-transparent"
+            : "flex gap-1 items-center justify-center text-white bg-transparent hover:text-orange-600 hover:bg-transparent"
         }
       >
-        <FaFire size={25} />
+        <FaFire className="text-base sm:text-2xl" />
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("FIRE")}
         </span>
@@ -102,11 +102,11 @@ export const BtnReactions = ({
         onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
         className={
           userReactions.LIKE
-            ? "flex gap-4 items-center justify-center text-red-600 bg-transparent hover:text-red-700 hover:bg-transparent"
-            : "flex gap-4 items-center justify-center text-white bg-transparent hover:text-red-600 hover:bg-transparent"
+            ? "flex gap-1 items-center justify-center text-red-600 bg-transparent hover:text-red-700 hover:bg-transparent"
+            : "flex gap-1 items-center justify-center text-white bg-transparent hover:text-red-600 hover:bg-transparent"
         }
       >
-        <FaHeart size={25} />
+        <FaHeart className="text-base sm:text-2xl" />
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("LIKE")}
         </span>
@@ -115,11 +115,11 @@ export const BtnReactions = ({
         onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
         className={
           userReactions.THUMBS_UP
-            ? "flex gap-4 items-center justify-center text-primary bg-transparent hover:text-primary/80 hover:bg-transparent"
-            : "flex gap-4 items-center justify-center text-white bg-transparent hover:text-primary/80 hover:bg-transparent"
+            ? "flex gap-1 items-center justify-center text-primary bg-transparent hover:text-primary/80 hover:bg-transparent"
+            : "flex gap-1 items-center justify-center text-white bg-transparent hover:text-primary/80 hover:bg-transparent"
         }
       >
-        <FaThumbsUp size={25} />
+        <FaThumbsUp className="text-base sm:text-2xl" />
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("THUMBS_UP")}
         </span>
