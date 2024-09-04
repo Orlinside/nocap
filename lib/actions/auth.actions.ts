@@ -15,6 +15,9 @@ import { signIn, signOut } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/route";
 import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
+import { generatePasswordResetToken } from "../tokens";
+import { sendPasswordResetEmail } from "../mail";
+import { getPasswordResetTokenByToken } from "./password-reset";
 
 //! LOGIN ACTION
 export const login = async (values: z.infer<typeof userLoginSchema>) => {
@@ -103,4 +106,76 @@ export const logout = async (pathname: string) => {
   // On peut dans cette fonction supprimer des cookies ou des tokens de session du User par exemple
   await signOut();
   revalidatePath(pathname);
+};
+
+//! RESET PASSWORD ACTION
+export const reset = async (values: z.infer<typeof ResetSchema>) => {
+  const validatedFields = ResetSchema.safeParse(values);
+  if (!validatedFields.success) {
+    return { error: "Formulaire invalide." };
+  }
+
+  const { email } = validatedFields.data;
+
+  const existingUser = await getUserByEmail(email);
+  if (!existingUser) {
+    return { error: "Email introuvable." };
+  }
+
+  // Générer un token de réinitialisation et envoyer un email
+  const passwordResetToken = await generatePasswordResetToken(email);
+  await sendPasswordResetEmail(
+    passwordResetToken.email,
+    passwordResetToken.token
+  );
+
+  return { success: "Un email de réinitialisation a été envoyé." };
+};
+
+//! RESET PASSWORD ACTION
+export const newPassword = async (
+  values: z.infer<typeof newPasswordSchema>,
+  token: string | null
+) => {
+  if (!token) {
+    return { error: "Token manquant." };
+  }
+
+  const validatedFields = newPasswordSchema.safeParse(values);
+  if (!validatedFields.success) {
+    return { error: "Formulaire invalide." };
+  }
+
+  const { password, passwordConfirmation } = validatedFields.data;
+  if (password !== passwordConfirmation) {
+    return { error: "Les mots de passe ne correspondent pas." };
+  }
+
+  const existingToken = await getPasswordResetTokenByToken(token);
+  if (!existingToken) {
+    return { error: "Token invalide." };
+  }
+
+  const hasExpired = new Date(existingToken.expires) < new Date();
+  if (hasExpired) {
+    return { error: "Le token a expiré." };
+  }
+
+  const existingUser = await getUserByEmail(existingToken.email);
+  if (!existingUser) {
+    return { error: "Utilisateur introuvable." };
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  await db.user.update({
+    where: { id: existingUser.id },
+    data: { password: hashedPassword },
+  });
+
+  await db.passwordResetToken.delete({
+    where: { id: existingToken.id },
+  });
+
+  return { success: "Mot de passe mis à jour." };
 };

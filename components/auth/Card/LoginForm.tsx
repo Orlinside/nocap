@@ -160,14 +160,14 @@ export const LoginForm = () => {
                           />
                         </FormControl>
 
-                        {/* <button className="">
+                        <button className="">
                           <Link
-                            href="/auth/reset"
+                            href="/reset"
                             className="text-[0.8rem] renogare tracking-widest hover:text-grey-500"
                           >
                             Mot de passe oublié ?
                           </Link>
-                        </button> */}
+                        </button>
                         <FormMessage />
                       </FormItem>
                     )}
