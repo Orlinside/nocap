@@ -84,7 +84,7 @@ export const BtnReactions = ({
   };
 
   return (
-    <div className="flex sm:flex-col gap-2 bg-transparent backdrop-blur-[3px] sm:backdrop-blur-none rounded-xl">
+    <div className="flex sm:flex-col sm:gap-2 bg-transparent backdrop-blur-[3px] sm:backdrop-blur-none rounded-xl">
       <Button
         onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
         className={

@@ -79,7 +79,7 @@ export const AccueilBackground = ({
               duration: 0.8,
               ease: [0, 0.71, 0.2, 1.01],
             }}
-            className="lg:mt-32 xl:mt-28 2xl:mt-40"
+            className="lg:mt-32 xl:mt-28"
           >
             <div className="w-full h-full flex-1 items-center justify-center">
               <Carousel

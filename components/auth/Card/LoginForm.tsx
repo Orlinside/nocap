@@ -94,7 +94,7 @@ export const LoginForm = () => {
     <AlertDialog>
       <AlertDialogTrigger
         aria-label="Connexion"
-        className="renogare text-white uppercase text-sm"
+        className="renogare text-white uppercase text-sm z-[200]"
       >
         <IoMdLogIn
           size={25}

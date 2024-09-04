@@ -34,14 +34,14 @@ export const Header = async () => {
               <LogoutBtn>
                 <IoMdLogOut
                   size={25}
-                  className="text-white hover:text-white/80"
+                  className="text-white hover:text-white/80 z-[200]"
                   aria-label="Déconnexion"
                 />
               </LogoutBtn>
               {role === "admin" && (
                 <Link
                   href="/admin"
-                  className="renogare uppercase text-white text-sm hover:text-white/80"
+                  className="renogare uppercase text-white text-sm hover:text-white/80 z-[200]"
                 >
                   Admin
                 </Link>

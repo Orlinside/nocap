@@ -79,7 +79,7 @@ export const Carousel = ({
               className="relative z-0 swiper-slide swiper-slide-active flex items-center justify-center"
               onClick={() => handlePhotoClick(photo.url)}
             >
-              <GlareCard className="w-full h-full bg-blue-400">
+              <GlareCard className="w-full h-full">
                 <Image
                   src={photo.url}
                   alt={photo.url}
@@ -89,7 +89,7 @@ export const Carousel = ({
                 />
               </GlareCard>
             </div>
-            <div className="absolute z-10 right-2 bottom-2">
+            <div className="absolute z-10 right-1 bottom-1 sm:right-2 sm:bottom-2">
               <BtnReactions
                 photoId={photo.id}
                 reaction={photo.reactions}

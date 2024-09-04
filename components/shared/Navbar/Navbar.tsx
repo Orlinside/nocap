@@ -71,7 +71,7 @@ export const Navbar = () => {
               );
             })}
           </div>
-          <div className="text-[0.6rem] flex-center gap-8 z-10">
+          <div className="text-[0.5rem] sm:text-[0.6rem] flex-center gap-4 sm:gap-8 z-10">
             <Link
               onClick={handleClick}
               href="/mentions-legales"
