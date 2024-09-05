@@ -79,7 +79,7 @@ function NewPasswordForm() {
                     <Input
                       type="password"
                       id="password"
-                      placeholder="********"
+                      placeholder="***********"
                       {...field}
                       disabled={isPending}
                       className="input rounded-xl"
@@ -102,7 +102,7 @@ function NewPasswordForm() {
                     <Input
                       type="password"
                       id="passwordConfirmation"
-                      placeholder="********"
+                      placeholder="***********"
                       {...field}
                       disabled={isPending}
                       className="input rounded-xl"
@@ -115,7 +115,11 @@ function NewPasswordForm() {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button type="submit" disabled={isPending} className="button w-full">
+          <Button
+            type="submit"
+            disabled={isPending}
+            className="button bg-gradient w-full"
+          >
             Réinitialiser le mot de passe
           </Button>
         </form>

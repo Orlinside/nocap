@@ -34,6 +34,11 @@ export default auth((req) => {
 
   const isAdminRoute = adminRoutes.includes(nextUrl.pathname); // Vérifier si la route est une route d'administrateur
 
+  // Vérifier si la route est /nouveau-mot-de-passe avec un token en paramètre
+  const isResetPasswordRoute =
+    nextUrl.pathname.startsWith("/nouveau-mot-de-passe") &&
+    nextUrl.searchParams.has("token");
+
   /**
    * ! L'ordre des conditions est important !
    * On check d'abord si c'est une API Route, ensuite si c'est une route d'authentification, et enfin si c'est une route publique et s'il le user est connecté ou non
@@ -52,6 +57,11 @@ export default auth((req) => {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl)); // le second paramètre est fait pour créer l'URL absolue (/profil ne suffit pas pour la redirection)
     }
+    return;
+  }
+
+  if (isResetPasswordRoute) {
+    // Autoriser l'accès à la route de réinitialisation du mot de passe avec un token
     return;
   }
 

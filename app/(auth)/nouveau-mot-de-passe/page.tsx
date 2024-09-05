@@ -3,8 +3,15 @@ import { Suspense } from "react";
 
 export default function NewPasswordPage() {
   return (
-    <Suspense>
-      <NewPasswordForm />
-    </Suspense>
+    <>
+      <section className="wrapper ">
+        <div className="mt-28 sm:mt-20"></div>
+        <div className="flex justify-center items-center">
+          <Suspense>
+            <NewPasswordForm />
+          </Suspense>
+        </div>
+      </section>
+    </>
   );
 }
