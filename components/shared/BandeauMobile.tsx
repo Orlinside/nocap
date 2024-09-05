@@ -95,25 +95,25 @@ export const BandeauMobile = ({ lastParty }: { lastParty: any }) => {
         }}
         className="grid auto-cols-max grid-flow-col gap-5 text-center"
       >
-        <div className="bg-dark/50 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
+        <div className="bg-dark/70 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
           <span className="countdown renogare text-sm">
             <span>{countTimer.jours}</span>
           </span>
           jours
         </div>
-        <div className="bg-dark/50 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
+        <div className="bg-dark/70 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
           <span className="countdown renogare text-sm">
             <span className="">{countTimer.heures}</span>
           </span>
           heures
         </div>
-        <div className="bg-dark/50 backdrop-blur-xl w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
+        <div className="bg-dark/70 backdrop-blur-xl w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
           <span className="countdown renogare text-sm">
             <span>{countTimer.minutes}</span>
           </span>
           min
         </div>
-        <div className="bg-dark/50 countdown2 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
+        <div className="bg-dark/70 countdown2 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
           <span className="countdown value renogare text-sm">
             <span className="">{countTimer.secondes}</span>
           </span>
