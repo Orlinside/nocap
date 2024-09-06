@@ -10,27 +10,27 @@ export const userLoginSchema = z.object({
 });
 
 //! REGISTER SCHEMA
-export const userRegisterSchema = z
-  .object({
-    name: z.string().min(2, "Le pseudo doit contenir au moins 2 caractères."),
-    email: z.string().email({
-      message: "L'email est requis.",
-    }),
-    role: z.enum(["user", "admin"]),
-    password: z
-      .string()
-      .min(8, "Le mot de passe doit contenir au moins 6 caractères."),
-    passwordConfirmation: z.string(),
-  })
-  .superRefine(({ passwordConfirmation, password }, ctx) => {
-    if (passwordConfirmation !== password) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Les mots de passe ne correspondent pas.",
-        path: ["passwordConfirmation"],
-      });
-    }
-  });
+export const userRegisterSchema = z.object({
+  name: z.string().min(2, "Le pseudo doit contenir au moins 2 caractères."),
+  email: z.string().email({
+    message: "L'email est requis.",
+  }),
+  role: z.enum(["user", "admin"]),
+  isNewsletterSubscribed: z.boolean(),
+  password: z
+    .string()
+    .min(8, "Le mot de passe doit contenir au moins 6 caractères."),
+  //   passwordConfirmation: z.string().optional(),
+  // })
+  // .superRefine(({ passwordConfirmation, password }, ctx) => {
+  //   if (passwordConfirmation && passwordConfirmation !== password) {
+  //     ctx.addIssue({
+  //       code: z.ZodIssueCode.custom,
+  //       message: "Les mots de passe ne correspondent pas.",
+  //       path: ["passwordConfirmation"],
+  //     });
+  //   }
+});
 
 //! RESET SCHEMA
 export const ResetSchema = z.object({

@@ -72,12 +72,12 @@ export const register = async (values: z.infer<typeof userRegisterSchema>) => {
     return { error: "Formulaire Invalide" };
   }
 
-  const { email, password, passwordConfirmation, name, role } =
+  const { email, password, name, role, isNewsletterSubscribed } =
     validateFields.data;
 
-  if (password !== passwordConfirmation) {
-    return { error: "Les mots de passe ne correspondent pas." };
-  }
+  // if (password !== passwordConfirmation) {
+  //   return { error: "Les mots de passe ne correspondent pas." };
+  // }
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -93,6 +93,7 @@ export const register = async (values: z.infer<typeof userRegisterSchema>) => {
       password: hashedPassword,
       name: name,
       role,
+      isNewsletterSubscribed,
     },
   });
 

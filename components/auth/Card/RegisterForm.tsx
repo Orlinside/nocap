@@ -10,11 +10,8 @@ import { register } from "@/lib/actions/auth.actions";
 import { CardWrapper } from "./CardWrapper";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -32,6 +29,7 @@ import { FormError } from "./FormError";
 import { FormSuccess } from "./FormSucess";
 
 import { ImCross } from "react-icons/im";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function RegisterForm() {
   const [isPending, startTransition] = useTransition();
@@ -46,7 +44,8 @@ export default function RegisterForm() {
       name: "",
       email: "",
       password: "",
-      passwordConfirmation: "",
+      // passwordConfirmation: "",
+      isNewsletterSubscribed: false,
       role: "user",
     },
   });
@@ -68,11 +67,11 @@ export default function RegisterForm() {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="renogare text-white text-sm tracking-widest hover:text-primary">
+      <AlertDialogTrigger className="renogare text-white text-sm tracking-widest hover:text-white/80">
         Pas encore de compte ? Créer un compte
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-transparent backdrop-blur-xl  w-full lg:w-fit border-none rounded-sm">
+      <AlertDialogContent className="bg-transparent backdrop-blur-xl w-full lg:w-fit border-none rounded-sm">
         <AlertDialogHeader className="w-full flex flex-row justify-between items-center gap-8">
           <AlertDialogTitle className="renogare text-white tracking-widest">
             S&apos;INSCRIRE
@@ -92,7 +91,7 @@ export default function RegisterForm() {
               onSubmit={form.handleSubmit(onSubmit)}
               className="space-y-6 w-full text-dark"
             >
-              <div className="space-y-4">
+              <div className="space-y-2">
                 <div className="flex flex-col sm:flex-row gap-2 w-full">
                   <div className="flex-grow">
                     <FormField
@@ -139,7 +138,7 @@ export default function RegisterForm() {
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-2 w-full">
+                <div className="space-y-4">
                   <div className="flex-grow">
                     <FormField
                       control={form.control}
@@ -162,7 +161,7 @@ export default function RegisterForm() {
                     />
                   </div>
 
-                  <div className="flex-grow">
+                  {/* <div className="flex-grow">
                     <FormField
                       control={form.control}
                       name="passwordConfirmation"
@@ -172,13 +171,39 @@ export default function RegisterForm() {
                             <Input
                               type="password"
                               id="passwordConfirmation"
-                              placeholder="Confirmation du mot de passe"
+                              placeholder="Confirmation du mot de passe (facultatif)"
                               {...field}
                               disabled={isPending}
                               className="input-field text-black"
                             />
                           </FormControl>
                           <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div> */}
+                  <div className="flex-grow ">
+                    <FormField
+                      control={form.control}
+                      name="isNewsletterSubscribed"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormControl>
+                            <div className="flex sm:justify-end items-center">
+                              <label
+                                htmlFor="isNewsletterSubscribed"
+                                className="text-white font-mono text-xs tracking-widest whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                Etre au courant des nouveautés :
+                              </label>
+                              <Checkbox
+                                onCheckedChange={field.onChange}
+                                checked={field.value}
+                                id="isFree"
+                                className="mr-2 h-4 w-4 sm:h-6 sm:w-6 border-2 border-white"
+                              />
+                            </div>
+                          </FormControl>
                         </FormItem>
                       )}
                     />
