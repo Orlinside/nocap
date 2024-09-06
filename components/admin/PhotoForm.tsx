@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 import {
   AlertDialog,
@@ -51,6 +50,8 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
 
   const [files, setFiles] = useState<File[]>([]); // Pour la gestion des fichiers (images)
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const initialValues =
     photo && type === "Modifier" ? { ...photo } : photoDefaultValues;
 
@@ -62,10 +63,10 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
   });
 
   async function onSubmit(values: z.infer<typeof photoFormSchema>) {
-    console.log(values);
     let uploadedUrl = values.url;
 
     if (files.length > 0) {
+      setIsLoading(true); // Début du chargement
       const uploadedImages = await startUpload(files);
 
       if (!uploadedImages) return;
@@ -81,6 +82,7 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
           userId,
         });
         if (newPhoto && "id" in newPhoto) {
+          setIsLoading(false); // Fin du chargement
           form.reset();
           router.push(`/admin/party/${partyId}`);
         }
@@ -91,57 +93,65 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
   }
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger
-        aria-describedby="Ajouter une photo"
-        className="button text-white renogare bg-gradient px-2"
-      >
-        <p>Ajouter une photo</p>
-      </AlertDialogTrigger>
+    <>
+      <AlertDialog>
+        <AlertDialogTrigger
+          aria-describedby="Ajouter une photo"
+          className="button text-white renogare bg-gradient px-2"
+        >
+          <p>Ajouter une photo</p>
+        </AlertDialogTrigger>
 
-      <AlertDialogContent
-        aria-describedby="Ajouter une photo"
-        className="bg-dark w-5/6 sm:w-2/3 rounded-xl border-none"
-      >
-        <AlertDialogHeader>
-          <AlertDialogTitle className="text-white renogare">
-            Ajouter une photo
-          </AlertDialogTitle>
-        </AlertDialogHeader>
+        <AlertDialogContent
+          aria-describedby="Ajouter une photo"
+          className="bg-dark w-5/6 sm:w-2/3 rounded-xl border-none"
+        >
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-white renogare">
+              Ajouter une photo
+            </AlertDialogTitle>
+          </AlertDialogHeader>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              control={form.control}
-              name="url"
-              render={({ field }) => (
-                <FormItem className="w-full">
-                  <FormControl className="h-72">
-                    <FileUploader
-                      onFieldChange={field.onChange}
-                      imageUrl={field.value}
-                      setFiles={setFiles}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <AlertDialogFooter>
-              <AlertDialogCancel className="text-white rounded-xl">
-                Annuler
-              </AlertDialogCancel>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <FormField
+                control={form.control}
+                name="url"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormControl className="h-72">
+                      <FileUploader
+                        onFieldChange={field.onChange}
+                        imageUrl={field.value}
+                        setFiles={setFiles}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <AlertDialogFooter>
+                <AlertDialogCancel className="text-white rounded-xl">
+                  Annuler
+                </AlertDialogCancel>
 
-              <AlertDialogAction
-                type="submit"
-                className="text-white rounded-xl renogare bg-gradient"
-              >
-                {isPending ? "Ajout..." : type}
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </form>
-        </Form>
-      </AlertDialogContent>
-    </AlertDialog>
+                <AlertDialogAction
+                  type="submit"
+                  className="text-white rounded-xl renogare bg-gradient"
+                >
+                  {isLoading ? "Chargement..." : isPending ? "Ajout..." : type}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </form>
+          </Form>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {isLoading && (
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex-center">
+          <p className="text-white renogare">Chargement...</p>
+        </div>
+      )}
+    </>
   );
 };
