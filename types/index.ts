@@ -97,7 +97,7 @@ export type AddReactionToPhotoParams = {
 // }
 
 export type AddComment = {
-  userId: string;
+  userId: string | null;
   content: string;
   path: string;
 };

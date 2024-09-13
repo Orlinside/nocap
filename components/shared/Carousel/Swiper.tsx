@@ -66,27 +66,30 @@ export const Carousel = ({
         }}
         loop={true}
         modules={[EffectCoverflow, Pagination]}
-        className="mx-auto h-full "
+        className="mx-auto h-auto"
         onSlideChange={handleSlideChange}
       >
         {photos.map((photo: any, idx: any) => (
           <SwiperSlide
             key={idx}
-            className="relative max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-[700px] h-auto rounded-sm object-cover"
+            className="relative max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-[700px] h-auto rounded-sm"
           >
             <div
               key={idx}
               className="relative z-0 swiper-slide swiper-slide-active flex items-center justify-center"
               onClick={() => handlePhotoClick(photo.url)}
             >
-              <GlareCard className="w-full h-full">
-                <Image
-                  src={photo.url}
-                  alt={photo.url}
-                  width={1000}
-                  height={1000}
-                  className="object-cover w-full h-full"
-                />
+              <GlareCard className="w-full h-full max-w-full max-h-full flex items-center justify-center">
+                <div className="relative w-full h-full max-w-full max-h-full overflow-hidden">
+                  <Image
+                    src={photo.url}
+                    alt={photo.url}
+                    width={1000}
+                    height={1000}
+                    className="object-contain"
+                    style={{ aspectRatio: photo.width / photo.height }}
+                  />
+                </div>
               </GlareCard>
             </div>
             <div className="absolute z-10 right-1 bottom-1 sm:right-2 sm:bottom-2">

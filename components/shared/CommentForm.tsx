@@ -47,12 +47,12 @@ export const CommentForm = ({ userId }: { userId: string }) => {
   });
 
   //! HANDLE DIALOG OPEN
-  const handleDialogOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (!userId) {
-      event.preventDefault();
-      toast.error("Vous devez être connecté pour écrire un commentaire");
-    }
-  };
+  // const handleDialogOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   if (!userId) {
+  //     event.preventDefault();
+  //     toast.error("Vous devez être connecté pour écrire un commentaire");
+  //   }
+  // };
 
   //! SUBMIT FORM
   async function onSubmit(values: z.infer<typeof commentFormSchema>) {
@@ -74,7 +74,7 @@ export const CommentForm = ({ userId }: { userId: string }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger
-        onClick={handleDialogOpen}
+        // onClick={handleDialogOpen}
         className="bg-gradient uppercase text-white renogare rounded-xl p-2 text-sm"
       >
         <p>écrire un commentaire</p>

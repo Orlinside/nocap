@@ -102,11 +102,11 @@ export const AccueilBackground = ({
           }}
           className="w-full wrapper flex gap-8 justify-center lg:justify-between items-center"
         >
-          <h2 className="text-2xl text-white renogare tracking-widest hidden lg:flex lg:justify-center items-center gap-4">
-            {party[0].name}{" "}
-            <span className="text-sm font-mono text-white">
-              {formattedDate}
-            </span>
+          <h2 className="text-[0.8rem] uppercase text-white renogare tracking-widest hidden lg:flex lg:justify-center items-center gap-4">
+            {/* {party[0].name}{" "} */}
+            {/* <span className="text-sm font-mono text-white"> */}
+            {formattedDate}
+            {/* </span> */}
           </h2>
 
           {totalPages > 1 && (

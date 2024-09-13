@@ -25,6 +25,7 @@ import {
   FormMessage,
   FormDescription,
 } from "@/components/ui/form";
+import { toast } from "sonner";
 
 import { photoDefaultValues } from "@/constants";
 import { FileUploader } from "../shared/FileUploader";
@@ -66,12 +67,22 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
     let uploadedUrl = values.url;
 
     if (files.length > 0) {
-      setIsLoading(true); // Début du chargement
-      const uploadedImages = await startUpload(files);
+      const file = files[0];
+      const MAX_FILE_SIZE = 8 * 1024 * 1024; // 8MB
 
-      if (!uploadedImages) return;
+      if (file.size > MAX_FILE_SIZE) {
+        toast.error("Erreur : la taille du fichier dépasse 8MB.");
+        return;
+      }
 
-      uploadedUrl = uploadedImages[0].url;
+      if (files.length > 0) {
+        setIsLoading(true); // Début du chargement
+        const uploadedImages = await startUpload(files);
+
+        if (!uploadedImages) return;
+
+        uploadedUrl = uploadedImages[0].url;
+      }
     }
 
     if (type === "Ajouter") {
@@ -85,8 +96,16 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
           setIsLoading(false); // Fin du chargement
           form.reset();
           router.push(`/admin/party/${partyId}`);
+          toast.success("Photo ajoutée");
+        } else {
+          setIsLoading(false); // Fin du chargement
+          toast.error(
+            "Erreur lors de l'ajout de la photo. Veuillez réessayer."
+          );
         }
       } catch (error) {
+        setIsLoading(false); // Fin du chargement
+        toast.error("Erreur lors de l'ajout de la photo. Veuillez réessayer.");
         console.log(error);
       }
     }

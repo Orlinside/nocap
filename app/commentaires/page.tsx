@@ -68,7 +68,7 @@ export default async function CommentairesPage() {
                     <div key={comment.id} className={entireDivClass}>
                       <div className="flex flex-col">
                         <h2 className={pseudoClass}>
-                          {comment.user.name}
+                          {comment.user?.name || "Anonyme"}
                           <span className="font-mono text-[0.7rem] text-white/50">
                             {formattedDate}
                           </span>

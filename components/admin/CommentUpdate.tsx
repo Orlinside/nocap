@@ -80,7 +80,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
       <AlertDialogTrigger className="w-full">
         <div className="bg-dark border border-white/30 rounded-xl flex flex-col justify-start sm:grid sm:grid-cols-4 w-full p-1 sm:p-2 hover:bg-[#121212] cursor-pointer">
           <p className="font-bold text-white text-sm sm:text-xl border-b border-white/20 pb-1 sm:border-none sm:pb-0">
-            {comment.user.name}
+            {comment.user?.name || "Anonyme"}
           </p>
           <p className="sm:text-left text-white text-[0.8rem] border-b border-white/20 py-1 sm:border-none sm:py-0">
             &apos;&apos;{comment.content}&apos;&apos;
@@ -105,7 +105,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
           </AlertDialogCancel>
         </AlertDialogHeader>
         <AlertDialogDescription className="text-white border-b-2 pb-4">
-          <p className="font-bold">{comment.user.name}</p>
+          <p className="font-bold">{comment.user?.name || "Anonyme"}</p>
           <p>{comment.content}</p>
         </AlertDialogDescription>
 

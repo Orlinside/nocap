@@ -2,29 +2,28 @@
 import { db } from "../db";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+
 import {
   AddComment,
   DeleteComment,
   GetCommentsParams,
   UpdateCommentParams,
 } from "@/types";
-import { isValid } from "react-datepicker/dist/date_utils";
 import { currentRole } from "../auth";
 import { Role } from "@prisma/client";
-import { getUserById } from "./user.actions";
 
 //! CREATE COMMENT
 export const createComment = async ({ userId, content, path }: AddComment) => {
   try {
-    if (!userId) {
-      return new NextResponse(null, { status: 401 });
-    }
+    // if (!userId) {
+    //   return new NextResponse(null, { status: 401 });
+    // }
 
     const newComment = await db.comment.create({
       data: {
         content,
-        userId,
-        isValid: true,
+        userId: userId || undefined,
+        isValid: false,
         importance: "LOW", // Valeur par défaut
       },
     });

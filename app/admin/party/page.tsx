@@ -8,7 +8,6 @@ import { Role } from "@prisma/client";
 import { getAllParties } from "@/lib/actions/party.actions";
 import { PartyProps } from "@/types";
 
-import { DeleteConfirmation } from "@/components/admin/DeleteConfirmation";
 import { PartyForm } from "@/components/admin/PartyForm";
 
 export default async function PartyPage() {
