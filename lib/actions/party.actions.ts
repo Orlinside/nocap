@@ -183,7 +183,9 @@ export async function getAllPartiesWithPhotos({
             reactions: true, // Inclure les réactions associées à chaque photo
           },
           orderBy: {
-            createdAt: "asc", // Trier les photos par date de création, de la plus ancienne à la plus récente
+            reactions: {
+              _count: "desc", // Trier les photos par nombre de réactions, de la plus réactive à la moins réactive
+            },
           },
         },
       },
@@ -197,11 +199,15 @@ export async function getAllPartiesWithPhotos({
     // Pour chaque party, réorganiser les photos
     const partiesWithSortedPhotos = parties.map((party) => {
       if (party.photos.length > 1) {
-        // Extraire la première photo
-        const [firstPhoto, ...restPhotos] = party.photos;
+        // Extraire la première photo ajoutée
+        const firstPhoto = party.photos.reduce((oldest, photo) => {
+          return new Date(photo.createdAt) < new Date(oldest.createdAt)
+            ? photo
+            : oldest;
+        }, party.photos[0]);
 
-        // Trier les autres photos par nombre de réactions
-        restPhotos.sort((a, b) => b.reactions.length - a.reactions.length);
+        // Filtrer les autres photos
+        const restPhotos = party.photos.filter((photo) => photo !== firstPhoto);
 
         // Combiner la première photo avec les autres triées
         party.photos = [firstPhoto, ...restPhotos];

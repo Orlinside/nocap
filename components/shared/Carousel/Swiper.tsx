@@ -21,7 +21,7 @@ export const Carousel = ({
 }: {
   photos: any;
   user: any;
-  isReact: any;
+  isReact: boolean;
   onPhotoChange: any;
 }) => {
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);

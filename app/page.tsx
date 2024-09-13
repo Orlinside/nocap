@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-import { currentUser } from "@/lib/auth";
 import { getAllPartiesWithPhotos } from "@/lib/actions/party.actions";
 
 import { Accueil } from "@/components/shared/Accueil";
@@ -10,10 +9,6 @@ export default async function Home({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  //! Récupérer l'ID de la personnne connecté pour afficher les events auxquels il est abonné
-  const user = await currentUser();
-  const userId = user?.id;
-
   const page = Number(searchParams?.page) || 1;
 
   //! Récupérer les soirées et leurs photos

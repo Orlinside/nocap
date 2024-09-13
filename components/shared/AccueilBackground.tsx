@@ -1,11 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { Carousel } from "./Carousel/Swiper";
 import { Pagination } from "./Pagination";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { AnnoncesMobile } from "./AnnoncesMobile";
 
 type AccueilProps = {
   user: any;
