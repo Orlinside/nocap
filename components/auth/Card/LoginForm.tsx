@@ -17,7 +17,6 @@ import { useState, useTransition } from "react";
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogHeader,
@@ -74,6 +73,7 @@ export const LoginForm = () => {
           if (data?.error) {
             form.reset();
             setError(data.error);
+            toast.error("Email ou mot de passe incorrect");
           }
 
           if (data?.success) {
@@ -81,8 +81,8 @@ export const LoginForm = () => {
             setSuccess(data.success);
             router.push("/");
             revalidatePath("/");
+            toast.success("Vous êtes connecté !");
           }
-          toast.success("Vous êtes connecté !");
         })
         .catch(() =>
           setError("Une erreur s'est produite. Veuillez réessayer.")

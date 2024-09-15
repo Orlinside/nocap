@@ -182,11 +182,11 @@ export async function getAllPartiesWithPhotos({
           include: {
             reactions: true, // Inclure les réactions associées à chaque photo
           },
-          orderBy: {
-            reactions: {
-              _count: "desc", // Trier les photos par nombre de réactions, de la plus réactive à la moins réactive
-            },
-          },
+          // orderBy: {
+          //   reactions: {
+          //     _count: "desc", // Trier les photos par nombre de réactions, de la plus réactive à la moins réactive
+          //   },
+          // },
         },
       },
       orderBy: {

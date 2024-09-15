@@ -31,6 +31,8 @@ import { FormSuccess } from "./FormSucess";
 import { ImCross } from "react-icons/im";
 import { Checkbox } from "@/components/ui/checkbox";
 
+import { toast } from "sonner";
+
 export default function RegisterForm() {
   const [isPending, startTransition] = useTransition();
 
@@ -61,6 +63,7 @@ export default function RegisterForm() {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+        toast.success("Vous pouvez maintenant vous connecter");
       });
     });
   };
