@@ -4,6 +4,14 @@ import { getAllPartiesWithPhotos } from "@/lib/actions/party.actions";
 
 import { Accueil } from "@/components/shared/Accueil";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Accueil | No Cap",
+  description:
+    "Page d'accueil de No Cap, présentant la soirée à venir et les soirées passées.",
+};
+
 export default async function Home({
   searchParams,
 }: {
