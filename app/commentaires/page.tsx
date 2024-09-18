@@ -5,6 +5,14 @@ import { currentUser } from "@/lib/auth";
 
 import { Transition } from "@/components/shared/Transition";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Commentaires | No Cap",
+  description:
+    "La page des commentaires de No Cap, pour donner votre avis sur les soirées.",
+};
+
 export default async function CommentairesPage() {
   const user = await currentUser();
   const userId = user?.id;

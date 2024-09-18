@@ -2,6 +2,13 @@ import { ContactForm } from "@/components/shared/ContactForm";
 
 import { Transition } from "@/components/shared/Transition";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact | No Cap",
+  description: "Contactez l'équipe de No Cap pour toute question ou demande.",
+};
+
 export default function ContactPage() {
   return (
     <>
