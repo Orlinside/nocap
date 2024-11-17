@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     "Mentions Légales",
   openGraph: {
     images: [
-      { url: "https://www.nocap.fr/api/opengraph", width: 1200, height: 630 },
+      { url: "https://www.nocapdscvr.com/api/opengraph", width: 1200, height: 630 },
     ],
   },
 };
