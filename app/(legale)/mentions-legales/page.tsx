@@ -1,4 +1,17 @@
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mentions Légales | No Cap",
+  description:
+    "Page d'accueil de No Cap, présentant la soirée à venir et les soirées passées.",
+  openGraph: {
+    images: [
+      { url: "https://www.nocap.fr/api/opengraph", width: 1200, height: 630 },
+    ],
+  },
+};
+
 
 export default function page() {
   return (
