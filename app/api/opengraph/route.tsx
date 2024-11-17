@@ -4,19 +4,9 @@ export const runtime = "edge";
 
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request.url);
-
-    // const hasTitle = searchParams.has("title");
-    // const title = hasTitle ? searchParams.get("title") : "No Cap";
-
-    // const hasDescription = searchParams.has("description");
-    // const description = hasDescription
-    //   ? searchParams.get("description")
-    //   : "Ici et nulle part ailleurs.";
-
-    const fontData = await fetch(
-      new URL("../../../public/font/Renogare-Regular.otf", import.meta.url)
-    ).then((res) => res.arrayBuffer());
+    // const fontData = await fetch(
+    //   new URL("../../../public/font/Renogare-Regular.otf", import.meta.url)
+    // ).then((res) => res.arrayBuffer());
 
     const imageDataBuffer = await fetch(
       new URL("../../../public/logo/Logo_NoCapR_white.png", import.meta.url)
@@ -53,13 +43,13 @@ export async function GET(request: Request) {
               >
                 {title}
               </h1> */}
-              <p tw="text-white">Ici et nulle part ailleurs.</p>
+              {/* <p tw="text-white">Ici et nulle part ailleurs.</p> */}
             </div>
           </div>
         </div>
       ),
       {
-        fonts: [{ name: "Renogare", data: fontData }],
+        // fonts: [{ name: "Renogare", data: fontData }],
         width: 1200,
         height: 630,
       }
