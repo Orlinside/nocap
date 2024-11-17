@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     "Contactez l'équipe de No Cap pour toutes questions ou demandes.",
   openGraph: {
     images: [
-      { url: "https://www.nocap.fr/api/opengraph", width: 1200, height: 630 },
+      { url: "https://www.nocapdscvr.com/api/opengraph", width: 1200, height: 630 },
     ],
   },
 };
