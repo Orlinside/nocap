@@ -3,10 +3,11 @@ import { useState } from "react";
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import "./swiper.css";
 
 import { GlareCard } from "@/components/ui/glare-card";
 import { BtnReactions } from "../BtnReactions";
@@ -68,11 +69,16 @@ export const Carousel = ({
         modules={[EffectCoverflow, Pagination]}
         className="mx-auto h-auto"
         onSlideChange={handleSlideChange}
+        pagination={{
+          clickable: true,
+          bulletClass: "swiper-pagination-bullet",
+          bulletActiveClass: "swiper-pagination-bullet-active",
+        }}
       >
         {photos.map((photo: any, idx: any) => (
           <SwiperSlide
             key={idx}
-            className="relative max-w-[95%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-[700px] h-auto rounded-sm"
+            className="relative max-w-[90%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-[700px] h-auto rounded-sm"
           >
             <div
               key={idx}
