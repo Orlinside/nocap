@@ -6,7 +6,13 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact | No Cap",
-  description: "Contactez l'équipe de No Cap pour toute question ou demande.",
+  description:
+    "Contactez l'équipe de No Cap pour toutes questions ou demandes.",
+  openGraph: {
+    images: [
+      { url: "https://www.nocapdscvr.com/api/opengraph", width: 1200, height: 630 },
+    ],
+  },
 };
 
 export default function ContactPage() {
