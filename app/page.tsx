@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Page d'accueil de No Cap, présentant la soirée à venir et les soirées passées.",
   openGraph: {
     images: [
-      { url: "https://www.nocap.fr/api/opengraph", width: 1200, height: 630 },
+      { url: "https://www.nocapdscvr.com/api/opengraph", width: 1200, height: 630 },
     ],
   },
 };
