@@ -24,6 +24,14 @@ export default async function RootLayout({
 
   return (
     <html lang="fr">
+       <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="9951baf4-c521-49f0-a81a-93b0e1401184"
+        ></script>
+      </head>
+      
       <SessionProvider session={session}>
         <body className="">
           <div className="fixed top-0 w-full z-50">
