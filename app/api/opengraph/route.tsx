@@ -16,24 +16,24 @@ export async function GET(request: Request) {
       imageDataBuffer
     ).toString("base64")}`;
 
-    const bgDataBuffer = await fetch(
-      new URL("../../../public/images/nocapComp.jpg", import.meta.url)
-    ).then((res) => res.arrayBuffer());
+    // const bgDataBuffer = await fetch(
+    //   new URL("../../../public/images/nocapComp.jpg", import.meta.url)
+    // ).then((res) => res.arrayBuffer());
 
-    const backgroundImage = `data:image/jpeg;base64,${Buffer.from(
-      bgDataBuffer
-    ).toString("base64")}`;
+    // const backgroundImage = `data:image/jpeg;base64,${Buffer.from(
+    //   bgDataBuffer
+    // ).toString("base64")}`;
 
     return new ImageResponse(
       (
         <div tw="flex flex-col h-full w-full items-center justify-center">
           <div
-            style={{
-              backgroundImage: `url(${backgroundImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-            tw=" flex items-center justify-center gap-12 w-full"
+            // style={{
+            //   backgroundImage: `url(${backgroundImage})`,
+            //   backgroundSize: "cover",
+            //   backgroundPosition: "center",
+            // }}
+            tw="bg-[#0F0F0F] flex items-center justify-center gap-12 w-full"
           >
             <div tw="flex flex-col md-flex-row w-full py-12 px-4 items-center justify-between p-10">
               <img width={170} height={35} src={imageData} />
