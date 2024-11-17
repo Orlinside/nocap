@@ -1,0 +1,22 @@
+/* Styles pour les bullets de pagination */
+.swiper-pagination-bullet {
+  background-color: #aaaaaac8; /* Couleur par défaut des bullets */
+  opacity: 1;
+  cursor: pointer;
+  width: 4px;
+  height: 4px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffffff; /* Couleur des bullets actives */
+}
+
+/* Positionner la pagination en bas au centre */
+/* .custom-pagination {
+  margin-top: 10px;
+} */
+
+.swiper-pagination {
+  top: 0 !important;
+  pointer-events: none;
+}

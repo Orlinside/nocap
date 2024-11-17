@@ -9,7 +9,7 @@ import {
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 
-import { FaHeart } from "react-icons/fa";
+import { BsSuitHeartFill } from "react-icons/bs";
 import { FaFire } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa6";
 
@@ -85,7 +85,7 @@ export const BtnReactions = ({
 
   return (
     <div className="flex sm:flex-col sm:gap-2 bg-transparent backdrop-blur-[3px] sm:backdrop-blur-none rounded-xl">
-      <Button
+      {/* <Button
         onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
         className={
           userReactions.FIRE
@@ -97,7 +97,7 @@ export const BtnReactions = ({
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("FIRE")}
         </span>
-      </Button>
+      </Button> */}
       <Button
         onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
         className={
@@ -106,12 +106,12 @@ export const BtnReactions = ({
             : "flex gap-1 items-center justify-center text-white bg-transparent hover:text-red-600 hover:bg-transparent"
         }
       >
-        <FaHeart className="text-base sm:text-2xl" />
+        <BsSuitHeartFill className="text-base sm:text-2xl" />
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("LIKE")}
         </span>
       </Button>
-      <Button
+      {/* <Button
         onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
         className={
           userReactions.THUMBS_UP
@@ -123,7 +123,7 @@ export const BtnReactions = ({
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("THUMBS_UP")}
         </span>
-      </Button>
+      </Button> */}
     </div>
   );
 };

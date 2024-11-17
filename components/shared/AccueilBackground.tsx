@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Carousel } from "./Carousel/Swiper";
 import { Pagination } from "./Pagination";
@@ -37,6 +37,15 @@ export const AccueilBackground = ({
       day: "numeric",
     }
   );
+
+  const [showSwipeHint, setShowSwipeHint] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSwipeHint(false);
+    }, 5000); // Masquer l'indicateur après 5 secondes
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="h-full w-full flex flex-col justify-between pb-6 items-center overflow-hidden relative">
@@ -118,6 +127,14 @@ export const AccueilBackground = ({
             </div>
           )}
         </motion.div>
+
+        {showSwipeHint && (
+          <div className="absolute bottom-0 md:bottom-20 lg:bottom-0 w-full text-white flex justify-center">
+            <p className="md:renogare bg-black bg-opacity-50 px-4 py-2 rounded-full text-sm lg:text-xs text-center">
+              Swipez de gauche à droite pour voir plus de photos
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
