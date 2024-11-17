@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     ).toString("base64")}`;
 
     const bgDataBuffer = await fetch(
-      new URL("../../../public/images/nocap.jpg", import.meta.url)
+      new URL("../../../public/images/nocapComp.jpg", import.meta.url)
     ).then((res) => res.arrayBuffer());
 
     const backgroundImage = `data:image/jpeg;base64,${Buffer.from(
