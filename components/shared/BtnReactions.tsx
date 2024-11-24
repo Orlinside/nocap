@@ -9,9 +9,7 @@ import {
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 
-import { FaHeart } from "react-icons/fa";
-import { FaFire } from "react-icons/fa";
-import { FaThumbsUp } from "react-icons/fa6";
+import { BsSuitHeartFill } from "react-icons/bs";
 
 export const BtnReactions = ({
   photoId,
@@ -85,19 +83,7 @@ export const BtnReactions = ({
 
   return (
     <div className="flex sm:flex-col sm:gap-2 bg-transparent backdrop-blur-[3px] sm:backdrop-blur-none rounded-xl">
-      <Button
-        onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
-        className={
-          userReactions.FIRE
-            ? "flex gap-1 items-center justify-center text-orange-600 bg-transparent hover:text-orange-700 hover:bg-transparent"
-            : "flex gap-1 items-center justify-center text-white bg-transparent hover:text-orange-600 hover:bg-transparent"
-        }
-      >
-        <FaFire className="text-base sm:text-2xl" />
-        <span className="renogare text-white text-[0.7rem] w-4">
-          {countReactions("FIRE")}
-        </span>
-      </Button>
+
       <Button
         onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
         className={
@@ -106,24 +92,12 @@ export const BtnReactions = ({
             : "flex gap-1 items-center justify-center text-white bg-transparent hover:text-red-600 hover:bg-transparent"
         }
       >
-        <FaHeart className="text-base sm:text-2xl" />
+        <BsSuitHeartFill className="text-base sm:text-2xl" />
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("LIKE")}
         </span>
       </Button>
-      <Button
-        onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
-        className={
-          userReactions.THUMBS_UP
-            ? "flex gap-1 items-center justify-center text-primary bg-transparent hover:text-primary/80 hover:bg-transparent"
-            : "flex gap-1 items-center justify-center text-white bg-transparent hover:text-primary/80 hover:bg-transparent"
-        }
-      >
-        <FaThumbsUp className="text-base sm:text-2xl" />
-        <span className="renogare text-white text-[0.7rem] w-4">
-          {countReactions("THUMBS_UP")}
-        </span>
-      </Button>
+
     </div>
   );
 };
