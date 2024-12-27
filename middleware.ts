@@ -14,6 +14,7 @@ import {
   authRoutes,
   adminRoutes,
   apiUploadPrefix,
+  apiEmailPrefix,
 } from "./route";
 
 const { auth } = NextAuth(authConfig);
@@ -26,6 +27,8 @@ export default auth((req) => {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix); // Vérifier si la route est une route d'authentification
 
   const isApiUploadRoute = nextUrl.pathname.startsWith(apiUploadPrefix); // Vérifier si la route est une route d'upload
+
+  const isEmailApiRoute = nextUrl.pathname.startsWith(apiEmailPrefix); // Vérifier si la route est une route d'envoi d'email
 
   // const isPublicRoute = isPublicRouteFonction(nextUrl.pathname); // Vérifier si la route est publique
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname); // Vérifier si la route est publique
@@ -49,6 +52,10 @@ export default auth((req) => {
   }
 
   if (isApiUploadRoute) {
+    return;
+  }
+
+  if (isEmailApiRoute) {
     return;
   }
 
@@ -90,3 +97,4 @@ export default auth((req) => {
 export const config = {
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
 };
+
