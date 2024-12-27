@@ -5,7 +5,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 //! Fonction pour envoyer un email de réinitialisation du mot de passe
 export const sendPasswordResetEmail = async (email: string, token: string) => {
   // Changer l'url pour la production
-  const resetLink = `http://localhost:3000/nouveau-mot-de-passe?token=${token}`;
+  const resetLink = `${process.env.NEXTAUTH_URL}/nouveau-mot-de-passe?token=${token}`;
 
   // Envoyer l'email
   await resend.emails.send({
