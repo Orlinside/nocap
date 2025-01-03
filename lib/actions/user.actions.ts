@@ -11,6 +11,7 @@ import {
   GetUserParams,
   DeleteUserParams,
 } from "@/types";
+import { logout } from "./auth.actions";
 
 //! GET USER BY ID
 export async function getUserById(id: string) {
@@ -63,7 +64,9 @@ export const deleteUser = async ({ userId, path }: DeleteUserParams) => {
       where: { id: userId },
     });
 
-    if (deletedUser) revalidatePath(path);
+    if (deletedUser) {
+      revalidatePath(path);
+    }
   } catch (error) {
     return null;
   }
@@ -80,3 +83,30 @@ export async function getReactionsByUserId(userId: string) {
     return null;
   }
 }
+
+//! GET COMMENTS BY USER ID
+export async function getCommentsByUserId(userId: string) {
+  try {
+    const comments = await db.comment.findMany({
+      where: { userId },
+    });
+    return comments;
+  } catch {
+    return null;
+  }
+}
+
+//! UPDATE USER
+export const updateUser = async ({ userId, user, path }: UpdateUserParams) => {
+  try {
+    const updatedUser = await db.user.update({
+      where: { id: userId },
+      data: user.name ? { name: user.name } : {},
+    });
+
+    if (updatedUser) revalidatePath(path);
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return null;
+  }
+};
