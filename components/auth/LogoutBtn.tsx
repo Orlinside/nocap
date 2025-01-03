@@ -15,6 +15,7 @@ export const LogoutBtn = ({ children }: LogoutBtnProps) => {
   const onClick = () => {
     logout(pathname);
     // router.push("/");
+    router.refresh();
     toast.success("Déconnection réussie");
   };
   return (
