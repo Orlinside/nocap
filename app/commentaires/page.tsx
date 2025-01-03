@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "La page des commentaires de No Cap, pour donner votre avis sur les soirées.",
   openGraph: {
     images: [
-      { url: "https://www.nocapdscvr.com/api/opengraph", width: 1200, height: 630 },
+      { url: "https://www.nocap.fr/api/opengraph", width: 1200, height: 630 },
     ],
   },
 };
@@ -103,7 +103,7 @@ export default async function CommentairesPage() {
           </section>
         </div>
       </Transition>
-      {/*  */}
     </>
   );
 }
+
