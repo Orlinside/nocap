@@ -172,3 +172,24 @@ export const deleteAdminComment = async ({
     return new NextResponse(null, { status: 500 });
   }
 };
+
+//! DELETE COmment in profile page
+export const deleteCommentProfile = async ({
+  commentId,
+  path,
+}: DeleteComment) => {
+  try {
+    await db.comment.delete({
+      where: {
+        id: commentId,
+      },
+    });
+
+    revalidatePath(path);
+
+    return { status: "success" };
+  } catch (error) {
+    return new NextResponse(null, { status: 500 });
+  }
+};
+
