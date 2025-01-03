@@ -57,6 +57,12 @@ export const newPasswordSchema = z
     }
   });
 
+//! UPDATE USER SCHEMA
+export const updateUserSchema = z.object({
+  name: z.string().min(2, "Le pseudo doit contenir au moins 2 caractères."),
+  isNewsletterSubscribed: z.boolean().optional(),
+});
+
 //! CREATE PARTY SCHEMA
 export const partyFormSchema = z.object({
   name: z
@@ -82,3 +88,4 @@ export const updateCommentSchema = z.object({
   importance: z.enum(["LOW", "MEDIUM", "HIGH"]),
   isValid: z.boolean(),
 });
+
