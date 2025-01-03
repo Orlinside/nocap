@@ -125,7 +125,11 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   // Générer un token de réinitialisation et envoyer un email
   const passwordResetToken = await generatePasswordResetToken(email);
-  
+  // await sendPasswordResetEmail(
+  //   passwordResetToken.email,
+  //   passwordResetToken.token
+  // );
+
   await fetch(`${process.env.NEXTAUTH_URL}/api/email`, {
     method: "POST",
     headers: {
