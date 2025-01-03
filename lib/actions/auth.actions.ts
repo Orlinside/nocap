@@ -125,10 +125,26 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
 
   // Générer un token de réinitialisation et envoyer un email
   const passwordResetToken = await generatePasswordResetToken(email);
-  await sendPasswordResetEmail(
-    passwordResetToken.email,
-    passwordResetToken.token
-  );
+  // await sendPasswordResetEmail(
+  //   passwordResetToken.email,
+  //   passwordResetToken.token
+  // );
+
+  await fetch(`${process.env.NEXTAUTH_URL}/api/email`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      sender: {
+        name: "No Cap",
+        address: "no-reply@nocap.com",
+      },
+      recipient: { name: existingUser.name, address: passwordResetToken.email },
+      subject: "NO CAP | Réinitialisation de votre mot de passe",
+      message: `Cliquez sur le lien suivant afin de réinitialiser votre mot de passe :  ${process.env.NEXTAUTH_URL}/nouveau-mot-de-passe?token=${passwordResetToken.token}`,
+    }),
+  });
 
   return { success: "Un email de réinitialisation a été envoyé." };
 };

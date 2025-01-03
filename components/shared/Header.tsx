@@ -5,10 +5,9 @@ import React, { Suspense } from "react";
 import { currentUser } from "@/lib/auth";
 
 import { Navbar } from "./Navbar/Navbar";
-import { LogoutBtn } from "../auth/LogoutBtn";
 import { LoginForm } from "../auth/Card/LoginForm";
 
-import { IoMdLogOut } from "react-icons/io";
+import { MdOutlineAccountCircle } from "react-icons/md";
 import { AnnoncesMobile } from "./AnnoncesMobile";
 
 export const Header = async () => {
@@ -31,13 +30,16 @@ export const Header = async () => {
           <Navbar />
           {user ? (
             <div className="flex justify-center items-center gap-4">
-              <LogoutBtn>
-                <IoMdLogOut
+              <Link
+                href="/compte"
+                className="renogare uppercase text-white text-sm hover:text-white/80 z-[200]"
+              >
+                <MdOutlineAccountCircle
                   size={25}
                   className="text-white hover:text-white/80 z-[200]"
-                  aria-label="Déconnexion"
+                  aria-label="Mon Compte"
                 />
-              </LogoutBtn>
+              </Link>
               {role === "admin" && (
                 <Link
                   href="/admin"

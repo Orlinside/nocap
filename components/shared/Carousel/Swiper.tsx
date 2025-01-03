@@ -13,6 +13,8 @@ import { GlareCard } from "@/components/ui/glare-card";
 import { BtnReactions } from "../BtnReactions";
 
 import { IoClose } from "react-icons/io5";
+import { IoDownload } from "react-icons/io5";
+import Link from "next/link";
 
 export const Carousel = ({
   photos,
@@ -98,10 +100,12 @@ export const Carousel = ({
                 </div>
               </GlareCard>
             </div>
+
             <div className="absolute z-10 right-1 bottom-1 sm:right-2 sm:bottom-2">
               <BtnReactions
                 photoId={photo.id}
                 reaction={photo.reactions}
+                photoUrl={photo.url}
                 user={user}
                 isReact={isReact}
               />

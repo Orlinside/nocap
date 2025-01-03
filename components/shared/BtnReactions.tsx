@@ -10,17 +10,21 @@ import { toast } from "sonner";
 import { Button } from "../ui/button";
 
 import { BsSuitHeartFill } from "react-icons/bs";
+import { MdOutlineDownloadForOffline } from "react-icons/md";
 import { FaFire } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa6";
+import Link from "next/link";
 
 export const BtnReactions = ({
   photoId,
   reaction,
   user,
   isReact,
+  photoUrl,
 }: {
   photoId: string;
   reaction: any;
+  photoUrl: string;
   user: any;
   isReact: boolean;
 }) => {
@@ -84,7 +88,7 @@ export const BtnReactions = ({
   };
 
   return (
-    <div className="flex sm:flex-col sm:gap-2 bg-transparent backdrop-blur-[3px] sm:backdrop-blur-none rounded-xl">
+    <div className="relative flex sm:gap-0 bg-transparent backdrop-blur-[3px] sm:backdrop-blur-none rounded-xl">
       {/* <Button
         onClick={() => handleReaction(photoId, userId ?? "", "FIRE")}
         className={
@@ -98,6 +102,18 @@ export const BtnReactions = ({
           {countReactions("FIRE")}
         </span>
       </Button> */}
+
+      {userId && (
+        <Link
+          href={photoUrl}
+          target="_blank"
+          download
+          className="flex justify-center items-center rounded-xl"
+        >
+          <MdOutlineDownloadForOffline className="text-lg sm:text-2xl hover:text-white/70" />
+        </Link>
+      )}
+
       <Button
         onClick={() => handleReaction(photoId, userId ?? "", "LIKE")}
         className={
@@ -106,11 +122,12 @@ export const BtnReactions = ({
             : "flex gap-1 items-center justify-center text-white bg-transparent hover:text-red-600 hover:bg-transparent"
         }
       >
-        <BsSuitHeartFill className="text-base sm:text-2xl" />
+        <BsSuitHeartFill className="text-base sm:text-xl" />
         <span className="renogare text-white text-[0.7rem] w-4">
           {countReactions("LIKE")}
         </span>
       </Button>
+
       {/* <Button
         onClick={() => handleReaction(photoId, userId ?? "", "THUMBS_UP")}
         className={

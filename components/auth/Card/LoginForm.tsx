@@ -80,6 +80,7 @@ export const LoginForm = () => {
             form.reset();
             setSuccess(data.success);
             router.push("/");
+            router.refresh();
             revalidatePath("/");
             toast.success("Vous êtes connecté !");
           }

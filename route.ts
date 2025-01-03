@@ -39,4 +39,6 @@ export const apiAuthPrefix = "/api/auth";
 
 export const apiUploadPrefix = "/api/uploadthing";
 
+export const apiEmailPrefix = "/api/email";
+
 export const DEFAULT_LOGIN_REDIRECT = "/";
