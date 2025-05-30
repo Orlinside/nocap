@@ -32,7 +32,7 @@ export const DeleteConfirmationCommentUser = ({
         <p className="text-[0.8rem] font-mono">Supprimer</p>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-dark w-1/3 border-none">
+      <AlertDialogContent className="bg-primary w-full sm:w-1/3 border-none">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-white renogare">
             Etes-vous sûr de vouloir supprimer votre commentaire ?
@@ -63,3 +63,4 @@ export const DeleteConfirmationCommentUser = ({
     </AlertDialog>
   );
 };
+
