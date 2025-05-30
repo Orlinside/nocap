@@ -89,7 +89,7 @@ export const PartyDetails = async ({
   return (
     <>
       <section className="wrapper">
-        <div className="mt-20"></div>
+        <div className="mt-32"></div>
         <div
           className="flex flex-col gap-4 justify-center sm:flex-row
          sm:flex-between"
@@ -144,3 +144,4 @@ export const PartyDetails = async ({
     </>
   );
 };
+
