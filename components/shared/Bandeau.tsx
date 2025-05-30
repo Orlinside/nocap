@@ -84,7 +84,7 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
           transition: { ease: "easeOut", duration: 3 },
         },
       }}
-      className="w-full flex items-center justify-center gap-20"
+      className="w-full flex items-center justify-center gap-20 h-[30px]"
     >
       <motion.p
         initial={{ x: "-120%" }}
@@ -95,7 +95,7 @@ export const Bandeau = ({ lastParty }: { lastParty: any }) => {
           repeat: Infinity,
           delay: 3,
         }}
-        className="w-full text-sm md:text-lg lg:text-sm text-center leading-[1.6] text-white renogare flex md:gap-32 lg:gap-40 uppercase"
+        className="w-full text-sm md:text-lg lg:text-md text-center leading-[1.6] text-white renogare flex md:gap-32 lg:gap-40 uppercase"
       >
         <span className="w-full">{countdownString}</span>
         <span className="w-full hidden sm:flex">{countdownString}</span>
