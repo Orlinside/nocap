@@ -123,7 +123,7 @@ export const PhotoForm = ({ partyId, type, photo, userId }: PhotoFormProps) => {
 
         <AlertDialogContent
           aria-describedby="Ajouter une photo"
-          className="bg-dark w-5/6 sm:w-2/3 rounded-xl border-none"
+          className="bg-primary w-5/6 sm:w-2/3 rounded-xl border-none"
         >
           <AlertDialogHeader>
             <AlertDialogTitle className="text-white renogare">
