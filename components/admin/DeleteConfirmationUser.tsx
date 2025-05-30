@@ -26,10 +26,10 @@ export const DeleteConfirmationUser = ({ userId }: { userId: string }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="text-white">
-        <MdDeleteForever size={25} className="hover:text-red-700" />
+        <MdDeleteForever size={18} className="hover:text-red-700" />
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-dark w-1/3 border-none">
+      <AlertDialogContent className="bg-primary w-full sm:w-1/3 border-none">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-white renogare">
             Etes-vous sûr de vouloir supprimer cet utilisateur ?

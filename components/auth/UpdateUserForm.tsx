@@ -57,7 +57,7 @@ export default function UpdateUserForm({ user }: { user: any }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-2"
+        className="grid grid-cols-2 gap-2"
       >
         <FormField
           control={form.control}
@@ -65,33 +65,37 @@ export default function UpdateUserForm({ user }: { user: any }) {
           render={({ field }) => {
             return (
               <FormItem className="w-full">
-                <FormLabel htmlFor="name">Pseudo</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Pseudo"
-                    {...field}
-                    className="input-field text-dark"
-                  />
-                </FormControl>
+                <div className="flex flex-col gap-2 bg-white/20 p-2 rounded-xl">
+                  <FormLabel htmlFor="name">Pseudo</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Pseudo"
+                      {...field}
+                      className="input-field text-dark font-mono"
+                    />
+                  </FormControl>
+                </div>
                 <FormMessage />
               </FormItem>
             );
           }}
         />
         <div className="flex flex-col gap-3">
-          <FormLabel htmlFor="">Email</FormLabel>
-          <Input
-            placeholder="Pseudo"
-            defaultValue={user.email}
-            className="input-field text-dark"
-            disabled
-          />
+          <div className="flex flex-col gap-2 bg-white/20 p-2 rounded-xl">
+            <FormLabel htmlFor="">Email</FormLabel>
+            <Input
+              placeholder="Pseudo"
+              defaultValue={user.email}
+              className="input-field text-dark font-mono"
+              disabled
+            />
+          </div>
         </div>
 
         <Button
           type="submit"
           disabled={isPending}
-          className="rounded-xl h-10 renogare uppercase tracking-widest text-xs hover:bg-slate-800 w-full"
+          className="col-span-2 rounded-xl h-10 renogare uppercase tracking-widest text-xs hover:bg-slate-800 w-full"
         >
           Modifier le pseudo
         </Button>

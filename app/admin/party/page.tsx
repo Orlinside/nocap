@@ -28,7 +28,7 @@ export default async function PartyPage() {
   return (
     <RoleGate allowedRole={Role.admin}>
       <section className="wrapper">
-        <div className="mt-20"></div>
+        <div className="mt-28 sm:mt-32"></div>
         <div className=" flex justify-between items-center">
           <h1 className="uppercase renogare bg-linear-text">
             Liste des soirées
@@ -50,9 +50,9 @@ export default async function PartyPage() {
             <Link
               key={party.id}
               href={`/admin/party/${party.id}`}
-              className="bg-gray-600 rounded-xl"
+              className="border-b"
             >
-              <div className="flex justify-between items-center hover:bg-white/20 p-2 rounded-xl">
+              <div className="flex justify-between items-center hover:bg-white/20 p-2">
                 <p className="text-white col-span-3 text-xl font-bold">
                   {party.name}
                 </p>

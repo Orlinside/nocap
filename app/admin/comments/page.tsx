@@ -26,7 +26,7 @@ export default async function GestionCommentPage({
     <RoleGate allowedRole={Role.admin}>
       <section>
         <div className="wrapper">
-          <div className="mt-20"></div>
+          <div className="mt-28 sm:mt-32"></div>
           <h1 className="uppercase renogare bg-linear-text">
             Gestion des commentaires
           </h1>

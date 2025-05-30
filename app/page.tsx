@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { getAllPartiesWithPhotos } from "@/lib/actions/party.actions";
+import {
+  getAllPartiesForHomePage,
+  getAllPartiesWithPhotos,
+  getLastParty,
+} from "@/lib/actions/party.actions";
 
 import { Accueil } from "@/components/shared/Accueil";
 import type { Metadata } from "next";
@@ -29,6 +33,12 @@ export default async function Home({
     page,
   });
 
+  const allParties = await getAllPartiesForHomePage();
+
+  const lastParty = await getLastParty();
+
+  console.log("All parties:", allParties);
+
   // Vérifier si la réponse est une instance de NextResponse : Pour que le code gère correctement les deux types de réponses possibles et évite l'erreur de propriété inexistante.
   if (partyResponse instanceof NextResponse) {
     // Gérer le cas où la réponse est un NextResponse
@@ -41,16 +51,20 @@ export default async function Home({
 
   const party = partyResponse;
 
+  console.log("Party data:", partyResponse);
+
   return (
     <>
       <section className="h-screen w-screen overflow-x-hidden">
         {/* {user && <p>{JSON.stringify(user)}</p>} */}
         <Accueil
+          allParties={allParties}
           party={party.data}
           totalPages={party.totalPages}
           limit={1}
           page={page}
           urlParamName={""}
+          lastParty={lastParty}
         />
       </section>
     </>

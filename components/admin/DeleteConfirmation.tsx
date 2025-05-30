@@ -32,7 +32,7 @@ export const DeleteConfirmation = ({ partyId }: { partyId: string }) => {
         <MdDeleteForever size={25} className="hover:text-red-700" />
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="w-2/3 sm:w-1/2 bg-dark rounded-xl border-none">
+      <AlertDialogContent className="w-2/3 sm:w-1/2 bg-primary rounded-xl border-none">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-white renogare">
             Etes-vous sûr de vouloir supprimer cette soirée ?

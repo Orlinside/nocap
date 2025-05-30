@@ -8,7 +8,6 @@ import { Navbar } from "./Navbar/Navbar";
 import { LoginForm } from "../auth/Card/LoginForm";
 
 import { MdOutlineAccountCircle } from "react-icons/md";
-import { AnnoncesMobile } from "./AnnoncesMobile";
 
 export const Header = async () => {
   const user = await currentUser();
@@ -55,9 +54,6 @@ export const Header = async () => {
             </Suspense>
           )}
         </div>
-      </div>
-      <div className="sm:hidden w-full">
-        <AnnoncesMobile />
       </div>
     </header>
   );

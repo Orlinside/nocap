@@ -14,7 +14,7 @@ import { BtnReactions } from "../BtnReactions";
 
 import { IoClose } from "react-icons/io5";
 import { IoDownload } from "react-icons/io5";
-import Link from "next/link";
+import { GrNext, GrPrevious } from "react-icons/gr";
 
 export const Carousel = ({
   photos,
@@ -54,7 +54,7 @@ export const Carousel = ({
   };
 
   return (
-    <div className="h-full w-full -z-0 ">
+    <div className="h-full w-full -z-0">
       <Swiper
         effect={"coverflow"}
         grabCursor={true}
@@ -68,8 +68,13 @@ export const Carousel = ({
           slideShadows: true,
         }}
         loop={true}
-        modules={[EffectCoverflow, Pagination]}
-        className="mx-auto h-auto"
+        modules={[EffectCoverflow, Pagination, Navigation]}
+        // navigation={true}
+        navigation={{
+          nextEl: ".custom-next",
+          prevEl: ".custom-prev",
+        }}
+        className="mx-auto h-auto relative"
         onSlideChange={handleSlideChange}
         pagination={{
           clickable: true,
@@ -80,7 +85,7 @@ export const Carousel = ({
         {photos.map((photo: any, idx: any) => (
           <SwiperSlide
             key={idx}
-            className="relative max-w-[90%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-[700px] h-auto rounded-sm"
+            className="relative max-w-[90%] sm:max-w-[90%] md:max-w-[80%] lg:max-w-[750px] h-auto rounded-sm"
           >
             <div
               key={idx}
@@ -110,6 +115,13 @@ export const Carousel = ({
                 isReact={isReact}
               />
             </div>
+
+            <button className="hidden sm:block custom-prev absolute top-1/2 -left-12 z-10 w-10 h-10 rounded-full text-center bg-black/50 hover:bg-black/80 transition-colors duration-300">
+              <GrPrevious className="mx-auto" />
+            </button>
+            <button className="hidden sm:block custom-next absolute top-1/2 -right-12 z-10 w-10 h-10 rounded-full text-center bg-black/50 hover:bg-black/80 transition-colors duration-300">
+              <GrNext className="mx-auto" />
+            </button>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -31,7 +31,7 @@ export default async function GestionUsers() {
   return (
     <RoleGate allowedRole={Role.admin}>
       <section className="wrapper">
-        <div className="mt-28 sm:mt-20"></div>
+        <div className="mt-28 sm:mt-32"></div>
         <div className=" flex justify-between items-center">
           <h1 className="uppercase renogare bg-linear-text">
             Liste des utilisateurs ({users.length})
@@ -39,18 +39,18 @@ export default async function GestionUsers() {
         </div>
       </section>
 
-      <section className="wrapper grid grid-cols-1 md:grid-cols-2 gap-4">
+      <section className="wrapper grid grid-cols-1 gap-4">
         {users.map((user) => {
           return (
             <div key={user.email} className="border border-white/60 rounded-xl">
-              <div className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center hover:bg-white/20 p-2 rounded-xl">
-                <p className="col-span-3 text-white text-sm sm:text-xl font-bold renogare">
+              <div className="w-full flex flex-col justify-center items-center gap-2 sm:grid sm:grid-cols-5 hover:bg-white/20 p-2 rounded-[10px]">
+                <p className="col-span-3 text-white text-xs sm:text-sm font-bold renogare">
                   {user.name}
                 </p>
-                <span className="text-xs text-white font-bold">
-                  {user.email}
-                </span>
-                <DeleteConfirmationUser userId={user.id} />
+                <p className="text-xs text-white font-bold ">{user.email}</p>
+                <div className="sm:text-right">
+                  <DeleteConfirmationUser userId={user.id} />
+                </div>
               </div>
             </div>
           );

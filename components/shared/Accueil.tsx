@@ -4,15 +4,19 @@ import { getReactionsByUserId } from "@/lib/actions/user.actions";
 import { AccueilBackground } from "./AccueilBackground";
 
 type AccueilProps = {
+  allParties: any;
   party: any;
   totalPages: number;
   page: number;
   urlParamName: string;
   limit: number;
+  lastParty?: any;
 };
 
 export const Accueil = async ({
+  allParties,
   party,
+  lastParty,
   totalPages,
   limit,
   page,
@@ -38,11 +42,13 @@ export const Accueil = async ({
     <>
       <AccueilBackground
         user={user}
+        allParties={allParties}
         party={party}
         totalPages={totalPages}
         urlParamName={urlParamName}
         page={page}
         isReact={isReact}
+        lastParty={lastParty}
       />
     </>
   );

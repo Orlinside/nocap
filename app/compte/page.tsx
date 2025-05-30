@@ -15,9 +15,9 @@ export default async function Compte() {
     <>
       <Transition>
         <section className="wrapper flex justify-center">
-          <div className="mt-28 sm:mt-20 flex-col gap-10 w-full lg:w-2/4">
+          <div className="mt-28 sm:mt-32 flex-col gap-6 w-full lg:w-3/4">
             <div className="w-full flex flex-col gap-4 bg-black bg-opacity-50 p-4 rounded-xl">
-              <h1 className="bg-gradient uppercase text-white renogare rounded-xl p-2 text-sm">
+              <h1 className="border-b uppercase text-white renogare p-2 text-sm">
                 Mes informations
               </h1>
               <div>
@@ -25,7 +25,7 @@ export default async function Compte() {
               </div>
             </div>
             <div className="w-full flex flex-col gap-4 mt-10 bg-black bg-opacity-50 p-4 rounded-xl">
-              <h2 className="bg-gradient uppercase text-white renogare rounded-xl p-2 text-sm">
+              <h2 className="border-b uppercase text-white renogare p-2 text-sm">
                 Mes commentaires
               </h2>
               <div>
