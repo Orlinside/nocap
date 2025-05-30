@@ -123,3 +123,4 @@ export const BandeauMobile = ({ lastParty }: { lastParty: any }) => {
     )
   );
 };
+
