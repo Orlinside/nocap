@@ -13,9 +13,7 @@ import {
 import { getUserById } from "./user.actions";
 
 import { Role } from "@prisma/client";
-import path from "path";
 import { currentRole } from "../auth";
-import { Value } from "@radix-ui/react-select";
 
 //! CREATE PARTY
 export const createParty = async ({
@@ -163,6 +161,26 @@ export async function getAllParties() {
   }
 }
 
+//! GET ALL PARTIES FOR HOME PAGE
+export async function getAllPartiesForHomePage() {
+  try {
+    const parties = await db.party.findMany({
+      where: {
+        photos: {
+          some: {}, // Filtrer pour ne récupérer que les parties avec des photos
+        },
+      },
+      orderBy: {
+        startDateTime: "desc", // Trier par date de début de la plus récente à la plus vieille
+      },
+    });
+
+    return parties;
+  } catch (error) {
+    return new NextResponse(null, { status: 500 });
+  }
+}
+
 //! GET ALL PARTIES
 export async function getAllPartiesWithPhotos({
   limit = 1,
@@ -246,3 +264,4 @@ export const getLastParty = async () => {
     return new NextResponse(null, { status: 500 });
   }
 };
+
