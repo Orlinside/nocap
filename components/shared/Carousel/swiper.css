@@ -20,3 +20,32 @@
   top: 0 !important;
   pointer-events: none;
 }
+
+.swiper {
+  position: relative; /* IMPORTANT pour que les flèches se basent dessus */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  top: 50%; /* Centrer verticalement */
+  transform: translateY(-50%); /* Centrer verticalement */
+  z-index: 10; /* S'assurer qu'elles sont au-dessus des slides */
+}
+
+.swiper-button-prev {
+  left: 10px; /* Positionner à gauche */
+}
+
+.swiper-button-next {
+  right: 10px; /* Positionner à droite */
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
