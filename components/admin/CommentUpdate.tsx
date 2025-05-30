@@ -18,7 +18,6 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -79,7 +78,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
     <AlertDialog>
       <AlertDialogTrigger className="w-full">
         <div className="bg-dark border border-white/30 rounded-xl flex flex-col justify-start sm:grid sm:grid-cols-4 w-full p-1 sm:p-2 hover:bg-[#121212] cursor-pointer">
-          <p className="font-bold text-white text-sm sm:text-xl border-b border-white/20 pb-1 sm:border-none sm:pb-0">
+          <p className="font-bold text-white text-left ml-2 text-sm sm:text-sm border-b border-white/20 pb-1 sm:border-none sm:pb-0">
             {comment.user?.name || "Anonyme"}
           </p>
           <p className="sm:text-left text-white text-[0.8rem] border-b border-white/20 py-1 sm:border-none sm:py-0">
@@ -95,7 +94,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
         </div>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="w-5/6 sm:w-1/2 bg-dark border-none">
+      <AlertDialogContent className="w-5/6 sm:w-1/2 bg-primary border-none">
         <AlertDialogHeader className="flex flex-row items-center justify-between">
           <AlertDialogTitle className="uppercase renogare text-white">
             Mettre à jour
@@ -121,16 +120,16 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-2 bg-dark/20 p-2 rounded-[10px]">
                         <label
                           htmlFor="isValid"
-                          className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-400 text-[0.8rem]"
+                          className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white/70 text-[0.8rem]"
                         >
                           Importance du commentaire :
                         </label>
                         <select
                           {...field}
-                          className="w-full p-1 rounded-xl text-dark"
+                          className="w-full p-1 rounded-[10px] text-dark"
                         >
                           <option value="LOW">Faible</option>
                           <option value="MEDIUM">Normal</option>
@@ -147,7 +146,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormControl>
-                      <div className="flex items-center">
+                      <div className="flex items-center ">
                         <label
                           htmlFor="isValid"
                           className="text-white whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -158,7 +157,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
                           onCheckedChange={field.onChange}
                           checked={field.value}
                           id="isFree"
-                          className="mr-2 h-4 w-4 border-2 border-primary"
+                          className="mr-2 h-4 w-4 border-2 border-white"
                         />
                       </div>
                     </FormControl>
@@ -167,7 +166,7 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row w-full gap-4 sm:gap-8">
+            <div className="flex flex-row gap-4 sm:gap-2">
               <AlertDialogAction
                 onClick={() =>
                   startTransition(async () => {
@@ -177,13 +176,13 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
                     });
                   })
                 }
-                className="text-white rubik bg-red-950 hover:bg-red-600 rounded-xl"
+                className="text-white text-xs rubik bg-red-950 hover:bg-red-600 rounded-[10px]"
               >
-                {isPending ? "Suppression..." : "Supprimer le commentaire"}
+                {isPending ? "Suppression..." : "Supprimer"}
               </AlertDialogAction>
               <AlertDialogAction
                 type="submit"
-                className="text-white button bg-gradient w-full"
+                className="text-white button bg-gradient text-xs rounded-[10px]"
               >
                 {isPending ? "..." : "Mettre à jour"}
               </AlertDialogAction>
