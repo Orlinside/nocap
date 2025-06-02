@@ -18,7 +18,7 @@ export const HeaderAuth = ({ label }: HeaderAuthProps) => {
           className="cursor-pointer z-[200]"
         />
       </Link>
-      <p className="text-muted-foreground text-sm renogare tracking-widest">
+      <p className="text-muted-foreground text-center text-xs mt-2 renogare tracking-widest">
         {label}
       </p>
     </div>
