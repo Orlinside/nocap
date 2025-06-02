@@ -51,13 +51,17 @@ export const AccueilBackground = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSwipeHint(false);
-      toast.info("Connecte-toi pour télécharger ta photo !");
+      if (!user) {
+        toast.info("Connecte-toi pour télécharger ta photo !");
+      }
     }, 6000); // Masquer l'indicateur après 5 secondes
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    toast.info("Connecte-toi pour télécharger ta photo !");
+    if (!user) {
+      toast.info("Connecte-toi pour télécharger ta photo !");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [party[0]?.id, page]);
 
@@ -171,3 +175,4 @@ export const AccueilBackground = ({
     </section>
   );
 };
+
