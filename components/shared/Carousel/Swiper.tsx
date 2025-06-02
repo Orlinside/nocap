@@ -115,13 +115,16 @@ export const Carousel = ({
                 isReact={isReact}
               />
             </div>
-
-            <button className="hidden sm:block custom-prev absolute top-1/2 -left-12 z-10 w-10 h-10 rounded-full text-center bg-black/50 hover:bg-black/80 transition-colors duration-300">
-              <GrPrevious className="mx-auto" />
-            </button>
-            <button className="hidden sm:block custom-next absolute top-1/2 -right-12 z-10 w-10 h-10 rounded-full text-center bg-black/50 hover:bg-black/80 transition-colors duration-300">
-              <GrNext className="mx-auto" />
-            </button>
+            {photos.length > 1 && (
+              <>
+                <button className="hidden sm:block custom-prev absolute top-1/2 -left-12 z-10 w-10 h-10 rounded-full text-center bg-black/50 hover:bg-black/80 transition-colors duration-300">
+                  <GrPrevious className="mx-auto" />
+                </button>
+                <button className="hidden sm:block custom-next absolute top-1/2 -right-12 z-10 w-10 h-10 rounded-full text-center bg-black/50 hover:bg-black/80 transition-colors duration-300">
+                  <GrNext className="mx-auto" />
+                </button>
+              </>
+            )}
           </SwiperSlide>
         ))}
       </Swiper>
@@ -132,7 +135,7 @@ export const Carousel = ({
             className={`relative fade-in ${isClosing ? "fade-out" : "fade-in"}`}
           >
             <button
-              className="absolute top-2 right-3 text-white text-sm sm:text-xl hover:text-white/80"
+              className="absolute top-5 right-3 text-white text-sm sm:text-xl hover:text-white/80"
               onClick={handleClose}
             >
               <IoClose size={30} />
