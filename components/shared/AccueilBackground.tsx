@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PartyList } from "./PartyList";
 import { AnnoncesMobile } from "./AnnoncesMobile";
 import { BandeauMobile } from "./BandeauMobile";
+import { toast } from "sonner";
 
 type AccueilProps = {
   user: any;
@@ -50,9 +51,15 @@ export const AccueilBackground = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSwipeHint(false);
+      toast.info("Connecte-toi pour télécharger ta photo !");
     }, 6000); // Masquer l'indicateur après 5 secondes
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    toast.info("Connecte-toi pour télécharger ta photo !");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [party[0]?.id, page]);
 
   return (
     <section className="h-full w-full flex flex-col justify-between pb-0 items-center overflow-hidden relative">
