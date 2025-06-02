@@ -56,7 +56,7 @@ export default async function Compte() {
                 className="text-white hover:text-white/80 z-[200]"
                 aria-label="Déconnexion"
               /> */}
-                <p className="renogare text-sm font-bold">Déconnexion</p>
+                <p className="renogare font-bold">Déconnexion</p>
               </LogoutBtn>
               {user && <DeleteUser userId={user.id} />}
             </div>
@@ -66,3 +66,4 @@ export default async function Compte() {
     </>
   );
 }
+
