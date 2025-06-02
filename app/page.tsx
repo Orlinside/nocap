@@ -37,8 +37,6 @@ export default async function Home({
 
   const lastParty = await getLastParty();
 
-  console.log("All parties:", allParties);
-
   // Vérifier si la réponse est une instance de NextResponse : Pour que le code gère correctement les deux types de réponses possibles et évite l'erreur de propriété inexistante.
   if (partyResponse instanceof NextResponse) {
     // Gérer le cas où la réponse est un NextResponse
@@ -50,8 +48,6 @@ export default async function Home({
   }
 
   const party = partyResponse;
-
-  console.log("Party data:", partyResponse);
 
   return (
     <>
