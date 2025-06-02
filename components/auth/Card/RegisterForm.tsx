@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
 
 import { userRegisterSchema } from "@/lib/validator";
-import { register } from "@/lib/actions/auth.actions";
+import { login, register } from "@/lib/actions/auth.actions";
 
 import { CardWrapper } from "./CardWrapper";
 import {
@@ -46,7 +46,6 @@ export default function RegisterForm() {
       name: "",
       email: "",
       password: "",
-      // passwordConfirmation: "",
       isNewsletterSubscribed: false,
       role: "user",
     },
@@ -60,17 +59,31 @@ export default function RegisterForm() {
 
     // Server Action (je peux aussi utiliser fetch ici)
     startTransition(() => {
-      register(values).then((data) => {
+      register(values).then(async (data) => {
         setError(data.error);
         setSuccess(data.success);
-        toast.success("Vous pouvez maintenant vous connecter");
+
+        if (data.success) {
+          // Connexion automatique après inscription
+          const loginResult = await login({
+            email: values.email,
+            password: values.password,
+          });
+
+          if (loginResult?.success) {
+            toast.success("Vous êtes connecté !");
+            window.location.href = "/"; // Redirige vers la page d'accueil ou celle de ton choix
+          }
+        } else {
+          toast.success("Vous pouvez maintenant vous connecter");
+        }
       });
     });
   };
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="renogare text-white text-sm tracking-widest hover:text-white/80">
+      <AlertDialogTrigger className="renogare text-white text-xs tracking-widest hover:text-white/80">
         Pas encore de compte ? Créer un compte
       </AlertDialogTrigger>
 
