@@ -80,6 +80,7 @@ export const LoginForm = () => {
             form.reset();
             setSuccess(data.success);
             router.push("/");
+            router.refresh();
             revalidatePath("/");
             toast.success("Vous êtes connecté !");
           }
@@ -114,7 +115,7 @@ export const LoginForm = () => {
         </AlertDialogHeader>
 
         <CardWrapper
-          headerLabel="ICI ET NULLE PART AILLEURS"
+          headerLabel="FEELINGS, FOR THE REAL LOVERS"
           backButtonLabel=""
           // Vous n'avez pas encore de compte ? C'est ici que ça se passe
           backButtonHref=""
@@ -136,7 +137,7 @@ export const LoginForm = () => {
                             placeholder="Email ou nom d'utilisateur"
                             {...field}
                             disabled={isPending}
-                            className="input-field rounded-sm text-black"
+                            className="input-field rounded-sm text-black text-sm"
                           />
                         </FormControl>
                         <FormMessage />
@@ -156,14 +157,14 @@ export const LoginForm = () => {
                             placeholder="Mot de passe"
                             {...field}
                             disabled={isPending}
-                            className="input-field text-black rounded-sm"
+                            className="input-field rounded-sm text-black text-sm"
                           />
                         </FormControl>
 
                         <button className="">
                           <Link
                             href="/reset"
-                            className="text-[0.8rem] renogare tracking-widest hover:text-grey-500"
+                            className="text-[12px] renogare tracking-widest hover:text-grey-500"
                           >
                             Mot de passe oublié ?
                           </Link>
@@ -179,7 +180,7 @@ export const LoginForm = () => {
               <Button
                 type="submit"
                 disabled={isPending}
-                className="button renogare uppercase tracking-widest hover:bg-slate-800 w-full"
+                className="button renogare uppercase tracking-widest w-full"
               >
                 Connexion
               </Button>
@@ -190,4 +191,6 @@ export const LoginForm = () => {
       </AlertDialogContent>
     </AlertDialog>
   );
+};
+
 };
