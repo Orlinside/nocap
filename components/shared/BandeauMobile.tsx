@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
+import { FaCalendarAlt, FaClock, FaMusic } from "react-icons/fa";
 
 interface LastParty {
   name: string;
@@ -71,56 +72,79 @@ export const BandeauMobile = ({ lastParty }: { lastParty: any }) => {
   // Vérifier si nous sommes sur la page d'accueil
   const isHomePage = pathname === "/";
 
-  let countdownString = `${lastParty.name} - ${countTimer.jours} JOURS - ${countTimer.heures}h ${countTimer.minutes}m ${countTimer.secondes}s`;
-
-  //! Si la date est en cours, j'affiche le message
-  if (
-    now >= new Date(lastParty.startDateTime) &&
-    now <= new Date(lastParty.endDateTime)
-  ) {
-    countdownString = `${lastParty.name} - ça commence maintenant !!!`;
-  }
-
   //! Si elle est définie, je veux afficher le bandeau avec le compte à rebours
   return (
     isVisible &&
     isHomePage && ( // Afficher le compteur uniquement si isVisible est true et si nous sommes sur la page d'accueil
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        transition={{
-          duration: 0.8,
-          ease: [0, 0.71, 0.2, 1.01],
-        }}
-        className="grid auto-cols-max grid-flow-col gap-5 text-center"
-      >
-        <div className="bg-dark/70 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
-          <span className="countdown renogare text-sm">
-            <span>{countTimer.jours}</span>
-          </span>
-          jours
-        </div>
-        <div className="bg-dark/70 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
-          <span className="countdown renogare text-sm">
-            <span className="">{countTimer.heures}</span>
-          </span>
-          heures
-        </div>
-        <div className="bg-dark/70 backdrop-blur-xl w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
-          <span className="countdown renogare text-sm">
-            <span>{countTimer.minutes}</span>
-          </span>
-          min
-        </div>
-        <div className="bg-dark/70 countdown2 w-16 shadowXL rounded-xl text-neutral-content flex flex-col p-2 font-mono text-white text-xs">
-          <span className="countdown value renogare text-sm">
-            <span className="">{countTimer.secondes}</span>
-          </span>
-          sec
-        </div>
-      </motion.div>
+      <div className="w-full space-y-2 mt-10 sm:mt-16">
+        {/* En-tête compact */}
+
+        {/* Compteur ultra-compact */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="px-2 grid grid-cols-4 gap-2"
+        >
+          {/* Jours */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05, duration: 0.4 }}
+            className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-xl p-1 text-center hover:bg-white/12 transition-all duration-300"
+          >
+            <div className="text-lg font-bold text-white renogare">
+              {countTimer.jours}
+            </div>
+            <div className="text-white/50 text-xs font-mono uppercase">J</div>
+          </motion.div>
+
+          {/* Heures */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.4 }}
+            className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-xl p-1 text-center hover:bg-white/12 transition-all duration-300"
+          >
+            <div className="text-lg font-bold text-white renogare">
+              {countTimer.heures}
+            </div>
+            <div className="text-white/50 text-xs font-mono uppercase">H</div>
+          </motion.div>
+
+          {/* Minutes */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.4 }}
+            className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-xl p-1 text-center hover:bg-white/12 transition-all duration-300"
+          >
+            <div className="text-lg font-bold text-white renogare">
+              {countTimer.minutes}
+            </div>
+            <div className="text-white/50 text-xs font-mono uppercase">M</div>
+          </motion.div>
+
+          {/* Secondes */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
+            className="bg-white/8 backdrop-blur-sm border border-white/15 rounded-xl p-1 text-center hover:bg-white/12 transition-all duration-300"
+          >
+            <motion.div
+              key={countTimer.secondes}
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.2 }}
+              className="text-lg font-bold text-white renogare"
+            >
+              {countTimer.secondes}
+            </motion.div>
+            <div className="text-white/50 text-xs font-mono uppercase">S</div>
+          </motion.div>
+        </motion.div>
+      </div>
     )
   );
 };
-
