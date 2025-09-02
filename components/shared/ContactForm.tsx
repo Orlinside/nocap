@@ -5,6 +5,13 @@ import { useState, useTransition } from "react";
 import emailjs from "@emailjs/browser";
 
 import { Button } from "../ui/button";
+import {
+  FaUser,
+  FaEnvelope,
+  FaTag,
+  FaCommentDots,
+  FaPaperPlane,
+} from "react-icons/fa";
 
 export const ContactForm = () => {
   const [confirmationMessage, setConfirmationMessage] = useState("");
@@ -52,50 +59,61 @@ export const ContactForm = () => {
   };
 
   return (
-    <form
-      onSubmit={sendEmail}
-      className="w-full md:w-2/3 lg:w-1/2 flex flex-col gap-4 "
-    >
+    <form onSubmit={sendEmail} className="w-full space-y-6">
       {confirmationMessage && (
-        <p className="text-white bg-emerald-400 p-4 rounded-xl renogare text-center">
-          {confirmationMessage}
-        </p>
+        <div className="bg-emerald-500/20 backdrop-blur-sm border border-emerald-400/30 rounded-xl p-4 text-center">
+          <p className="text-emerald-300 renogare font-bold">
+            {confirmationMessage}
+          </p>
+        </div>
       )}
-      <div className="flex flex-col sm:flex-row gap-2 w-full">
-        <div className="flex flex-col gap-2 w-full">
-          <label className="text-white renogare">Nom & Prénom</label>
+
+      {/* Première ligne - Nom */}
+      <div className="space-y-2">
+        <label className="flex items-center gap-2 text-white/70 font-mono text-sm">
+          <FaUser className="text-xs" />
+          Nom & Prénom
+        </label>
+        <div className="relative">
           <input
             type="text"
             name="name"
-            placeholder="Stephen King"
+            placeholder="Votre nom complet..."
             onChange={handleChange}
             value={form.name}
             required
             minLength={2}
             maxLength={30}
-            className="input-field"
+            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/40 text-white rounded-xl px-4 py-3 placeholder:text-white/50 transition-all duration-300 focus:bg-white/15 hover:bg-white/5"
           />
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-2 w-full">
-        <div className="flex flex-col gap-2 w-full">
-          <label className="text-white renogare">Email</label>
+      {/* Deuxième ligne - Email et Objet */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-2">
+          <label className="flex items-center gap-2 text-white/70 font-mono text-sm">
+            <FaEnvelope className="text-xs" />
+            Email
+          </label>
           <input
-            type="text"
+            type="email"
             name="mail"
-            placeholder="mail@mail.fr"
+            placeholder="votre@email.com"
             onChange={handleChange}
             value={form.mail}
             required
             minLength={2}
             maxLength={40}
-            className="input-field"
+            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/40 text-white rounded-xl px-4 py-3 placeholder:text-white/50 transition-all duration-300 focus:bg-white/15 hover:bg-white/5"
           />
         </div>
 
-        <div className="flex flex-col gap-2 w-full">
-          <label className="text-white renogare">Objet</label>
+        <div className="space-y-2">
+          <label className="flex items-center gap-2 text-white/70 font-mono text-sm">
+            <FaTag className="text-xs" />
+            Objet
+          </label>
           <input
             type="text"
             name="object"
@@ -105,32 +123,76 @@ export const ContactForm = () => {
             required
             minLength={2}
             maxLength={30}
-            className="input-field"
+            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/40 text-white rounded-xl px-4 py-3 placeholder:text-white/50 transition-all duration-300 focus:bg-white/15 hover:bg-white/5"
           />
         </div>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label className="text-white renogare">Message</label>
-        <textarea
-          name="message"
-          placeholder="Ecrire votre message ici..."
-          onChange={handleChange}
-          value={form.message}
-          required
-          minLength={2}
-          maxLength={350}
-          className="text-dark dark:text-dark bg-grey-50 flex flex-1 placeholder:text-grey-500 p-regular-16 px-5 py-3 border-none focus-visible:ring-transparent rounded-xl"
-        />
+      {/* Message */}
+      <div className="space-y-2">
+        <label className="flex items-center gap-2 text-white/70 font-mono text-sm">
+          <FaCommentDots className="text-xs" />
+          Message
+        </label>
+        <div className="relative">
+          <textarea
+            name="message"
+            placeholder="Écrivez votre message ici..."
+            onChange={handleChange}
+            value={form.message}
+            required
+            minLength={2}
+            maxLength={350}
+            rows={5}
+            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/40 text-white rounded-xl px-4 py-3 placeholder:text-white/50 resize-none transition-all duration-300 focus:bg-white/15 hover:bg-white/5"
+          />
+          <div className="absolute bottom-3 right-3 text-white/40 text-xs font-mono">
+            {form.message.length}/350
+          </div>
+        </div>
       </div>
 
-      <Button
-        type="submit"
-        size="lg"
-        className="button bg-gradient uppercase renogare col-span-2 w-full"
-      >
-        {isPending ? "Envoie..." : "Envoyer"}
-      </Button>
+      {/* Bouton d'envoi */}
+      <div className="flex justify-end pt-4">
+        <Button
+          type="submit"
+          disabled={isPending}
+          className="group relative overflow-hidden bg-gradient-to-r from-[#fc0010] to-[#FE9D01] hover:from-[#fc0010]/90 hover:to-[#FE9D01]/90 text-white renogare text-xs tracking-wider rounded-xl px-8 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+        >
+          <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <span className="relative flex items-center gap-2">
+            {isPending ? (
+              <>
+                <svg
+                  className="animate-spin w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  />
+                </svg>
+                Envoi en cours...
+              </>
+            ) : (
+              <>
+                <FaPaperPlane className="text-sm" />
+                Envoyer le message
+              </>
+            )}
+          </span>
+        </Button>
+      </div>
     </form>
   );
 };
