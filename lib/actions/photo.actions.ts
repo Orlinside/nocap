@@ -2,6 +2,7 @@
 import { db } from "../db";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { UTApi } from "uploadthing/server";
 
 import { Role } from "@prisma/client";
 import { AddPhotoToPartyParams } from "@/types";
@@ -62,6 +63,22 @@ export const deletePhoto = async (photoId: string) => {
       return new NextResponse(null, { status: 404 });
     }
 
+    // Extraire la clé du fichier depuis l'URL UploadThing
+    const fileKey = photo.url.split('/').pop();
+    
+    if (fileKey) {
+      // Supprimer le fichier d'UploadThing
+      const utapi = new UTApi();
+      try {
+        await utapi.deleteFiles([fileKey]);
+        console.log(`Fichier supprimé d'UploadThing: ${fileKey}`);
+      } catch (uploadthingError) {
+        console.error("Erreur lors de la suppression du fichier UploadThing:", uploadthingError);
+        // On continue même si la suppression UploadThing échoue
+      }
+    }
+
+    // Supprimer l'entrée de la base de données
     await db.photo.delete({
       where: {
         id: photoId,
@@ -72,6 +89,7 @@ export const deletePhoto = async (photoId: string) => {
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {
+    console.error("Erreur lors de la suppression de la photo:", error);
     return new NextResponse(null, { status: 500 });
   }
 };
