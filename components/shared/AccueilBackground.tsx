@@ -51,9 +51,6 @@ export const AccueilBackground = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSwipeHint(false);
-      if (!user) {
-        toast.info("Connecte-toi pour télécharger ta photo !");
-      }
     }, 6000); // Masquer l'indicateur après 5 secondes
     return () => clearTimeout(timer);
   }, []);
@@ -90,7 +87,7 @@ export const AccueilBackground = ({
         }}
       ></motion.div>
 
-      <div className="relative z-10 w-full h-screen flex flex-col justify-center md:justify-between gap-8 md:gap-4 lg:gap-0">
+      <div className="relative z-10 w-full h-screen flex flex-col justify-center md:justify-between gap-6 md:gap-4 lg:gap-0">
         <div className="w-full h-auto flex items-center justify-center bg-transparent md:hidden">
           <BandeauMobile lastParty={lastParty} />
         </div>
@@ -175,4 +172,3 @@ export const AccueilBackground = ({
     </section>
   );
 };
-
