@@ -34,6 +34,15 @@ import { Checkbox } from "../ui/checkbox";
 import { toast } from "sonner";
 
 import { IoClose } from "react-icons/io5";
+import {
+  FaUser,
+  FaComment,
+  FaExclamationTriangle,
+  FaEdit,
+  FaTrash,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 
 export const CommentUpdate = ({ comment }: { comment: any }) => {
   const router = useRouter();
@@ -54,8 +63,6 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
   });
 
   async function onSubmit(values: z.infer<typeof updateCommentSchema>) {
-    console.log("SUBMIT", values);
-
     try {
       const updatedComment = await updateAdminComment({
         commentId: comment.id,
@@ -76,97 +83,193 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-full">
-        <div className="bg-dark border border-white/30 rounded-xl flex flex-col justify-start sm:grid sm:grid-cols-4 w-full p-1 sm:p-2 hover:bg-[#121212] cursor-pointer">
-          <p className="font-bold text-white text-left ml-2 text-sm sm:text-sm border-b border-white/20 pb-1 sm:border-none sm:pb-0">
-            {comment.user?.name || "Anonyme"}
-          </p>
-          <p className="sm:text-left text-white text-[0.8rem] border-b border-white/20 py-1 sm:border-none sm:py-0">
-            &apos;&apos;{comment.content}&apos;&apos;
-          </p>
-          <p className="text-xs text-white sm:text-sm pt-1 sm:pt-0">
-            Niveau{" "}
-            <span className="font-bold text-white">{comment.importance}</span>
-          </p>
-          <p className="text-xs sm:text-sm text-white">
-            Afficher : {comment.isValid ? "OUI" : "NON"}
-          </p>
+      <AlertDialogTrigger className="w-full group">
+        <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 transition-all duration-300 hover:bg-black/50 hover:border-white/20 hover:scale-[1.02] cursor-pointer">
+          {/* Header */}
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center space-x-3">
+              <div className="bg-gradient p-2 rounded-lg">
+                <FaUser className="text-white text-sm" />
+              </div>
+              <div>
+                <p className="font-bold text-white text-left renogare text-lg">
+                  {comment.user?.name || "ANONYME"}
+                </p>
+                <p className="text-white/60 font-mono text-xs">
+                  {new Date(comment.createdAt).toLocaleDateString("fr-FR")}
+                </p>
+              </div>
+            </div>
+
+            {/* Status badges */}
+            <div className="flex items-center space-x-2">
+              <div
+                className={`px-2 py-1 rounded-full text-xs font-mono ${
+                  comment.importance === "HIGH"
+                    ? "bg-red-500/20 text-red-400"
+                    : comment.importance === "MEDIUM"
+                    ? "bg-yellow-500/20 text-yellow-400"
+                    : "bg-green-500/20 text-green-400"
+                }`}
+              >
+                {comment.importance === "HIGH"
+                  ? "HAUTE"
+                  : comment.importance === "MEDIUM"
+                  ? "NORMALE"
+                  : "FAIBLE"}
+              </div>
+              <div
+                className={`px-2 py-1 rounded-full text-xs font-mono flex items-center space-x-1 ${
+                  comment.isValid
+                    ? "bg-green-500/20 text-green-400"
+                    : "bg-red-500/20 text-red-400"
+                }`}
+              >
+                {comment.isValid ? (
+                  <FaEye className="text-xs" />
+                ) : (
+                  <FaEyeSlash className="text-xs" />
+                )}
+                <span>{comment.isValid ? "VISIBLE" : "MASQUÉ"}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Comment content */}
+          <div className="bg-black/20 rounded-xl p-4 mb-4">
+            <div className="flex items-start space-x-2">
+              <FaComment className="text-white/40 text-sm mt-1 flex-shrink-0" />
+              <p className="text-white/80 font-mono text-sm leading-relaxed">
+                &quot;{comment.content}&quot;
+              </p>
+            </div>
+          </div>
+
+          {/* Action hint */}
+          <div className="flex items-center justify-center space-x-2 text-white/40 group-hover:text-white/60 transition-colors">
+            <FaEdit className="text-sm" />
+            <span className="font-mono text-xs">Cliquer pour modifier</span>
+          </div>
         </div>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="w-5/6 sm:w-1/2 bg-primary border-none">
-        <AlertDialogHeader className="flex flex-row items-center justify-between">
-          <AlertDialogTitle className="uppercase renogare text-white">
-            Mettre à jour
-          </AlertDialogTitle>
-          <AlertDialogCancel className="text-white border-none hover:text-white/80">
-            <IoClose size={20} />
-          </AlertDialogCancel>
+      <AlertDialogContent className="bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl max-w-2xl mx-4">
+        <AlertDialogHeader className="pb-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="bg-gradient p-3 rounded-xl">
+                <FaEdit className="text-white text-lg" />
+              </div>
+              <AlertDialogTitle className="uppercase renogare text-white text-xl font-bold tracking-wider">
+                MODÉRATION COMMENTAIRE
+              </AlertDialogTitle>
+            </div>
+            <AlertDialogCancel className="bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white transition-all duration-300 rounded-xl p-2">
+              <IoClose size={20} />
+            </AlertDialogCancel>
+          </div>
         </AlertDialogHeader>
-        <AlertDialogDescription className="text-white border-b-2 pb-4">
-          <p className="font-bold">{comment.user?.name || "Anonyme"}</p>
-          <p>{comment.content}</p>
-        </AlertDialogDescription>
+
+        {/* Comment Display */}
+        <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-6 mb-6">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="bg-gradient p-2 rounded-lg">
+              <FaUser className="text-white text-sm" />
+            </div>
+            <div>
+              <p className="font-bold text-white renogare text-lg">
+                {comment.user?.name || "ANONYME"}
+              </p>
+              <p className="text-white/60 font-mono text-sm">
+                {new Date(comment.createdAt).toLocaleDateString("fr-FR")}
+              </p>
+            </div>
+          </div>
+          <div className="bg-black/20 rounded-xl p-4">
+            <p className="text-white/80 font-mono leading-relaxed">
+              &quot;{comment.content}&quot;
+            </p>
+          </div>
+        </div>
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col gap-8 items-center"
-          >
-            <div className="flex flex-grow flex-col sm:flex-row w-full gap-8 sm:justify-between items-center">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Importance Field */}
               <FormField
                 control={form.control}
                 name="importance"
                 render={({ field }) => (
-                  <FormItem className="w-full">
+                  <FormItem>
                     <FormControl>
-                      <div className="flex flex-col gap-2 bg-dark/20 p-2 rounded-[10px]">
-                        <label
-                          htmlFor="isValid"
-                          className="whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-white/70 text-[0.8rem]"
-                        >
-                          Importance du commentaire :
+                      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all duration-300 focus-within:border-white/40">
+                        <label className="text-white/70 font-mono text-sm mb-3 flex items-center space-x-2">
+                          <FaExclamationTriangle className="text-sm" />
+                          <span>Niveau d&apos;importance</span>
                         </label>
                         <select
                           {...field}
-                          className="w-full p-1 rounded-[10px] text-dark"
+                          className="w-full bg-transparent border-none text-white focus:outline-none font-mono"
                         >
-                          <option value="LOW">Faible</option>
-                          <option value="MEDIUM">Normal</option>
-                          <option value="HIGH">Haute</option>
+                          <option value="LOW" className="bg-black text-white">
+                            Faible
+                          </option>
+                          <option
+                            value="MEDIUM"
+                            className="bg-black text-white"
+                          >
+                            Normal
+                          </option>
+                          <option value="HIGH" className="bg-black text-white">
+                            Haute
+                          </option>
                         </select>
                       </div>
                     </FormControl>
+                    <FormMessage className="text-red-400 text-xs font-mono" />
                   </FormItem>
                 )}
               />
+
+              {/* Visibility Field */}
               <FormField
                 control={form.control}
                 name="isValid"
                 render={({ field }) => (
-                  <FormItem className="w-full">
+                  <FormItem>
                     <FormControl>
-                      <div className="flex items-center ">
-                        <label
-                          htmlFor="isValid"
-                          className="text-white whitespace-nowrap pr-3 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                          Afficher le commentaire :
+                      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all duration-300 focus-within:border-white/40">
+                        <label className="text-white/70 font-mono text-sm mb-3 flex items-center space-x-2">
+                          {field.value ? (
+                            <FaEye className="text-sm" />
+                          ) : (
+                            <FaEyeSlash className="text-sm" />
+                          )}
+                          <span>Visibilité du commentaire</span>
                         </label>
-                        <Checkbox
-                          onCheckedChange={field.onChange}
-                          checked={field.value}
-                          id="isFree"
-                          className="mr-2 h-4 w-4 border-2 border-white"
-                        />
+                        <div className="flex items-center space-x-3">
+                          <Checkbox
+                            onCheckedChange={field.onChange}
+                            checked={field.value}
+                            id="isValid"
+                            className="border-2 border-white/40 data-[state=checked]:bg-gradient data-[state=checked]:border-white"
+                          />
+                          <span className="text-white font-mono text-sm">
+                            {field.value
+                              ? "Commentaire visible"
+                              : "Commentaire masqué"}
+                          </span>
+                        </div>
                       </div>
                     </FormControl>
+                    <FormMessage className="text-red-400 text-xs font-mono" />
                   </FormItem>
                 )}
               />
             </div>
 
-            <div className="flex flex-row gap-4 sm:gap-2">
+            {/* Action Buttons */}
+            <div className="flex gap-3 pt-6">
               <AlertDialogAction
                 onClick={() =>
                   startTransition(async () => {
@@ -176,15 +279,18 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
                     });
                   })
                 }
-                className="text-white text-xs rubik bg-red-950 hover:bg-red-600 rounded-[10px]"
+                className="flex-1 bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 hover:border-red-500/50 text-red-400 hover:text-red-300 rounded-xl transition-all duration-300 font-mono font-bold flex items-center justify-center space-x-2"
               >
-                {isPending ? "Suppression..." : "Supprimer"}
+                <FaTrash className="text-sm" />
+                <span>{isPending ? "Suppression..." : "Supprimer"}</span>
               </AlertDialogAction>
+
               <AlertDialogAction
                 type="submit"
-                className="text-white button bg-gradient text-xs rounded-[10px]"
+                className="flex-1 bg-gradient hover:opacity-80 text-white rounded-xl transition-all duration-300 renogare font-bold flex items-center justify-center space-x-2"
               >
-                {isPending ? "..." : "Mettre à jour"}
+                <FaEdit className="text-sm" />
+                <span>{isPending ? "..." : "Mettre à jour"}</span>
               </AlertDialogAction>
             </div>
           </form>
@@ -193,3 +299,4 @@ export const CommentUpdate = ({ comment }: { comment: any }) => {
     </AlertDialog>
   );
 };
+
