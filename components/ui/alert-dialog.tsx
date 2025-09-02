@@ -6,11 +6,23 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 
-const AlertDialog = ({ children }: { children: React.ReactNode }) => {
-  const [open, setOpen] = React.useState(false);
+const AlertDialog = ({
+  children,
+  open,
+  onOpenChange,
+}: {
+  children: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}) => {
+  const [internalOpen, setInternalOpen] = React.useState(false);
+
+  // Utiliser les props externes si fournies, sinon utiliser l'état interne
+  const isOpen = open !== undefined ? open : internalOpen;
+  const handleOpenChange = onOpenChange || setInternalOpen;
 
   return (
-    <AlertDialogPrimitive.Root open={open} onOpenChange={setOpen}>
+    <AlertDialogPrimitive.Root open={isOpen} onOpenChange={handleOpenChange}>
       {children}
     </AlertDialogPrimitive.Root>
   );
