@@ -35,8 +35,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { FaEdit } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa";
+import { FaEdit, FaPlus, FaCalendarAlt, FaClock } from "react-icons/fa";
 import { toast } from "sonner";
 
 type PartyFormProps = {
@@ -120,25 +119,39 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger
-        aria-describedby={type}
-        className="bg-linear-text text-white hover:text-white/70"
-      >
-        {type === "Créer" ? (
-          <FaPlus size={25} className="" />
-        ) : type === "Modifier" ? (
-          <FaEdit size={25} className="" />
-        ) : null}
+      <AlertDialogTrigger aria-describedby={type} className="group">
+        <div className="bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 backdrop-blur-sm rounded-xl p-3 transition-all duration-300">
+          {type === "Créer" ? (
+            <FaPlus
+              size={20}
+              className="text-white group-hover:text-white/80 transition-colors"
+            />
+          ) : type === "Modifier" ? (
+            <FaEdit
+              size={20}
+              className="text-white group-hover:text-white/80 transition-colors"
+            />
+          ) : null}
+        </div>
       </AlertDialogTrigger>
 
       <AlertDialogContent
         aria-describedby={type}
-        className="bg-primary w-4/5 sm:w-1/2 rounded-xl border-none"
+        className="bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl max-w-lg mx-4"
       >
-        <AlertDialogHeader>
-          <AlertDialogTitle className="text-white renogare">
-            {type} une soirée
-          </AlertDialogTitle>
+        <AlertDialogHeader className="pb-6">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="bg-gradient p-3 rounded-xl">
+              {type === "Créer" ? (
+                <FaPlus className="text-white text-lg" />
+              ) : (
+                <FaEdit className="text-white text-lg" />
+              )}
+            </div>
+            <AlertDialogTitle className="text-white renogare text-xl font-bold tracking-wider">
+              {type.toUpperCase()} UNE SOIRÉE
+            </AlertDialogTitle>
+          </div>
         </AlertDialogHeader>
 
         <Form {...form}>
@@ -147,48 +160,51 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem className="w-full bg-dark/20 rounded-[20px]">
+                <FormItem>
                   <FormControl>
-                    <div className="w-full flex flex-col gap-1 overflow-hidden rounded-[20px] bg-grey-50 px-4 py-2">
-                      <p className="whitespace-nowrap text-white font-mono text-sm">
-                        Nom de l&apos;event
-                      </p>
-                      <Input
-                        placeholder="Nom de l'événement"
-                        {...field}
-                        className="input-field text-dark text-sm"
-                      />
+                    <div className="relative">
+                      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all duration-300 focus-within:border-white/40">
+                        <label className="text-white/70 font-mono text-sm mb-2 block">
+                          Nom de l&apos;événement
+                        </label>
+                        <Input
+                          placeholder="Entrez le nom de la soirée..."
+                          {...field}
+                          className="bg-transparent border-none text-white placeholder:text-white/40 focus-visible:ring-0 focus-visible:ring-offset-0 p-0"
+                        />
+                      </div>
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-400 text-xs font-mono" />
                 </FormItem>
               )}
             />
 
-            <div className="w-full flex flex-col gap-5 md:flex-row">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="startDateTime"
                 render={({ field }) => (
-                  <FormItem className="w-full bg-dark/20 rounded-[20px]">
+                  <FormItem>
                     <FormControl>
-                      <div className="w-full flex flex-col gap-1 overflow-hidden rounded-[20px] bg-grey-50 px-4 py-2">
-                        <p className="whitespace-nowrap text-white font-mono text-sm">
-                          Début
-                        </p>
+                      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all duration-300 focus-within:border-white/40">
+                        <label className="text-white/70 font-mono text-sm mb-2 flex items-center space-x-2">
+                          <FaCalendarAlt className="text-sm" />
+                          <span>Date de début</span>
+                        </label>
                         <DatePicker
                           locale="fr"
                           selected={field.value}
                           onChange={(date: Date | null) => field.onChange(date)}
                           showTimeSelect
-                          timeInputLabel="Heure :" //! Label pour l'heure
-                          dateFormat="dd/MM/yyyy - HH:mm" //! Format de la date
-                          wrapperClassName="datePicker"
-                          className="input-field w-full text-black text-sm"
+                          timeInputLabel="Heure :"
+                          dateFormat="dd/MM/yyyy - HH:mm"
+                          wrapperClassName="w-full"
+                          className="bg-transparent border-none text-white placeholder:text-white/40 focus:outline-none w-full"
                         />
                       </div>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-red-400 text-xs font-mono" />
                   </FormItem>
                 )}
               />
@@ -197,38 +213,39 @@ export const PartyForm = ({ userId, type, party, partyId }: PartyFormProps) => {
                 control={form.control}
                 name="endDateTime"
                 render={({ field }) => (
-                  <FormItem className="w-full bg-dark/20 rounded-[20px]">
+                  <FormItem>
                     <FormControl>
-                      <div className="w-full flex flex-col gap-1 overflow-hidden rounded-[20px] bg-grey-50 px-4 py-2">
-                        <p className="whitespace-nowrap text-white font-mono text-sm">
-                          Fin
-                        </p>
+                      <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 transition-all duration-300 focus-within:border-white/40">
+                        <label className="text-white/70 font-mono text-sm mb-2 flex items-center space-x-2">
+                          <FaClock className="text-sm" />
+                          <span>Date de fin</span>
+                        </label>
                         <DatePicker
                           locale="fr"
                           selected={field.value}
                           onChange={(date: Date | null) => field.onChange(date)}
                           showTimeSelect
-                          timeInputLabel="Heure :" //! Label pour l'heure
-                          dateFormat="dd/MM/yyyy - HH:mm" //! Format de la date
-                          wrapperClassName="datePicker"
-                          className="input-field w-full text-black text-sm"
+                          timeInputLabel="Heure :"
+                          dateFormat="dd/MM/yyyy - HH:mm"
+                          wrapperClassName="w-full"
+                          className="bg-transparent border-none text-white placeholder:text-white/40 focus:outline-none w-full"
                         />
                       </div>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-red-400 text-xs font-mono" />
                   </FormItem>
                 )}
               />
             </div>
 
-            <AlertDialogFooter>
-              <AlertDialogCancel className="text-white rounded-xl">
+            <AlertDialogFooter className="flex gap-3 pt-6">
+              <AlertDialogCancel className="flex-1 bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white rounded-xl transition-all duration-300 font-mono">
                 Annuler
               </AlertDialogCancel>
 
               <AlertDialogAction
                 type="submit"
-                className="text-white rounded-xl renogare bg-gradient"
+                className="flex-1 bg-gradient hover:opacity-80 text-white rounded-xl transition-all duration-300 renogare font-bold"
               >
                 {isPending ? "..." : type}
               </AlertDialogAction>

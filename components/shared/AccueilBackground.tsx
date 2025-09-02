@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { PartyList } from "./PartyList";
 import { AnnoncesMobile } from "./AnnoncesMobile";
 import { BandeauMobile } from "./BandeauMobile";
+import { toast } from "sonner";
 
 type AccueilProps = {
   user: any;
@@ -54,6 +55,13 @@ export const AccueilBackground = ({
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (!user) {
+      toast.info("Connecte-toi pour télécharger ta photo !");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [party[0]?.id, page]);
+
   return (
     <section className="h-full w-full flex flex-col justify-between pb-0 items-center overflow-hidden relative">
       <motion.div
@@ -79,7 +87,7 @@ export const AccueilBackground = ({
         }}
       ></motion.div>
 
-      <div className="relative z-10 w-full h-screen flex flex-col justify-center md:justify-between gap-8 md:gap-4 lg:gap-0">
+      <div className="relative z-10 w-full h-screen flex flex-col justify-center md:justify-between gap-6 md:gap-4 lg:gap-0">
         <div className="w-full h-auto flex items-center justify-center bg-transparent md:hidden">
           <BandeauMobile lastParty={lastParty} />
         </div>

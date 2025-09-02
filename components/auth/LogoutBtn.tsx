@@ -14,14 +14,20 @@ export const LogoutBtn = ({ children }: LogoutBtnProps) => {
 
   const onClick = () => {
     logout(pathname);
-    // router.push("/");
     router.refresh();
-    toast.success("Déconnection réussie");
+    toast.success("Déconnexion réussie");
+    setTimeout(() => {
+      redirectToHome();
+    }, 300); // petit délai pour laisser le refresh s'effectuer
+  };
+
+  const redirectToHome = () => {
+    router.push("/");
   };
   return (
     <span
       onClick={onClick}
-      className="flex-center cursor-pointer text-white hover:text-primary"
+      className="flex-center cursor-pointer text-white text-[12px] hover:text-white/80"
     >
       {children}
     </span>

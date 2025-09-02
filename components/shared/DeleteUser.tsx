@@ -26,21 +26,22 @@ export const DeleteUser = ({ userId }: { userId: string }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="">
-        <p className="text-[0.8rem] font-mono">Supprimer mon compte</p>
+        <p className="text-[10px] font-mono">Supprimer mon compte</p>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="bg-dark w-1/3 border-none">
+      <AlertDialogContent className="bg-dark w-full sm:w-1/3 border-none">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-white renogare">
+          <AlertDialogTitle className="text-white renogare text">
             Etes-vous sûr de vouloir supprimer votre compte ?
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-white">
-            La suppression est irréversible.
+          <AlertDialogDescription className="text-white text-[12px]">
+            La suppression est irréversible. Vos réactions et vos commentaires
+            seront supprimés.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel className="text-white rounded-xl">
+          <AlertDialogCancel className="text-white rounded-[5px]">
             Annuler
           </AlertDialogCancel>
 
@@ -53,7 +54,7 @@ export const DeleteUser = ({ userId }: { userId: string }) => {
                   toast.success("Votre compte est supprimé");
                 })
               }
-              className="text-white renogare bg-gradient hover:bg-primary/80 rounded-xl"
+              className="text-white renogare bg-gradient hover:bg-primary/80 rounded-[5px]"
             >
               {isPending ? "Suppression..." : "Supprimer"}
             </AlertDialogAction>
