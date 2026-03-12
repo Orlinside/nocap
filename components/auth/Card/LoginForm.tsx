@@ -83,10 +83,17 @@ export const LoginForm = () => {
   return (
     <RightPanel
       open={isLoginOpen}
-      onOpenChange={setIsLoginOpen}
+      onOpenChange={(open) => {
+        setIsLoginOpen(open);
+
+        if (!open) {
+          setView("login");
+          setError("");
+        }
+      }}
       triggerClassName="renogare z-[200] text-sm uppercase text-white"
       overlayClassName="bg-black/30 backdrop-blur-none"
-      panelClassName="w-[95vw] min-w-[630px] border border-white/20 bg-black/90 p-4 backdrop-blur-xl sm:p-6 lg:w-[560px] lg:max-w-[560px] lg:rounded-none lg:border-y-0 lg:border-r-0 lg:border-l lg:border-white/15 lg:p-6"
+      panelClassName="inset-x-0 right-0 top-0 h-[100dvh] w-full max-w-none border-x-0 border-y-0 bg-black/95 p-4 backdrop-blur-xl sm:inset-x-auto sm:w-[92vw] sm:max-w-[560px] sm:border-l sm:border-white/15 sm:p-6 lg:w-[560px]"
       trigger={
         <IoMdLogIn
           size={25}
