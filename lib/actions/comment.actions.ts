@@ -2,7 +2,6 @@
 import { db } from "../db";
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-
 import {
   AddComment,
   DeleteComment,
@@ -10,7 +9,7 @@ import {
   UpdateCommentParams,
 } from "@/types";
 import { currentRole } from "../auth";
-import { Role } from "@prisma/client";
+import { Role, type Prisma } from "@prisma/client";
 
 //! CREATE COMMENT
 export const createComment = async ({ userId, content, path }: AddComment) => {
@@ -73,18 +72,19 @@ export const getAllComments = async ({
     const skipAmount = (Number(page) - 1) * limit;
     const normalizedSearchName = searchName?.trim();
 
-    const whereClause = normalizedSearchName
-      ? {
-          user: {
-            is: {
-              name: {
-                contains: normalizedSearchName,
-                mode: "insensitive",
+    const whereClause: Prisma.CommentWhereInput | undefined =
+      normalizedSearchName
+        ? {
+            user: {
+              is: {
+                name: {
+                  contains: normalizedSearchName,
+                  mode: "insensitive" as const,
+                },
               },
             },
-          },
-        }
-      : undefined;
+          }
+        : undefined;
 
     const comments = await db.comment.findMany({
       where: whereClause,
