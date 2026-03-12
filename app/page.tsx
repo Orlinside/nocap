@@ -51,7 +51,7 @@ export default async function Home({
 
   return (
     <>
-      <section className="h-screen w-screen overflow-x-hidden">
+      <section className="h-full w-full overflow-x-hidden">
         {/* {user && <p>{JSON.stringify(user)}</p>} */}
         <Accueil
           allParties={allParties}

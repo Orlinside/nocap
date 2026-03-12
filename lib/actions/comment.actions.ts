@@ -67,11 +67,27 @@ export const deleteComment = async ({ commentId, path }: DeleteComment) => {
 export const getAllComments = async ({
   limit = 10,
   page,
+  searchName,
 }: GetCommentsParams) => {
   try {
     const skipAmount = (Number(page) - 1) * limit;
+    const normalizedSearchName = searchName?.trim();
+
+    const whereClause = normalizedSearchName
+      ? {
+          user: {
+            is: {
+              name: {
+                contains: normalizedSearchName,
+                mode: "insensitive",
+              },
+            },
+          },
+        }
+      : undefined;
 
     const comments = await db.comment.findMany({
+      where: whereClause,
       skip: skipAmount,
       take: limit,
       orderBy: {
@@ -86,7 +102,9 @@ export const getAllComments = async ({
       },
     });
 
-    const totalComments = await db.comment.count();
+    const totalComments = await db.comment.count({
+      where: whereClause,
+    });
 
     return {
       data: comments,

@@ -15,17 +15,17 @@ export const Header = async () => {
 
   return (
     <header className="w-full bg-transparent">
-      <div className="wrapper flex justify-between items-center w-full h-full p-6 bg-transparent">
+      <div className="flex items-center justify-between bg-transparent px-4 py-1 lg:px-12 lg:py-4">
         <Link href="/" className="flex justify-center">
           <Image
             src="/logo/Logo_NoCapR_white.png"
             alt="logo"
-            width={175}
+            width={140}
             height={100}
-            className="cursor-pointer z-[200] w-24 h-auto md:w-44 md:h-auto lg:w-44 lg:h-auto"
+            className="cursor-pointer w-20 h-auto object-contain"
           />
         </Link>
-        <div className="flex items-center justify-end bg-transparent">
+        <div className="flex items-center justify-end gap-4 bg-transparent lg:gap-6">
           <Navbar />
           {user ? (
             <div className="flex justify-center items-center gap-4">

@@ -5,23 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
 
-import { CardWrapper } from "./Card/CardWrapper";
-import { FormError } from "./Card/FormError";
-import { FormSuccess } from "./Card/FormSucess";
+import { FaEnvelope, FaPaperPlane } from "react-icons/fa";
 
 import { ResetSchema } from "@/lib/validator";
 import { reset } from "@/lib/actions/auth.actions";
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 
 export const ResetForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -29,7 +16,6 @@ export const ResetForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
 
-  //! Schema de validation
   const form = useForm<z.infer<typeof ResetSchema>>({
     resolver: zodResolver(ResetSchema),
     defaultValues: {
@@ -37,13 +23,10 @@ export const ResetForm = () => {
     },
   });
 
-  //! Fonction de soumission du formulaire
   const onSubmit = (values: z.infer<typeof ResetSchema>) => {
-    // Reset des messages d'erreur et de succès
     setError("");
     setSuccess("");
 
-    // Server Action (je peux aussi utiliser fetch ici)
     startTransition(() => {
       reset(values).then((data) => {
         setError(data?.error);
@@ -53,46 +36,53 @@ export const ResetForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel="Mot de passe oublié ?"
-      backButtonLabel="Retourner à l'accueil"
-      backButtonHref="/"
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      className="w-full space-y-5 py-4"
     >
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel htmlFor="email">Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      id="email"
-                      placeholder="nocap@email.fr"
-                      {...field}
-                      disabled={isPending}
-                      className="input rounded-xl"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
-          <Button
-            type="submit"
-            disabled={isPending}
-            className="button bg-gradient w-full"
-          >
-            Envoyer un email de réinitialisation
-          </Button>
-        </form>
-      </Form>
-    </CardWrapper>
+      {error && (
+        <div className="border border-rose-400/35 bg-rose-400/10 px-4 py-3 backdrop-blur-sm">
+          <p className="renogare text-xs uppercase tracking-[0.18em] text-rose-300">
+            {error}
+          </p>
+        </div>
+      )}
+
+      {success && (
+        <div className="border border-emerald-300/40 bg-emerald-400/10 px-4 py-3 backdrop-blur-sm">
+          <p className="renogare text-xs uppercase tracking-[0.18em] text-emerald-200">
+            {success}
+          </p>
+        </div>
+      )}
+
+      <div className="space-y-1.5">
+        <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
+          <FaEnvelope className="text-xs" />
+          Adresse email
+        </label>
+        <input
+          type="email"
+          placeholder="nocap@email.fr"
+          {...form.register("email")}
+          disabled={isPending}
+          className="w-full border border-white/20 bg-black/35 px-3 py-2.5 text-sm text-white placeholder:text-white/45 transition-colors duration-300 hover:bg-black/45 focus:border-white/40 focus:bg-black/55 focus:outline-none disabled:opacity-50"
+        />
+        {form.formState.errors.email && (
+          <p className="text-[11px] uppercase tracking-[0.15em] text-rose-400">
+            {form.formState.errors.email.message}
+          </p>
+        )}
+      </div>
+
+      <button
+        type="submit"
+        disabled={isPending}
+        className="renogare flex w-full items-center justify-center gap-2 bg-gradient-to-r from-[#fc0010] to-[#FE9D01] px-6 py-3 text-xs uppercase tracking-[0.2em] text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+      >
+        <FaPaperPlane className="text-xs" />
+        {isPending ? "Envoi en cours..." : "Envoyer le lien"}
+      </button>
+    </form>
   );
 };

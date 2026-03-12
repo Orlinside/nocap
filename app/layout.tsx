@@ -33,15 +33,20 @@ export default async function RootLayout({
       </head>
 
       <SessionProvider session={session}>
-        <body className="">
-          <div className="fixed top-0 w-full z-50">
+        <body className="flex min-h-screen flex-col">
+          <div
+            data-site-header
+            className="sticky top-0 z-[120] w-full shrink-0 bg-transparent"
+          >
             <div className="hidden sm:flex w-full">
               <Annonces />
             </div>
             <Header />
           </div>
 
-          <main className="min-h-screen bg-gradient-to-b from-[#020202] via-[#040404] to-second z-50">
+          <main className="flex-1 bg-black">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.12),transparent_60%)]"></div>
+            <div className="pointer-events-none absolute inset-0 opacity-40 [background-image:linear-gradient(to_right,rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:64px_64px]"></div>
             {children}
           </main>
 

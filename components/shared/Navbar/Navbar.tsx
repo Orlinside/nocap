@@ -3,48 +3,51 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 import { headerLinks } from "@/constants";
 
 export const Navbar = () => {
-  const [navActive, setNavActive] = useState(false);
-  const [activeLink, setActiveLink] = useState("/");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
-  //! BURGER TO CROSS
-  const [isActive, setIsActive] = useState(false);
-  const handleClick = () => {
-    setIsActive(!isActive);
-    setNavActive(!navActive);
+  const isActiveRoute = (route: string) => {
+    return route === "/" ? pathname === "/" : pathname.startsWith(route);
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen((current) => !current);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
 
   return (
-    <div>
-      <nav className="flex flex-col justify-between">
-        <div
-          className={`flex flex-col justify-center items-center gap-y-1 cursor-pointer relative ${
-            isActive ? "active" : ""
-          }`}
-          onClick={handleClick}
+    <div className="bg-transparent">
+      <nav className="flex items-center bg-transparent">
+        <button
+          type="button"
+          className="relative z-[110] flex w-20 cursor-pointer flex-col items-center justify-center text-[0.8rem] tracking-widest text-white hover:text-white/80 lg:hidden"
+          onClick={toggleMenu}
+          aria-expanded={isMenuOpen}
+          aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
         >
-          <p className="z-[110] h-8 w-20 text-[0.8rem] renogare bg-transparent flex-center text-white bg-gray-500 hover:text-white/80 tracking-widest">
-            {isActive ? "FERMER" : "MENU"}
-          </p>
-        </div>
+          <span className="renogare bg-transparent py-1.5">
+            {isMenuOpen ? "FERMER" : "MENU"}
+          </span>
+        </button>
 
         <div
-          className={`fixed left-0 w-full h-[100vh] flex flex-col justify-between pb-6 pt-32 sm:pt-28 bg-com3 backdrop-blur-lg transition-all duration-500 ease opacity-0 z-[100] ${
-            navActive ? "top-0 opacity-100 z-[100]" : "top-[-100vh] -z-50"
+          className={`fixed left-0 h-[100vh] w-full flex-col justify-between bg-com3 pb-6 pt-32 opacity-0 backdrop-blur-lg transition-all duration-500 ease sm:pt-28 lg:hidden ${
+            isMenuOpen
+              ? "top-0 z-[100] flex opacity-100"
+              : "-top-[100vh] -z-50 flex"
           }`}
         >
           <div className="flex flex-col">
             {headerLinks.map((item, index) => {
-              const active =
-                item.route === "/"
-                  ? pathname === "/"
-                  : pathname.startsWith(item.route);
+              const active = isActiveRoute(item.route);
+
               return (
                 <div
                   className={`w-full h-full flex flex-col justify-left p-10 sm:p-12 border-gray-300 hover:bg-dark/50 hover:backdrop-blur-sm transition-all ease-in-out duration-300 ${
@@ -53,11 +56,7 @@ export const Navbar = () => {
                       : ""
                   }`}
                   key={index}
-                  onClick={() => {
-                    setActiveLink(item.route),
-                      setIsActive(!isActive),
-                      setNavActive(false);
-                  }}
+                  onClick={closeMenu}
                 >
                   <Link
                     href={item.route}
@@ -73,14 +72,14 @@ export const Navbar = () => {
           </div>
           <div className="text-[0.5rem] sm:text-[0.6rem] flex-center gap-4 sm:gap-8 z-10">
             <Link
-              onClick={handleClick}
+              onClick={closeMenu}
               href="/mentions-legales"
               className="text-white hover:text-gray-300"
             >
               Mentions Légales
             </Link>
             <Link
-              onClick={handleClick}
+              onClick={closeMenu}
               href="/politique-de-confidentialite"
               className="text-white hover:text-gray-300"
             >
@@ -94,6 +93,24 @@ export const Navbar = () => {
               Website by inTheGleam
             </Link>
           </div>
+        </div>
+
+        <div className="hidden items-center gap-6 bg-transparent lg:flex xl:gap-8">
+          {headerLinks.map((item) => {
+            const active = isActiveRoute(item.route);
+
+            return (
+              <Link
+                key={item.route}
+                href={item.route}
+                className={`renogare text-xs uppercase tracking-[0.18em] text-white transition-colors duration-200 hover:text-white/75 ${
+                  active ? styles.activeLink : ""
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
       </nav>
     </div>

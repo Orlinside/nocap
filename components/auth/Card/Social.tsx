@@ -14,7 +14,7 @@ export function Social() {
   return (
     <div className="flex items-center w-full gap-x-2">
       <button
-        className="w-full h-[35px] flex justify-center items-center bg-dark p-2 rounded-[5px] hover:bg-dark/60 transition-all ease-in-out duration-200"
+        className="flex h-[38px] w-full items-center justify-center border border-white/20 bg-white/[0.04] p-2 transition-all duration-200 hover:border-white/35 hover:bg-white/[0.1]"
         onClick={() => onClick("google")}
       >
         <FcGoogle className="h-5 w-5" />

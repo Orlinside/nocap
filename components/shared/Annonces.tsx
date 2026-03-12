@@ -5,7 +5,7 @@ export const Annonces = async () => {
   const lastParty = await getLastParty();
 
   return (
-    <div className="hidden md:flex w-full h-fit items-center justify-center gap-20 bg-black/50 shadowXL">
+    <div className="hidden h-fit w-full items-center justify-center gap-20 bg-transparent md:flex">
       <Bandeau lastParty={lastParty} />
     </div>
   );
