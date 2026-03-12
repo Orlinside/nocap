@@ -1,29 +1,47 @@
 import { sendEmail } from "@/lib/mailConfig";
-import type { NextApiRequest } from "next";
+type EmailPayload = {
+  sender: { name: string; address: string };
+  recipient: { name: string; address: string };
+  subject: string;
+  message: string;
+};
 
-export async function POST(req: NextApiRequest) {
-  const jsonPayload = await new Response(req.body).text();
-  const { sender, recipient, subject, message } = JSON.parse(jsonPayload);
-
-  const mailOptions = {
-    sender: { name: sender.name, address: sender.address },
-    recipient: [{ name: recipient.name, address: recipient.address }],
-    subject: subject,
-    message: message,
-  };
-
-  console.log("Mail options:", mailOptions);
-
+export async function POST(req: Request) {
   try {
+    const payload = (await req.json()) as Partial<EmailPayload>;
+    const { sender, recipient, subject, message } = payload;
+
+    if (
+      !sender?.name ||
+      !sender?.address ||
+      !recipient?.name ||
+      !recipient?.address ||
+      !subject ||
+      !message
+    ) {
+      return Response.json(
+        { message: "Invalid email payload" },
+        { status: 400 },
+      );
+    }
+
+    const mailOptions = {
+      sender: { name: sender.name, address: sender.address },
+      recipient: [{ name: recipient.name, address: recipient.address }],
+      subject,
+      message,
+    };
+
     const result = await sendEmail(mailOptions);
 
-    console.log("Email sent: " + result.response);
-
-    return Response.json({
-      message: "Email sent successfully",
-      accepted: result.accepted,
-    });
+    return Response.json(
+      {
+        message: "Email sent successfully",
+        accepted: result.accepted,
+      },
+      { status: 200 },
+    );
   } catch {
-    return Response.json({ message: "Error sending email" });
+    return Response.json({ message: "Error sending email" }, { status: 500 });
   }
 }
