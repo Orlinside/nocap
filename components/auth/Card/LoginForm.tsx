@@ -93,7 +93,7 @@ export const LoginForm = () => {
       }}
       triggerClassName="renogare z-[200] text-sm uppercase text-white"
       overlayClassName="bg-black/30 backdrop-blur-none"
-      panelClassName="inset-x-0 right-0 top-0 h-[100dvh] w-full max-w-none border-x-0 border-y-0 bg-black/95 p-4 backdrop-blur-xl sm:inset-x-auto sm:w-[92vw] sm:max-w-[560px] sm:border-l sm:border-white/15 sm:p-6 lg:w-[560px]"
+      panelClassName="inset-x-0 right-0 top-0 h-[100dvh] w-full max-w-none border-x-0 border-y-0 bg-black/95 p-4 backdrop-blur-xl sm:left-auto sm:right-0 sm:w-[92vw] sm:max-w-[560px] sm:border-l sm:border-white/15 sm:p-6 lg:w-[560px]"
       trigger={
         <IoMdLogIn
           size={25}

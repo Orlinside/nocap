@@ -54,7 +54,9 @@ export const AccueilBackground = ({
   const partyName = party?.[0]?.name ?? "No Cap";
   // const staticBackgroundUrl = photos[0]?.url ?? FALLBACK_PHOTO_URL;
 
-  const [selectedPhotoUrl, setSelectedPhotoUrl] = useState<string | null>(null);
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(
+    null,
+  );
   const [isLightboxMounted, setIsLightboxMounted] = useState(false);
   const [activeBlockIndex, setActiveBlockIndex] = useState(0);
   const [showSwipeHint, setShowSwipeHint] = useState(true);
@@ -88,12 +90,47 @@ export const AccueilBackground = ({
     [photoBlocks, activeBlockIndex],
   );
 
+  const lightboxPhotos = useMemo(
+    () =>
+      photos.length > 0
+        ? photos
+        : [{ id: "fallback-photo", url: FALLBACK_PHOTO_URL }],
+    [photos],
+  );
+
+  const selectedPhotoUrl =
+    selectedPhotoIndex !== null
+      ? (lightboxPhotos[selectedPhotoIndex]?.url ?? null)
+      : null;
+  const hasMultipleLightboxPhotos = lightboxPhotos.length > 1;
+
   const handleMosaicPhotoClick = (photoUrl: string) => {
-    setSelectedPhotoUrl(photoUrl);
+    const photoIndex = lightboxPhotos.findIndex(
+      (photo: any) => photo.url === photoUrl,
+    );
+    setSelectedPhotoIndex(photoIndex >= 0 ? photoIndex : 0);
   };
 
   const handleLightboxClose = () => {
-    setSelectedPhotoUrl(null);
+    setSelectedPhotoIndex(null);
+  };
+
+  const handleLightboxPrev = () => {
+    if (selectedPhotoIndex === null || !hasMultipleLightboxPhotos) return;
+
+    setSelectedPhotoIndex((currentIndex) => {
+      if (currentIndex === null) return 0;
+      return (currentIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length;
+    });
+  };
+
+  const handleLightboxNext = () => {
+    if (selectedPhotoIndex === null || !hasMultipleLightboxPhotos) return;
+
+    setSelectedPhotoIndex((currentIndex) => {
+      if (currentIndex === null) return 0;
+      return (currentIndex + 1) % lightboxPhotos.length;
+    });
   };
 
   const canGoPrev = page > 1;
@@ -164,11 +201,47 @@ export const AccueilBackground = ({
   }, []);
 
   useEffect(() => {
+    if (selectedPhotoIndex === null) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setSelectedPhotoIndex(null);
+        return;
+      }
+
+      if (!hasMultipleLightboxPhotos) return;
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setSelectedPhotoIndex((currentIndex) => {
+          if (currentIndex === null) return 0;
+          return (
+            (currentIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length
+          );
+        });
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setSelectedPhotoIndex((currentIndex) => {
+          if (currentIndex === null) return 0;
+          return (currentIndex + 1) % lightboxPhotos.length;
+        });
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedPhotoIndex, lightboxPhotos.length, hasMultipleLightboxPhotos]);
+
+  useEffect(() => {
     if (!user) {
-      toast.info("Connecte-toi pour télécharger ta photo !");
+      toast.info("Connecte-toi pour télécharger ta photo !", {
+        id: "login-hint-toast",
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activePartyId, page]);
+  }, [user]);
 
   useEffect(() => {
     const updateAvailableHeight = () => {
@@ -497,13 +570,106 @@ export const AccueilBackground = ({
         isLightboxMounted &&
         createPortal(
           <div
-            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-md"
+            className="fixed inset-0 z-[220] flex items-center justify-center bg-black/80 backdrop-blur-md"
             onClick={handleLightboxClose}
           >
+            {/* Mobile arrows: bottom of photo */}
+            <div className="absolute bottom-[calc(env(safe-area-inset-bottom)+16px)] left-1/2 z-[230] flex -translate-x-1/2 items-center gap-3 sm:hidden">
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  handleLightboxPrev();
+                }}
+                onTouchEnd={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  handleLightboxPrev();
+                }}
+                disabled={!hasMultipleLightboxPhotos}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/45 bg-black/75 text-white shadow-lg transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-35"
+                aria-label="Photo précédente"
+              >
+                <IoChevronBackOutline size={24} />
+              </button>
+
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  handleLightboxNext();
+                }}
+                onTouchEnd={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  handleLightboxNext();
+                }}
+                disabled={!hasMultipleLightboxPhotos}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/45 bg-black/75 text-white shadow-lg transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-35"
+                aria-label="Photo suivante"
+              >
+                <IoChevronForwardOutline size={24} />
+              </button>
+            </div>
+
+            {/* Desktop arrows: closer to image edges */}
             <button
               type="button"
-              onClick={handleLightboxClose}
-              className="absolute right-6 top-6 rounded-full border border-white/30 bg-black/60 p-3 text-white transition-colors hover:bg-black"
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleLightboxPrev();
+              }}
+              onTouchEnd={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleLightboxPrev();
+              }}
+              disabled={!hasMultipleLightboxPhotos}
+              className="absolute left-[calc(5vw+12px)] top-1/2 z-[230] hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/45 bg-black/75 text-white shadow-lg transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-35 sm:flex"
+              aria-label="Photo précédente"
+            >
+              <IoChevronBackOutline size={24} />
+            </button>
+
+            <button
+              type="button"
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleLightboxNext();
+              }}
+              onTouchEnd={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleLightboxNext();
+              }}
+              disabled={!hasMultipleLightboxPhotos}
+              className="absolute right-[calc(5vw+12px)] top-1/2 z-[230] hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/45 bg-black/75 text-white shadow-lg transition-colors hover:bg-black disabled:cursor-not-allowed disabled:opacity-35 sm:flex"
+              aria-label="Photo suivante"
+            >
+              <IoChevronForwardOutline size={24} />
+            </button>
+
+            <button
+              type="button"
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleLightboxClose();
+              }}
+              onTouchEnd={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                handleLightboxClose();
+              }}
+              className="absolute z-[230] rounded-full border border-white/30 bg-black/60 p-3 text-white transition-colors hover:bg-black"
+              style={{
+                top: "calc(env(safe-area-inset-top) + 12px)",
+                right: "calc(env(safe-area-inset-right) + 12px)",
+              }}
               aria-label="Fermer la photo"
             >
               <IoClose size={26} />
@@ -520,6 +686,12 @@ export const AccueilBackground = ({
                 priority
               />
             </div>
+
+            {selectedPhotoIndex !== null && hasMultipleLightboxPhotos && (
+              <div className="pointer-events-none absolute bottom-20 left-1/2 z-[230] -translate-x-1/2 border border-white/20 bg-black/50 px-3 py-1 font-mono text-[11px] text-white/90 backdrop-blur-sm sm:bottom-4">
+                {selectedPhotoIndex + 1} / {lightboxPhotos.length}
+              </div>
+            )}
           </div>,
           document.body,
         )}
