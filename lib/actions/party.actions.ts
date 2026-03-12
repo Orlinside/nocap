@@ -264,3 +264,4 @@ export const getLastParty = async () => {
     return new NextResponse(null, { status: 500 });
   }
 };
+

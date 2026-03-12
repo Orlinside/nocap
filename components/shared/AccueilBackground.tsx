@@ -40,6 +40,7 @@ type AccueilProps = {
 
 export const AccueilBackground = ({
   user,
+  allParties,
   party,
   lastParty,
   totalPages,
