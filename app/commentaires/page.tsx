@@ -28,27 +28,6 @@ export const metadata: Metadata = {
   },
 };
 
-import {
-  FaQuoteLeft,
-  FaUser,
-  FaCrown,
-  FaStar,
-  FaComment,
-} from "react-icons/fa";
-
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Commentaires | No Cap",
-  description:
-    "La page des commentaires de No Cap, pour donner votre avis sur les soirées.",
-  openGraph: {
-    images: [
-      { url: "https://www.nocap.fr/api/opengraph", width: 1200, height: 630 },
-    ],
-  },
-};
-
 export default async function CommentairesPage() {
   const user = await currentUser();
   const userId = user?.id;
@@ -215,4 +194,3 @@ export default async function CommentairesPage() {
     </Transition>
   );
 }
-
