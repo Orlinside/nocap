@@ -110,7 +110,7 @@ export default function UpdateUserForm({ user }: { user: any }) {
           <Button
             type="submit"
             disabled={isPending}
-            className="group relative overflow-hidden bg-gradient-to-r from-[#fc0010] to-[#FE9D01] hover:from-[#fc0010]/90 hover:to-[#FE9D01]/90 text-white font-mono text-[10px] tracking-wider rounded-xl px-4 py-1 transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            className="group relative overflow-hidden border border-white/30 bg-gradient-to-l from-orange-800 to-orange-400 rounded-none px-6 py-2.5 text-xs uppercase tracking-[0.15em] text-white transition-all duration-300  disabled:cursor-not-allowed disabled:opacity-50"
           >
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="relative flex items-center gap-2">

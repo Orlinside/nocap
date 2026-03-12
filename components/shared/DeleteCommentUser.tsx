@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useTransition } from "react";
@@ -18,7 +17,8 @@ import {
 import { toast } from "sonner";
 
 import {
-  deleteCommentProfile
+  deleteAdminComment,
+  deleteCommentProfile,
 } from "@/lib/actions/comment.actions";
 
 export const DeleteCommentUser = ({ commentId }: { commentId: string }) => {

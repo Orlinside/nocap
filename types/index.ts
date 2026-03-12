@@ -110,6 +110,7 @@ export type DeleteComment = {
 export type GetCommentsParams = {
   limit: number;
   page: number;
+  searchName?: string;
 };
 
 export type UpdateCommentParams = {

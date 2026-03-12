@@ -53,24 +53,24 @@ export const ContactForm = () => {
           },
           (error: any) => {
             console.log("FAILED...", error.text);
-          }
+          },
         );
     });
   };
 
   return (
-    <form onSubmit={sendEmail} className="w-full space-y-6">
+    <form onSubmit={sendEmail} className="w-full space-y-4">
       {confirmationMessage && (
-        <div className="bg-emerald-500/20 backdrop-blur-sm border border-emerald-400/30 rounded-xl p-4 text-center">
-          <p className="text-emerald-300 renogare font-bold">
+        <div className="border border-emerald-300/40 bg-emerald-400/10 px-4 py-3 backdrop-blur-sm">
+          <p className="renogare text-xs uppercase tracking-[0.18em] text-emerald-200">
             {confirmationMessage}
           </p>
         </div>
       )}
 
       {/* Première ligne - Nom */}
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 text-white/70 font-mono text-sm">
+      <div className="space-y-1.5">
+        <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
           <FaUser className="text-xs" />
           Nom & Prénom
         </label>
@@ -84,15 +84,15 @@ export const ContactForm = () => {
             required
             minLength={2}
             maxLength={30}
-            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/40 text-white rounded-xl px-4 py-3 placeholder:text-white/50 transition-all duration-300 focus:bg-white/15 hover:bg-white/5"
+            className="w-full border border-white/20 bg-black/35 px-3 py-2.5 text-sm text-white placeholder:text-white/45 transition-colors duration-300 hover:bg-black/45 focus:border-white/40 focus:bg-black/55"
           />
         </div>
       </div>
 
       {/* Deuxième ligne - Email et Objet */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <label className="flex items-center gap-2 text-white/70 font-mono text-sm">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="space-y-1.5">
+          <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
             <FaEnvelope className="text-xs" />
             Email
           </label>
@@ -105,12 +105,12 @@ export const ContactForm = () => {
             required
             minLength={2}
             maxLength={40}
-            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/40 text-white rounded-xl px-4 py-3 placeholder:text-white/50 transition-all duration-300 focus:bg-white/15 hover:bg-white/5"
+            className="w-full border border-white/20 bg-black/35 px-3 py-2.5 text-sm text-white placeholder:text-white/45 transition-colors duration-300 hover:bg-black/45 focus:border-white/40 focus:bg-black/55"
           />
         </div>
 
-        <div className="space-y-2">
-          <label className="flex items-center gap-2 text-white/70 font-mono text-sm">
+        <div className="space-y-1.5">
+          <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
             <FaTag className="text-xs" />
             Objet
           </label>
@@ -123,14 +123,14 @@ export const ContactForm = () => {
             required
             minLength={2}
             maxLength={30}
-            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/40 text-white rounded-xl px-4 py-3 placeholder:text-white/50 transition-all duration-300 focus:bg-white/15 hover:bg-white/5"
+            className="w-full border border-white/20 bg-black/35 px-3 py-2.5 text-sm text-white placeholder:text-white/45 transition-colors duration-300 hover:bg-black/45 focus:border-white/40 focus:bg-black/55"
           />
         </div>
       </div>
 
       {/* Message */}
-      <div className="space-y-2">
-        <label className="flex items-center gap-2 text-white/70 font-mono text-sm">
+      <div className="space-y-1.5">
+        <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
           <FaCommentDots className="text-xs" />
           Message
         </label>
@@ -143,21 +143,21 @@ export const ContactForm = () => {
             required
             minLength={2}
             maxLength={350}
-            rows={5}
-            className="w-full bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/40 text-white rounded-xl px-4 py-3 placeholder:text-white/50 resize-none transition-all duration-300 focus:bg-white/15 hover:bg-white/5"
+            rows={4}
+            className="w-full resize-none border border-white/20 bg-black/35 px-3 py-2.5 text-sm text-white placeholder:text-white/45 transition-colors duration-300 hover:bg-black/45 focus:border-white/40 focus:bg-black/55"
           />
-          <div className="absolute bottom-3 right-3 text-white/40 text-xs font-mono">
+          <div className="absolute bottom-2 right-2 text-[10px] text-white/40">
             {form.message.length}/350
           </div>
         </div>
       </div>
 
       {/* Bouton d'envoi */}
-      <div className="flex justify-end pt-4">
+      <div className="flex justify-end pt-2">
         <Button
           type="submit"
           disabled={isPending}
-          className="group relative overflow-hidden bg-gradient-to-r from-[#fc0010] to-[#FE9D01] hover:from-[#fc0010]/90 hover:to-[#FE9D01]/90 text-white renogare text-xs tracking-wider rounded-xl px-8 py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          className="group relative overflow-hidden border border-white/30 bg-gradient-to-l from-orange-800 to-orange-400 rounded-none px-6 py-2.5 text-xs uppercase tracking-[0.15em] text-white transition-all duration-300  disabled:cursor-not-allowed disabled:opacity-50"
         >
           <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <span className="relative flex items-center gap-2">
