@@ -417,20 +417,6 @@ export const AccueilBackground = ({
                       />
 
                       <span className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/35 opacity-70 transition-opacity duration-300 group-hover:opacity-40"></span>
-
-                      {user && (
-                        <a
-                          href={photo.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          download
-                          onClick={(event) => event.stopPropagation()}
-                          className="absolute bottom-1.5 right-1.5 z-20 flex h-7 w-7 items-center justify-center rounded-full border border-white/40 bg-black/65 text-white backdrop-blur-sm transition hover:border-white/70 hover:bg-black"
-                          aria-label={`Telecharger la photo ${index + 1}`}
-                        >
-                          <IoDownloadOutline size={15} />
-                        </a>
-                      )}
                     </div>
                   ))}
                 </motion.div>
@@ -565,22 +551,7 @@ export const AccueilBackground = ({
                       sizes="(min-width: 1280px) 18vw, (min-width: 1024px) 23vw, 100vw"
                       className="object-cover saturate-75 contrast-110 transition duration-300 group-hover:scale-105 group-hover:saturate-100"
                     />
-
                     <span className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/35 opacity-70 transition-opacity duration-300 group-hover:opacity-40"></span>
-
-                    {user && (
-                      <a
-                        href={photo.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        download
-                        onClick={(event) => event.stopPropagation()}
-                        className="absolute bottom-2 right-2 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-white/40 bg-black/65 text-white backdrop-blur-sm transition hover:border-white/70 hover:bg-black"
-                        aria-label={`Telecharger la photo ${index + 1}`}
-                      >
-                        <IoDownloadOutline size={16} />
-                      </a>
-                    )}
                   </div>
                 ))}
               </motion.div>
@@ -724,6 +695,20 @@ export const AccueilBackground = ({
                 className="object-contain"
                 priority
               />
+
+              {user && (
+                <a
+                  href={selectedPhotoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  onClick={(event) => event.stopPropagation()}
+                  className="absolute bottom-4 right-4 z-[231] flex h-11 w-11 items-center justify-center rounded-full border border-white/45 bg-black/70 text-white shadow-lg backdrop-blur-sm transition-colors hover:border-white/80 hover:bg-black"
+                  aria-label="Telecharger la photo"
+                >
+                  <IoDownloadOutline size={24} />
+                </a>
+              )}
             </div>
 
             {selectedPhotoIndex !== null && hasMultipleLightboxPhotos && (
