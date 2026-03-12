@@ -118,6 +118,19 @@ export const AccueilBackground = ({
       })
     : "";
 
+  const upcomingPartyName = lastParty?.name ?? partyName;
+  const upcomingPartyDate = lastParty?.startDateTime
+    ? new Date(lastParty.startDateTime).toLocaleDateString("fr-FR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : formattedDate;
+  const desktopTickerText = `Prochaine soiree • ${upcomingPartyName} • ${upcomingPartyDate}`;
+  const isUpcomingParty =
+    !!lastParty?.startDateTime &&
+    new Date(lastParty.startDateTime).getTime() > Date.now();
+
   useEffect(() => {
     setIsLightboxMounted(true);
 
@@ -339,6 +352,27 @@ export const AccueilBackground = ({
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative col-span-7 min-h-0 border-y border-white/15"
           >
+            {isUpcomingParty && (
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-30 border-b border-white/15 bg-[#080a0d]/55 backdrop-blur-sm">
+                <div className="relative h-10 overflow-hidden">
+                  <motion.div
+                    animate={{ x: ["100%", "-100%"] }}
+                    transition={{
+                      duration: 18,
+                      ease: "linear",
+                      repeat: Infinity,
+                    }}
+                    className="absolute top-1/2 whitespace-nowrap px-4 font-mono text-[11px] uppercase tracking-[0.22em] text-white/80"
+                    style={{ y: "-50%" }}
+                  >
+                    {desktopTickerText}
+                    <span className="mx-8 text-white/40">|</span>
+                    {desktopTickerText}
+                  </motion.div>
+                </div>
+              </div>
+            )}
+
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
               <div className="relative h-48 w-48 xl:h-[30rem] xl:w-[30rem]">
                 <Image

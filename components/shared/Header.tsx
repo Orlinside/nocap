@@ -15,7 +15,7 @@ export const Header = async () => {
 
   return (
     <header className="w-full bg-transparent">
-      <div className="flex items-center justify-between bg-transparent px-4 py-1 lg:px-12 lg:py-4">
+      <div className="flex items-center justify-between bg-transparent px-4 pt-3 lg:px-12 lg:py-4">
         <Link href="/" className="flex justify-center">
           <Image
             src="/logo/Logo_NoCapR_white.png"
